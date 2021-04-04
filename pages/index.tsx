@@ -1,29 +1,20 @@
-import React from 'react'
-import Head from 'next/head'
-import { Component } from 'react'
-import { attributes, react as HomeContent } from '@content/home.md'
+import NavigationBar from '../components/NavigationBar'
 
-export default class Home extends Component {
-  render() {
-    let { title, cats } = attributes
-    return (
-      <>
-        <Head>
-          <script src="https://identity.netlify.com/v1/netlify-identity-widget.js" />
-        </Head>
-        <article>
-          <h1>{title}</h1>
-          <HomeContent />
-          <ul>
-            {cats.map((cat, k) => (
-              <li key={k}>
-                <h2>{cat.name}</h2>
-                <p>{cat.description}</p>
-              </li>
-            ))}
-          </ul>
-        </article>
-      </>
-    )
-  }
+import Layout from '../components/Layout'
+import HomeHero from '../components/HomeHero.js'
+
+import React from 'react'
+import { withStyles } from '@material-ui/core/styles'
+import { Grommet, Main, Grid, Box } from 'grommet'
+
+const Index = () => {
+  return (
+    <Layout>
+      <Main fill width={{ max: 'xlarge' }} align="center" alignSelf="center" alignContent="center" pad="large">
+        <HomeHero></HomeHero>
+      </Main>
+    </Layout>
+  )
 }
+
+export default Index
