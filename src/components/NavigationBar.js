@@ -4,6 +4,7 @@ import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from "grommet";
 import { Grommet as GrommetIcon, Menu as MenuIcon } from "grommet-icons";
 import { grommet } from "grommet/themes";
 import Link from "next/link";
+import Router from "next/router";
 
 const NavigationBar = () => (
   <Grommet theme={grommet}>
@@ -24,12 +25,16 @@ const NavigationBar = () => (
                 icon={<MenuIcon color="brand" />}
                 items={[
                   {
-                    label: <Box pad="small">Dave Peach Voice</Box>,
-                    href: "https://v2.grommet.io/",
+                    label: <Box pad="small">Pricing</Box>,
+                    onClick: () => {
+                      Router.push("/pricing");
+                    },
                   },
                   {
-                    label: <Box pad="small">Feedback</Box>,
-                    href: "https://github.com/grommet/grommet/issues",
+                    label: <Box pad="small">Contact</Box>,
+                    onClick: () => {
+                      Router.push("/contact");
+                    },
                   },
                 ]}
               />
