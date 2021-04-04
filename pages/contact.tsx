@@ -1,3 +1,5 @@
+import { attributes, react as ContactContent } from '../content/contact.md'
+
 import NavigationBar from '../components/NavigationBar'
 
 import Layout from '../components/Layout'
@@ -7,12 +9,12 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { Grommet, Main, Grid, Box } from 'grommet'
 
-const Index = () => {
+const Contact = () => {
   return (
     <Layout>
-      <HomeHero></HomeHero>
+      <ContactContent></ContactContent>
     </Layout>
   )
 }
 
-export default Index
+export default Contact

@@ -1,8 +1,9 @@
-import React from 'react';
+import React from 'react'
 
-import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from 'grommet';
-import { Grommet as GrommetIcon, Menu as MenuIcon } from 'grommet-icons';
-import { grommet } from 'grommet/themes';
+import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from 'grommet'
+import { Grommet as GrommetIcon, Menu as MenuIcon } from 'grommet-icons'
+import { grommet } from 'grommet/themes'
+import Link from 'next/link'
 
 const NavigationBar = () => (
   <Grommet theme={grommet}>
@@ -13,7 +14,7 @@ const NavigationBar = () => (
         label="Dave Peach: Professional Voice"
       />
       <ResponsiveContext.Consumer>
-        {size =>
+        {(size) =>
           size === 'small' ? (
             <Box justify="end">
               <Menu
@@ -34,17 +35,18 @@ const NavigationBar = () => (
             </Box>
           ) : (
             <Box justify="end" direction="row" gap="medium">
-              <Anchor href="https://v2.grommet.io/" label="Pricing" />
-              <Anchor
-                href="https://github.com/grommet/grommet/issues"
-                label="Contact"
-              />
+              <Link href="/pricing">
+                <Anchor href="https://v2.grommet.io/" label="Pricing" />
+              </Link>
+              <Link href="/contact">
+                <Anchor href="https://github.com/grommet/grommet/issues" label="Contact" />
+              </Link>
             </Box>
           )
         }
       </ResponsiveContext.Consumer>
     </Header>
   </Grommet>
-);
+)
 
-export default NavigationBar;
+export default NavigationBar

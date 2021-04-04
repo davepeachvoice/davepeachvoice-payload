@@ -1,33 +1,40 @@
-// https://github.com/berlitz-global/max/blob/master/packages/eslint-config-max-base/index.js
-// sans 'eslint:recommended' because it causes issue with PropTypes in *.tsx
 module.exports = {
-  parser:  '@typescript-eslint/parser',  // Specifies the ESLint parser
-  extends: [
-    'plugin:react/recommended',
-    'plugin:prettier/recommended'],
-  env: {
-    browser: true,
-    es6: true,
-    node: true,
-    jest: true,
-  },
-  parserOptions:  {
-    ecmaVersion:  2018,  // Allows for the parsing of yarn modern ECMAScript features
-    sourceType:  'module',  // Allows for the use of imports
-  },
-  rules: {
-    strict: 0,
-    'react/prop-types': 0,
-    'prettier/prettier': 'warn',
-    'comma-dangle': ["error", "always-multiline"],
-    'react/display-name': 0
-  },
-  settings: {
-    react: {
-      pragma: 'React',
-      version: 'detect',
+  overrides: [
+    {
+      files: ['*.ts', '*.tsx'],
+      extends: [
+        'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended',
+        'prettier', // eslint-config-prettier
+        'plugin:prettier/recommended',
+      ],
+      plugins: ['react', 'prettier', '@typescript-eslint', 'react-hooks'],
+      rules: {
+        '@typescript-eslint/no-explicit-any': 'off',
+        '@typescript-eslint/explicit-module-boundary-types': 'off',
+        'react-hooks/rules-of-hooks': 'error',
+        'react-hooks/exhaustive-deps': 'warn',
+        'react/prop-types': 'error',
+        '@typescript-eslint/no-empty-function': 'off',
+        'react/display-name': 'off',
+      },
+      parserOptions: {
+        project: './tsconfig.json',
+        tsconfigRootDir: __dirname,
+        ecmaVersion: 2020,
+        sourceType: 'module',
+        ecmaFeatures: {
+          'implied-strict': true,
+          modules: true,
+        },
+      },
+      settings: {
+        react: {
+          pragma: 'React',
+          version: 'detect',
+        },
+      },
     },
-  },
+  ],
+  parser: '@typescript-eslint/parser',
 }
-
-

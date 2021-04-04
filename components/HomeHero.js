@@ -7,6 +7,8 @@ import Canvas from './Canvas'
 import { motion } from 'framer-motion'
 import AudioVisualizer from './AudioVisualizer'
 
+import { attributes } from '@content/home.md'
+
 export const Pulsate = (props) => (
   <motion.div
     whileHover={{
@@ -53,6 +55,7 @@ const HomeHero = () => {
   const [playingAudio, setPlayingAudio] = useState(false)
   const [audio, setAudio] = useState(null)
   const [audioFile, setAudioFile] = useState(null)
+  let { hero_main_text, hero_sub_text, audio_sample_text } = attributes
 
   useEffect(() => {
     console.log(audioFile)
@@ -74,17 +77,17 @@ const HomeHero = () => {
         </Box>
         <Box align="center" justify="center" background={{ color: 'brand', opacity: 'weak' }}>
           <Heading size="large" margin="large">
-            Give your clients a distinguishing touch
+            {hero_main_text}
           </Heading>
         </Box>
       </Stack>
-      <Box gridArea="tagline">With the voice of the Butler Bulldogs</Box>
+      <Box gridArea="tagline">{hero_sub_text}</Box>
       <ButtonWithIcon
         onMouseEnter={() => setAnimateButton(true)}
         onMouseLeave={() => setAnimateButton(false)}
         gridArea="button"
       >
-        <div>Hear a Sample</div>
+        <div>{audio_sample_text}</div>
         <Pulsate>
           <Circle>
             <Play></Play>
