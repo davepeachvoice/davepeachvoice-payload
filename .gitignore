@@ -3,6 +3,3 @@ node_modules/
 /npm-debug.log
 .DS_Store
 out/
-
-# Editors
-.idea
