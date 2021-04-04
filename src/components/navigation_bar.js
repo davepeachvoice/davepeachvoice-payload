@@ -11,7 +11,7 @@ export default class NavExample extends React.Component {
 
     this.state = {
       dropdownOpen: false,
-      collapseOpen: false
+      collapseOpen: false,
     };
   }
 
@@ -19,8 +19,8 @@ export default class NavExample extends React.Component {
     this.setState({
       ...this.state,
       ...{
-        dropdownOpen: !this.state.dropdownOpen
-      }
+        dropdownOpen: !this.state.dropdownOpen,
+      },
     });
   }
 
@@ -28,8 +28,8 @@ export default class NavExample extends React.Component {
     this.setState({
       ...this.state,
       ...{
-        collapseOpen: !this.state.collapseOpen
-      }
+        collapseOpen: !this.state.collapseOpen,
+      },
     });
   }
 

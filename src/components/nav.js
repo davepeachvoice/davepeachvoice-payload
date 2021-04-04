@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link"
+import Link from "next/link";
 import Query from "./query";
 import PORTFOLIO_ITEMS_QUERY from "../apollo/queries/portfolio_item/portfolio_items";
 
@@ -29,7 +29,7 @@ const Nav = () => {
                           <Link
                             href={{
                               pathname: "category",
-                              query: { id: category.id }
+                              query: { id: category.id },
                             }}
                           >
                             <a className="uk-link-reset">{category.name}</a>
