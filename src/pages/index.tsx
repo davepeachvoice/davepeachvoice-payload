@@ -1,16 +1,16 @@
-import NavigationBar from "../components/NavigationBar";
-
 import Layout from "../components/Layout";
+import HomeAudio from "../components/HomeAudio.js";
 import HomeHero from "../components/HomeHero.js";
 
 import React from "react";
-import { withStyles } from "@material-ui/core/styles";
-import { Grommet, Main, Grid, Box } from "grommet";
+import { react as HomeContent } from "../content/home.md";
 
 const Index = () => {
   return (
     <Layout>
       <HomeHero></HomeHero>
+      <HomeAudio></HomeAudio>
+      <HomeContent></HomeContent>
     </Layout>
   );
 };

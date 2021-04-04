@@ -30,7 +30,8 @@
       "@interfaces/*": ["src/interfaces/*"],
       "@hocs/*": ["src/hocs/*"],
       "@content/*": ["src/content/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "public/*": ["src/public/*"]
     }
   },
   "exclude": [
