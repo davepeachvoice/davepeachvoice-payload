@@ -1,6 +1,9 @@
 const resolveTsconfigPathsToAlias = require('./resolve-tsconfig-path-to-webpack-alias')
 
 module.exports = {
+  images: {
+    domains: ["placekitten.com"]
+  },
   webpack: (cfg) => {
     cfg.plugins = cfg.plugins || []
 

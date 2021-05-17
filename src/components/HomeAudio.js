@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Heading, Grid, Box, Button, Stack } from "grommet";
+import { Heading, Grid, Box, Button, Stack, Main } from "grommet";
 import styled, { keyframes } from "styled-components";
 import { Play } from "grommet-icons";
 import Canvas from "./Canvas";
@@ -71,45 +71,47 @@ const HomeAudio = () => {
 
   return (
     <>
-      <Stack guidingChild="last">
-        <Box fill>
-          <AudioVisualizer
-            audio={audio}
-            playing={playingAudio}
-          ></AudioVisualizer>
-        </Box>
-        <Box
-          align="center"
-          justify="center"
-          background={{ color: "brand", opacity: "weak" }}
+      <Box>
+        <Stack guidingChild="last">
+          <Box fill>
+            <AudioVisualizer
+              audio={audio}
+              playing={playingAudio}
+            ></AudioVisualizer>
+          </Box>
+          <Box
+            align="center"
+            justify="center"
+            background={{ color: "brand", opacity: "weak" }}
+          >
+            <Heading size="large" margin="large">
+              {hero_main_text}
+            </Heading>
+          </Box>
+        </Stack>
+        <Box gridArea="tagline">{hero_sub_text}</Box>
+        <ButtonWithIcon
+          onMouseEnter={() => setAnimateButton(true)}
+          onMouseLeave={() => setAnimateButton(false)}
+          gridArea="button"
         >
-          <Heading size="large" margin="large">
-            {hero_main_text}
-          </Heading>
-        </Box>
-      </Stack>
-      <Box gridArea="tagline">{hero_sub_text}</Box>
-      <ButtonWithIcon
-        onMouseEnter={() => setAnimateButton(true)}
-        onMouseLeave={() => setAnimateButton(false)}
-        gridArea="button"
-      >
-        <div>{audio_sample_text}</div>
-        <Pulsate>
-          <Circle>
-            <Play></Play>
-          </Circle>
-        </Pulsate>
-      </ButtonWithIcon>
+          <div>{audio_sample_text}</div>
+          <Pulsate>
+            <Circle>
+              <Play></Play>
+            </Circle>
+          </Pulsate>
+        </ButtonWithIcon>
 
-      <input
-        type="file"
-        onChange={(event) => setAudioFile(event.target.files)}
-        id="thefile"
-        accept="audio/*"
-      />
-      <Button onClick={() => setPlayingAudio(false)}></Button>
-      <audio id="audio" controls></audio>
+        <input
+          type="file"
+          onChange={(event) => setAudioFile(event.target.files)}
+          id="thefile"
+          accept="audio/*"
+        />
+        <Button onClick={() => setPlayingAudio(false)}></Button>
+        <audio id="audio" controls></audio>
+      </Box>
     </>
   );
 };

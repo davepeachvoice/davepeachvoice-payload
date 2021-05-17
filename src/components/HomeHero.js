@@ -1,14 +1,19 @@
 import React from "react";
 import Image from "next/image";
+import { Box } from "grommet";
 
 const HomeHero = () => {
   return (
-    <Image
-      src="/march_madness.jpg"
-      alt="Dave Peach Doing PA at March Madness 2021"
-      width="64"
-      height="64"
-    />
+    <Box height="500px">
+      <Image
+        height="500px"
+        width="400px"
+        layout="responsive"
+        objectFit="contain"
+        src="/images/march_madness.png"
+        objectPosition="center top"
+      />
+    </Box>
   );
 };
 

@@ -137,19 +137,10 @@ const contentStyle = {
 };
 
 const Layout = (props) => (
-  <Grommet full theme={theme}>
+  <Grommet full theme={theme} themeMode="dark">
     <Box fill>
       <NavigationBar></NavigationBar>
-      <Main
-        fill
-        width={{ max: "xlarge" }}
-        align="center"
-        alignSelf="center"
-        alignContent="center"
-        pad="large"
-      >
-        <div style={contentStyle}>{props.children}</div>
-      </Main>
+      <div style={contentStyle}>{props.children}</div>
     </Box>
   </Grommet>
 );

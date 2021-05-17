@@ -3,14 +3,14 @@ import HomeAudio from "../components/HomeAudio.js";
 import HomeHero from "../components/HomeHero.js";
 
 import React from "react";
-import { react as HomeContent } from "../content/home.md";
+import HomeExperience from "../components/HomeExperience";
 
 const Index = () => {
   return (
     <Layout>
       <HomeHero></HomeHero>
       <HomeAudio></HomeAudio>
-      <HomeContent></HomeContent>
+      <HomeExperience></HomeExperience>
     </Layout>
   );
 };
