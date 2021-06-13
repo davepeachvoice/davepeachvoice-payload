@@ -1,6 +1,6 @@
 import Header from "./Header";
 import NavigationBar from "./NavigationBar";
-import { Grommet, ResponsiveContext, Box } from "grommet";
+import { Grommet, ResponsiveContext, Box, App } from "grommet";
 import { Reddit } from "grommet-icons";
 import { React } from "react";
 import { Main } from "grommet";

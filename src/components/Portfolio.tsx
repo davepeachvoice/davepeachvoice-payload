@@ -1,7 +1,8 @@
 import React from "react";
 
-import PortfolioItem from "./PortfolioItem";
+import PortfolioItems from "./PortfolioItems2";
 
 export default function Portfolio() {
-  return <PortfolioItem></PortfolioItem>;
+  const items = ["hi", "hi", "hi"];
+  return <PortfolioItems items={items}></PortfolioItems>;
 }
