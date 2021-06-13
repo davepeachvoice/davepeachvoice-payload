@@ -1,6 +1,8 @@
 import React from "react";
 import { useViewportScroll, motion, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import Layout from "../components/Layout";
+import HomeHero from "../components/HomeAudio.js";
 
 const Parallax = () => {
   const { scrollY } = useViewportScroll();
@@ -74,23 +76,27 @@ const Parallax = () => {
           margin-right: auto;
         }
       `}</style>
-      <motion.div className="box" style={{ y: y1, x: -50 }} />
-      <motion.div
-        className="box"
-        style={{ y: y2, x: 50, background: "salmon" }}
-      />
-      <div style={{ height: 500 }} />
-      <div style={{ position: "fixed", top: 0, left: 0 }}>
-        {" "}
-        {"is in view? " + inView}
-      </div>
-      <motion.div
-        animate={inView ? "visible" : "hidden"}
-        variants={variants}
-        transition={{ duration: 2, ease: "easeOut" }}
-        ref={ref}
-        className="magic"
-      />
+
+      <Layout>
+        <HomeHero></HomeHero>
+        <motion.div className="box" style={{ y: y1, x: -50 }} />
+        <motion.div
+          className="box"
+          style={{ y: y2, x: 50, background: "salmon" }}
+        />
+        <div style={{ height: 500 }} />
+        <div style={{ position: "fixed", top: 0, left: 0 }}>
+          {" "}
+          {"is in view? " + inView}
+        </div>
+        <motion.div
+          animate={inView ? "visible" : "hidden"}
+          variants={variants}
+          transition={{ duration: 2, ease: "easeOut" }}
+          ref={ref}
+          className="magic"
+        />
+      </Layout>
     </>
   );
 };
