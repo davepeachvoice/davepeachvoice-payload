@@ -7,11 +7,11 @@ export default class CustomDocument extends Document {
       <Html>
         <Head>
           {/* This is going to be your global head */}
-          <link
+          {/* <link
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/grommet/1.10.1/grommet.min.css"
-          />
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/grommet/1.10.1/grommet.min.js"></script>
+          /> */}
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/grommet/2.17.3/grommet.min.js"></script>
         </Head>
         <body>
           <Main /> {/* each routed page will go inside here */}
