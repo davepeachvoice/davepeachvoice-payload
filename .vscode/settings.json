@@ -18,7 +18,8 @@
     "octokit",
     "repos",
     "xlarge",
-    "frontmatter"
+    "frontmatter",
+    "netlifycms"
   ],
   "files.exclude": {
     "**/.git": true,

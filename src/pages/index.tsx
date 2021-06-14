@@ -1,6 +1,6 @@
 import Layout from "../components/Layout";
-import HomeAudio from "../components/HomeAudio.js";
-import HomeHero from "../components/HomeHero.js";
+import HomeAudio from "../components/HomeAudio";
+import HomeHero from "../components/HomeHero";
 import Portfolio from "../components/Portfolio";
 
 import React from "react";

@@ -127,10 +127,12 @@ const contentStyle = {
 };
 
 export default function Layout(props) {
-  <Grommet full theme={theme} themeMode="dark">
-    <Box fill>
-      <NavigationBar></NavigationBar>
-      <div style={contentStyle}>{props.children}</div>
-    </Box>
-  </Grommet>;
+  return (
+    <Grommet full theme={theme} themeMode="dark">
+      <Box fill>
+        <NavigationBar></NavigationBar>
+        <div style={contentStyle}>{props.children}</div>
+      </Box>
+    </Grommet>
+  );
 }
