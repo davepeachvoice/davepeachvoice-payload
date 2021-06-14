@@ -24,7 +24,6 @@
     "**/.DS_Store": true,
     "**/node_modules": true,
     ".next": true,
-    ".vscode": true,
     "tsconfig.json": true,
     "resolve-tsconfig-path-to-webpack-alias.js": true,
     "next.config.js": true,
@@ -34,5 +33,6 @@
     ".gitignore": true,
     ".babelrc": true,
     ".prettierrc": true,
-  },
+    "*.code-workspace": true
+  }
 }
