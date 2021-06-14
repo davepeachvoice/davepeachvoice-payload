@@ -3,7 +3,7 @@ import Canvas from "./Canvas";
 import { List } from "immutable";
 
 // https://github.com/anonymousthing/audio-visualizer/blob/master/visualizer.js
-const AudioVisualizer = (props) => {
+export default function AudioVisualizer(props) {
   const [audioContext, setAudioContext] = React.useState(null);
   const [audioAnalyserNode, setAudioAnalyserNode] = React.useState(null);
   const [
@@ -296,6 +296,4 @@ const AudioVisualizer = (props) => {
       />
     </>
   );
-};
-
-export default AudioVisualizer;
+}
