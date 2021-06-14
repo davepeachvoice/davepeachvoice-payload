@@ -10,7 +10,7 @@ const HomeHero = () => {
         width="400px"
         layout="responsive"
         objectFit="contain"
-        src="/images/march_madness.png"
+        src="/dave-peach-web-netlify-cms/march_madness.png"
         objectPosition="center top"
       />
     </Box>
