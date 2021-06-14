@@ -1,8 +1,8 @@
 {
-  "name": "nextjs-netlifycms-ts-starter",
+  "name": "dave-peach-web-netlify-cms",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/pages/index.tsx",
   "scripts": {
     "dev": "next",
     "build": "next build",
@@ -28,7 +28,7 @@
     "@babel/core": "^7.13.14",
     "@babel/preset-react": "^7.13.13",
     "@material-ui/core": "^4.11.3",
-    "framer-motion": "1.11.1",
+    "framer-motion": "^4.1.17",
     "grommet": "^2.17.1",
     "immutable": "^4.0.0-rc.12",
     "next": "^10.2.3",
