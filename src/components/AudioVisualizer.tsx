@@ -52,6 +52,76 @@ const AudioVisualizer = (props) => {
 
   // wait for audioContext to be available
   useEffect(() => {
+    function createLookupTable(bins, lookupTable) {
+      const binLengths = [];
+      if (drawPitch) {
+        let lastFrequency = magicConstant / multiplier;
+        let currentLength = 0;
+        let lastBinIndex = 0;
+        for (let i = 0; i < displayBins; i++) {
+          const thisFreq = lastFrequency * multiplier;
+          lastFrequency = thisFreq;
+          const binIndex = Math.floor((bins * thisFreq) / 22050);
+          lookupTable[i] = binIndex;
+          currentLength++;
+
+          if (binIndex != lastBinIndex) {
+            for (let j = 0; j < currentLength; j++)
+              binLengths.push(currentLength);
+            currentLength = 0;
+          }
+
+          lastBinIndex = binIndex;
+        }
+      } else {
+        for (let i = 0; i < displayBins; i++) {
+          lookupTable[i] = i;
+        }
+      }
+      console.log("binLengths");
+      console.log(binLengths);
+      return binLengths;
+    }
+
+    function setupAudioApi(audioElement) {
+      console.log("Setting up audio api");
+      const src = audioContext.createMediaElementSource(audioElement);
+      const localAudioAnalyserNode = audioContext.createAnalyser();
+      src.connect(localAudioAnalyserNode);
+      localAudioAnalyserNode.connect(audioContext.destination);
+
+      //FFT node takes in 2 samples per bin, and we internally use 2 samples per bin
+      localAudioAnalyserNode.fftSize = drawPitch
+        ? displayBins * 8
+        : displayBins * 2;
+      setMultiplier(
+        Math.pow(22050, 1 / displayBins) *
+          Math.pow(1 / magicConstant, 1 / displayBins)
+      );
+      setLogBinLengths(List());
+      const localFinalBins = [];
+      const localLogLookupTable = [];
+      for (let i = 0; i < displayBins; i++) {
+        localFinalBins.push(0);
+        localLogLookupTable.push(0);
+      }
+      setFinalBins(List(localFinalBins));
+      setLogBinLengths(
+        List(
+          createLookupTable(
+            localAudioAnalyserNode.frequencyBinCount,
+            localLogLookupTable
+          )
+        )
+      );
+      setLogLookupTable(localLogLookupTable);
+      setBinWidth(Math.ceil(canvasWidth / (displayBins - 1)));
+
+      setAudioAnalyserNode(localAudioAnalyserNode);
+
+      setAudioVisualizerInitialized(true);
+    }
+
     function initializeVisualizer(audioElement) {
       try {
         console.log("audiocontext");
@@ -73,7 +143,14 @@ const AudioVisualizer = (props) => {
     console.log("used effect");
     if (props.playing) play();
     else stop();
-  }, [audioContext, props.playing, props.audio, setupAudioApi]);
+  }, [
+    audioContext,
+    props.playing,
+    props.audio,
+    canvasWidth,
+    drawPitch,
+    multiplier,
+  ]);
 
   const handleContextAvailable = (localCtx) => {
     setCanvasWidth(localCtx.canvas.width);
@@ -85,7 +162,7 @@ const AudioVisualizer = (props) => {
     setDrawing(false);
   };
 
-  const draw = (localCtx, frameCount) => {
+  const draw = (localCtx) => {
     console.log("drawing");
 
     if (!audioVisualizerInitialized) return;
@@ -101,7 +178,7 @@ const AudioVisualizer = (props) => {
     console.log(barColour);
 
     if (drawPitch) updateBinsLog(logLookupTable, data);
-    else updateBins(bins, logBinLengths, data);
+    else updateBins(bins, logBinLengths);
 
     if (!drawCurved) {
       for (let i = 0; i < displayBins; i++) {
@@ -148,7 +225,7 @@ const AudioVisualizer = (props) => {
       const localSongText = "";
       localCtx.fillText(
         songText,
-        canvasWidth / 2 - textSize.width / 2,
+        canvasWidth / 2 - parseInt(textSize, 10) / 2,
         canvasHeight / 2 - 15 / 2 + 15
       );
       setSongText(localSongText);
@@ -176,37 +253,6 @@ const AudioVisualizer = (props) => {
       setLogBinLengths([...logBinLengths, 1]);
       setFinalBins(finalBins.set(i, binValue));
     }
-  }
-
-  function createLookupTable(bins, lookupTable) {
-    const binLengths = [];
-    if (drawPitch) {
-      let lastFrequency = magicConstant / multiplier;
-      let currentLength = 0;
-      let lastBinIndex = 0;
-      for (let i = 0; i < displayBins; i++) {
-        const thisFreq = lastFrequency * multiplier;
-        lastFrequency = thisFreq;
-        const binIndex = Math.floor((bins * thisFreq) / 22050);
-        lookupTable[i] = binIndex;
-        currentLength++;
-
-        if (binIndex != lastBinIndex) {
-          for (let j = 0; j < currentLength; j++)
-            binLengths.push(currentLength);
-          currentLength = 0;
-        }
-
-        lastBinIndex = binIndex;
-      }
-    } else {
-      for (let i = 0; i < displayBins; i++) {
-        lookupTable[i] = i;
-      }
-    }
-    console.log("binLengths");
-    console.log(binLengths);
-    return binLengths;
   }
 
   function updateBinsLog(lookupTable, data) {
@@ -238,45 +284,6 @@ const AudioVisualizer = (props) => {
   function paintSingleBin(i, localCtx) {
     const height = getBinHeight(i);
     localCtx.fillRect(i * binWidth, canvasHeight - height, binWidth, height);
-  }
-
-  function setupAudioApi(audioElement) {
-    console.log("Setting up audio api");
-    const src = audioContext.createMediaElementSource(audioElement);
-    const localAudioAnalyserNode = audioContext.createAnalyser();
-    src.connect(localAudioAnalyserNode);
-    localAudioAnalyserNode.connect(audioContext.destination);
-
-    //FFT node takes in 2 samples per bin, and we internally use 2 samples per bin
-    localAudioAnalyserNode.fftSize = drawPitch
-      ? displayBins * 8
-      : displayBins * 2;
-    setMultiplier(
-      Math.pow(22050, 1 / displayBins) *
-        Math.pow(1 / magicConstant, 1 / displayBins)
-    );
-    setLogBinLengths(List());
-    const localFinalBins = [];
-    const localLogLookupTable = [];
-    for (let i = 0; i < displayBins; i++) {
-      localFinalBins.push(0);
-      localLogLookupTable.push(0);
-    }
-    setFinalBins(List(localFinalBins));
-    setLogBinLengths(
-      List(
-        createLookupTable(
-          localAudioAnalyserNode.frequencyBinCount,
-          localLogLookupTable
-        )
-      )
-    );
-    setLogLookupTable(localLogLookupTable);
-    setBinWidth(Math.ceil(canvasWidth / (displayBins - 1)));
-
-    setAudioAnalyserNode(localAudioAnalyserNode);
-
-    setAudioVisualizerInitialized(true);
   }
 
   return (
