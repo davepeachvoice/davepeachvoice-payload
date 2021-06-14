@@ -17,7 +17,8 @@
     "mattddean",
     "octokit",
     "repos",
-    "xlarge"
+    "xlarge",
+    "frontmatter"
   ],
   "files.exclude": {
     "**/.git": true,
