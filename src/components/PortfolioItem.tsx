@@ -1,7 +1,12 @@
 import React from "react";
 
 import NikeCard from "../components/nikeCard/index";
+import PortfolioItemInterface from "./PortfolioItemInterface";
 
-export default function PortfolioItem() {
-  return <NikeCard></NikeCard>;
+interface PortfolioItemProps {
+  portfolioItem: PortfolioItemInterface;
+}
+
+export default function PortfolioItem(props: PortfolioItemProps) {
+  return <NikeCard portfolioItem={props.portfolioItem}></NikeCard>;
 }

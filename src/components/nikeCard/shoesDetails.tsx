@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Marginer from "./marginer";
+import PortfolioItem from "../PortfolioItemInterface";
 
 const DetailsContainer = styled.div`
   width: 100%;
@@ -32,7 +33,7 @@ const SpacedHorizontalContainer = styled.div`
   align-items: center;
 `;
 
-const BuyButton = styled.button`
+const ActionButton = styled.button`
   padding: 10px 16px;
   background-color: #fbbe01;
   color: #000;
@@ -44,6 +45,7 @@ const BuyButton = styled.button`
   cursor: pointer;
   transition: all 290ms ease-in-out;
   border-radius: 8px;
+  align-self: flex-end;
   &:hover {
     background-color: transparent;
     color: #fff;
@@ -51,34 +53,22 @@ const BuyButton = styled.button`
   }
 `;
 
-const NikeLogo = styled.div`
-  width: 100%;
-  height: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  img {
-    width: auto;
-    height: 13px;
-  }
-`;
+interface PortfolioItemProps {
+  portfolioItem: PortfolioItem;
+}
 
-export default function ShoesDetails() {
+export default function ShoesDetails(props: PortfolioItemProps) {
   return (
     <DetailsContainer>
-      <SmallText>NIKE</SmallText>
       <SpacedHorizontalContainer>
-        <MediumText>AIR JORDAN 1 MID SE GC</MediumText>
-        <MediumText>¥856</MediumText>
+        <MediumText>{props.portfolioItem.title}</MediumText>
       </SpacedHorizontalContainer>
       <Marginer direction="vertical" margin="1.2em" />
       <SpacedHorizontalContainer>
-        <MediumText>YOUR NEXT SHOES</MediumText>
-        <BuyButton>BUY</BuyButton>
+        <ActionButton>
+          {props.portfolioItem.mediaType == "video" ? "watch" : "listen"}
+        </ActionButton>
       </SpacedHorizontalContainer>
-      <NikeLogo>
-        <img src="/images/nike-logo.png" />
-      </NikeLogo>
     </DetailsContainer>
   );
 }

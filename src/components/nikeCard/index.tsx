@@ -2,6 +2,7 @@ import { motion, useMotionValue, useTransform } from "framer-motion";
 import React from "react";
 import styled from "styled-components";
 
+import PortfolioItem from "../PortfolioItemInterface";
 import ShoesDetails from "./shoesDetails";
 
 const CardWrapper = styled.div`
@@ -95,7 +96,11 @@ const Shoes = styled(motion.div)`
   }
 `;
 
-export default function NikeCard() {
+interface NikeCardProps {
+  portfolioItem: PortfolioItem;
+}
+
+export default function NikeCard(props: NikeCardProps) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
@@ -127,7 +132,7 @@ export default function NikeCard() {
           <NikeText>NIKE AIR</NikeText>
         </TopContainer>
         <BottomContainer>
-          <ShoesDetails />
+          <ShoesDetails portfolioItem={props.portfolioItem} />
         </BottomContainer>
       </CardContainer>
     </CardWrapper>

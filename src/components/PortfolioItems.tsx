@@ -1,48 +1,32 @@
 import React from "react";
-import Card from "./card";
+import { Box, Grid, CardBody, Card } from "grommet";
+import PortfolioItem from "./PortfolioItem";
+import PortfolioItemInterface from "./PortfolioItemInterface";
 
 interface PortfolioItemsProps {
-  portfolioItems: any[];
+  items: PortfolioItemInterface[];
 }
 
 export default function PortfolioItems(props: PortfolioItemsProps) {
-  const leftArticlesCount = Math.ceil(props.portfolioItems.length / 5);
-  const leftArticles = props.portfolioItems.slice(0, leftArticlesCount);
-  const rightArticles = props.portfolioItems.slice(
-    leftArticlesCount,
-    props.portfolioItems.length
-  );
-
   return (
-    <div>
-      <div className="uk-child-width-1-2" data-uk-grid>
-        <div>
-          {leftArticles.map((portfolioItem) => {
-            return (
-              <Card
-                portfolio_item={portfolioItem}
-                key={`article__${portfolioItem.id}`}
-              />
-            );
-          })}
-        </div>
-        <div>
-          <div
-            className="uk-child-width-1-2@m uk-grid-
-          "
-            data-uk-grid
+    <Box pad="large" background="dark-1" height="100%">
+      <Grid gap="medium" columns={{ count: "fit", size: "small" }}>
+        {props.items.map((item) => (
+          <Card
+            key={item.title}
+            onClick={() => {
+              alert("Card was Clicked!");
+            }}
           >
-            {rightArticles.map((portfolioItem2) => {
-              return (
-                <Card
-                  portfolio_item={portfolioItem2}
-                  key={`article__${portfolioItem2.id}`}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
-    </div>
+            <CardBody pad="small">
+              <PortfolioItem portfolioItem={item}></PortfolioItem>
+            </CardBody>
+            {/* <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
+              <Text size="xsmall">{item.message}</Text>
+            </CardFooter> */}
+          </Card>
+        ))}
+      </Grid>
+    </Box>
   );
 }
