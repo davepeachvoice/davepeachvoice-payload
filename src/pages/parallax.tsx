@@ -2,7 +2,7 @@ import React from "react";
 import { useViewportScroll, motion, useTransform } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import Layout from "../components/Layout";
-import HomeHero from "../components/HomeAudio.js";
+import HomeHero from "../components/HomeAudio";
 
 const Parallax = () => {
   const { scrollY } = useViewportScroll();
