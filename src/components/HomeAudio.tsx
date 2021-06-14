@@ -59,10 +59,8 @@ const HomeAudio = () => {
   useEffect(() => {
     console.log(audioFile);
     if (audioFile === null) return;
-    const localAudio: React.DetailedHTMLProps<
-      React.AudioHTMLAttributes<HTMLAudioElement>,
-      HTMLAudioElement
-    > = document.getElementById("audio");
+    // TODO: type this (something like React.DetailedHTMLProps<React.AudioHTMLAttributes<HTMLAudioElement>,HTMLAudioElement> but where ContentEditable works)
+    const localAudio: any = document.getElementById("audio");
     console.log(audioFile);
     localAudio.src = URL.createObjectURL(audioFile[0]);
     localAudio.load();
