@@ -1,0 +1,38 @@
+{
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+  ],
+  "editor.tabSize": 2,
+  "cSpell.words": [
+    "audiocontext",
+    "badroute",
+    "fontawesome",
+    "fortawesome",
+    "marginer",
+    "mattddean",
+    "octokit",
+    "repos",
+    "xlarge"
+  ],
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "**/node_modules": true,
+    ".next": true,
+    ".vscode": true,
+    "tsconfig.json": true,
+    "resolve-tsconfig-path-to-webpack-alias.js": true,
+    "next.config.js": true,
+    "package-lock.json": true,
+    "next-env.d.ts": true,
+    ".eslintrc.js": true,
+    ".gitignore": true,
+    ".babelrc": true,
+    ".prettierrc": true,
+  },
+}
