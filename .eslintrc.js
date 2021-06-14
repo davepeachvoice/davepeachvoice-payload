@@ -1,7 +1,7 @@
 module.exports = {
   "overrides": [
     {
-      "files": ["*.ts", "*.tsx", "*.js"],
+      "files": ["*.ts", "*.tsx"],
       "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
