@@ -1,6 +1,11 @@
 const resolveTsconfigPathsToAlias = require('./resolve-tsconfig-path-to-webpack-alias')
 
 module.exports = {
+  target: 'serverless',
+  images: {
+    loader: 'cloudinary',
+    path: 'https://res.cloudinary.com/prestocloud/image/upload/'
+  },
   webpack: (cfg) => {
     cfg.plugins = cfg.plugins || []
 
