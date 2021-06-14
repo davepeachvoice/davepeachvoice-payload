@@ -2,7 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 
-const useCanvas = (draw, options = {}, drawing, onContextAvailable) => {
+const useCanvas = (draw, options?, drawing?, onContextAvailable?) => {
   const [animationFrameId, setAnimationFrameId] = useState(null);
 
   const canvasRef = useRef(null);

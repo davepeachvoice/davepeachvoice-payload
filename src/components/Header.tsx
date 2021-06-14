@@ -1,4 +1,4 @@
-import NavigationBar from "./NavigationBar";
+import React from "react";
 
 const headerStyle = {
   backgroundColor: "blue",

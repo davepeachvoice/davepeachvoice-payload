@@ -26,7 +26,7 @@ const AudioVisualizer = (props) => {
   const displayBins = 512;
   const backgroundColour = "#2C2E3B";
   const barColour = "#EC1A55";
-  const songFont = "15px 'Open Sans'";
+  // const songFont = "15px 'Open Sans'";
   //Where the bottom of the waveform is rendered at (out of 255). I recommend
   //leaving it at 96 since it seems to work well, basically any volume will push
   //it past 96. If your audio stream is quiet though, you'll want to reduce this.
@@ -52,38 +52,38 @@ const AudioVisualizer = (props) => {
 
   // wait for audioContext to be available
   useEffect(() => {
+    function initializeVisualizer(audioElement) {
+      try {
+        console.log("audiocontext");
+        console.log(audioContext);
+        setupAudioApi(audioElement); // STARTHERE: make canvasWidth available to this function (must get get this from canvas somehow)
+      } catch (e) {
+        console.log(e);
+      }
+    }
+
+    const play = () => {
+      console.log("playing");
+      initializeVisualizer(props.audio);
+
+      // tell Canvas to start drawing
+      setDrawing(true);
+    };
+
     console.log("used effect");
     if (props.playing) play();
     else stop();
-  }, [audioContext]);
+  }, [audioContext, props.playing, props.audio, setupAudioApi]);
 
   const handleContextAvailable = (localCtx) => {
     setCanvasWidth(localCtx.canvas.width);
     setCanvasHeight(localCtx.canvas.height);
   };
 
-  const play = () => {
-    console.log("playing");
-    initializeVisualizer(props.audio);
-
-    // tell Canvas to start drawing
-    setDrawing(true);
-  };
-
   const stop = () => {
     console.log("stopping");
     setDrawing(false);
   };
-
-  function initializeVisualizer(audioElement) {
-    try {
-      console.log("audiocontext");
-      console.log(audioContext);
-      setupAudioApi(audioElement); // STARTHERE: make canvasWidth available to this function (must get get this from canvas somehow)
-    } catch (e) {
-      console.log(e);
-    }
-  }
 
   const draw = (localCtx, frameCount) => {
     console.log("drawing");
@@ -94,8 +94,8 @@ const AudioVisualizer = (props) => {
     localCtx.fillStyle = backgroundColour;
     localCtx.fillRect(0, 0, canvasWidth, canvasHeight);
 
-    let bins = audioAnalyserNode.frequencyBinCount;
-    let data = new Uint8Array(bins);
+    const bins = audioAnalyserNode.frequencyBinCount;
+    const data = new Uint8Array(bins);
     audioAnalyserNode.getByteFrequencyData(data);
     localCtx.fillStyle = barColour;
     console.log(barColour);
@@ -115,13 +115,13 @@ const AudioVisualizer = (props) => {
       console.log(getBinHeight(0));
       let i;
       for (i = 0; i < displayBins - 2; ) {
-        var thisX = i * binWidth;
-        var nextX = (i + logBinLengths[i]) * binWidth; //First subbin of the next bin
-        var x = (thisX + nextX) / 2;
+        const thisX = i * binWidth;
+        const nextX = (i + logBinLengths[i]) * binWidth; //First subbin of the next bin
+        const x = (thisX + nextX) / 2;
 
-        var thisY = canvasHeight - getBinHeight(i);
-        var nextY = canvasHeight - getBinHeight(i + logBinLengths[i]);
-        var y = (thisY + nextY) / 2;
+        const thisY = canvasHeight - getBinHeight(i);
+        const nextY = canvasHeight - getBinHeight(i + logBinLengths[i]);
+        const y = (thisY + nextY) / 2;
 
         localCtx.quadraticCurveTo(thisX, thisY, x, y);
 
@@ -145,7 +145,7 @@ const AudioVisualizer = (props) => {
     if (drawText) {
       localCtx.fillStyle = "white";
       //Note: the 15's here need to be changed if you change the font size
-      let localSongText = "";
+      const localSongText = "";
       localCtx.fillText(
         songText,
         canvasWidth / 2 - textSize.width / 2,
@@ -168,26 +168,26 @@ const AudioVisualizer = (props) => {
   }
 
   function updateBins(bins, data) {
-    let step = bins / displayBins;
+    const step = bins / displayBins;
     for (let i = 0; i < displayBins; i++) {
-      let lower = i * step;
-      let upper = (i + 1) * step - 1;
-      let binValue = averageRegion(data, lower, upper);
+      const lower = i * step;
+      const upper = (i + 1) * step - 1;
+      const binValue = averageRegion(data, lower, upper);
       setLogBinLengths([...logBinLengths, 1]);
       setFinalBins(finalBins.set(i, binValue));
     }
   }
 
   function createLookupTable(bins, lookupTable) {
-    let binLengths = [];
+    const binLengths = [];
     if (drawPitch) {
       let lastFrequency = magicConstant / multiplier;
       let currentLength = 0;
       let lastBinIndex = 0;
       for (let i = 0; i < displayBins; i++) {
-        let thisFreq = lastFrequency * multiplier;
+        const thisFreq = lastFrequency * multiplier;
         lastFrequency = thisFreq;
-        let binIndex = Math.floor((bins * thisFreq) / 22050);
+        const binIndex = Math.floor((bins * thisFreq) / 22050);
         lookupTable[i] = binIndex;
         currentLength++;
 
@@ -216,7 +216,7 @@ const AudioVisualizer = (props) => {
   }
 
   function getBinHeight(i) {
-    let binValue = finalBins[i];
+    const binValue = finalBins[i];
     console.log("getBinHeight finalBins");
     console.log(finalBins);
     console.log("binValue");
@@ -236,14 +236,14 @@ const AudioVisualizer = (props) => {
   }
 
   function paintSingleBin(i, localCtx) {
-    let height = getBinHeight(i);
+    const height = getBinHeight(i);
     localCtx.fillRect(i * binWidth, canvasHeight - height, binWidth, height);
   }
 
   function setupAudioApi(audioElement) {
     console.log("Setting up audio api");
-    let src = audioContext.createMediaElementSource(audioElement);
-    let localAudioAnalyserNode = audioContext.createAnalyser();
+    const src = audioContext.createMediaElementSource(audioElement);
+    const localAudioAnalyserNode = audioContext.createAnalyser();
     src.connect(localAudioAnalyserNode);
     localAudioAnalyserNode.connect(audioContext.destination);
 

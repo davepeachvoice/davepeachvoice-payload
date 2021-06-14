@@ -1,8 +1,7 @@
 import React from "react";
 
-import { Grommet, Header, Anchor, Box, ResponsiveContext, Menu } from "grommet";
-import { Grommet as GrommetIcon, Menu as MenuIcon } from "grommet-icons";
-import { grommet } from "grommet/themes";
+import { Header, Anchor, Box, ResponsiveContext, Menu } from "grommet";
+import { Menu as MenuIcon } from "grommet-icons";
 import Link from "next/link";
 import Router from "next/router";
 

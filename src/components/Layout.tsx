@@ -1,9 +1,6 @@
-import Header from "./Header";
 import NavigationBar from "./NavigationBar";
-import { Grommet, ResponsiveContext, Box, App } from "grommet";
-import { Reddit } from "grommet-icons";
-import { React } from "react";
-import { Main } from "grommet";
+import { Grommet, Box } from "grommet";
+import React from "react";
 
 const theme = {
   name: "aruba",
@@ -123,26 +120,17 @@ const theme = {
   date: "2020-02-14T21:38:28.000Z",
 };
 
-const layoutStyle = {
-  display: "flex",
-  flexDirection: "column",
-  height: "100%",
-  width: "100%",
-};
-
 const contentStyle = {
   flex: 1,
   display: "flex",
-  flexDirection: "column",
+  flexDirection: "column" as const,
 };
 
-const Layout = (props) => (
+export default function Layout(props) {
   <Grommet full theme={theme} themeMode="dark">
     <Box fill>
       <NavigationBar></NavigationBar>
       <div style={contentStyle}>{props.children}</div>
     </Box>
-  </Grommet>
-);
-
-export default Layout;
+  </Grommet>;
+}
