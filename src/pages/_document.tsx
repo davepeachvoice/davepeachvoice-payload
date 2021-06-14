@@ -3,6 +3,7 @@ import Document, { Head, Main, NextScript, Html } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class CustomDocument extends Document {
+  // styled-components ssr
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
@@ -28,6 +29,7 @@ export default class CustomDocument extends Document {
       sheet.seal();
     }
   }
+  // grommet support (ssr I think?)
   render() {
     return (
       <Html>
