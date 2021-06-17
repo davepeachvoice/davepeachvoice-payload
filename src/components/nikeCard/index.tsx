@@ -15,7 +15,7 @@ const CardWrapper = styled.div`
 
 const CardContainer = styled(motion.div)`
   width: 285px;
-  height: 500px;
+  height: 175px;
   display: flex;
   flex-direction: column;
   border-radius: 25px;
@@ -105,11 +105,13 @@ export default function NikeCard(props: NikeCardProps) {
   const y = useMotionValue(0);
   const rotateX = useTransform(y, [-100, 100], [30, -30]);
   const rotateY = useTransform(x, [-100, 100], [-30, 30]);
+  // const translateX = useTransform(x, [0], [10]);
 
   return (
     <CardWrapper>
       <CardContainer
         style={{ x, y, rotateX, rotateY, z: 100 }}
+        whileHover={{ rotateX }}
         drag
         dragElastic={0.16}
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
