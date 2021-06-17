@@ -1,7 +1,69 @@
 import React, { CSSProperties, useState, useEffect } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
+import styled from "styled-components";
+import ShoesDetails from "./nikeCard/shoesDetails";
+
+// https://codesandbox.io/s/agitated-shockley-cdzuy?file=/src/components/record-button.tsx:1574-1575
 
 const RED_COLOR = `#FF214D`;
+
+const DetailsContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2.5em 6px 0 6px;
+  line-height: 1.4;
+`;
+
+const MediumText = styled.span`
+  font-size: 18px;
+  color: #fff;
+  font-weight: 800;
+  text-transform: uppercase;
+`;
+
+const SmallText = styled.span`
+  font-size: 11px;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+`;
+
+const SpacedHorizontalContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const ActionButton = styled(motion.div)`
+  padding: 10px 16px;
+  background-color: #fbbe01;
+  transition: all 290ms ease-in-out;
+  color: #000;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: 700;
+  border: 3px solid transparent;
+  outline: none;
+  cursor: pointer;
+  border-radius: 8px;
+  align-self: flex-end;
+  &:hover {
+    background-color: transparent;
+    color: #fff;
+    border: 3px solid #fbbe01;
+  }
+`;
+
+const Details = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 30px;
+  bottom: 0;
+`;
 
 const outerCircleVariants: Variants = {
   circle: {
@@ -10,17 +72,7 @@ const outerCircleVariants: Variants = {
     boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
   },
   largeCircle: {
-    transform: "scale(2)",
-    opacity: 1,
-    boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
-  },
-  pulseIn: {
-    transform: "scale(2)",
-    opacity: 1,
-    boxShadow: `0px 0px 0px 20px ${RED_COLOR}`,
-  },
-  pulseOut: {
-    transform: "scale(2)",
+    transform: "scale(1.1)",
     opacity: 1,
     boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
   },
@@ -28,16 +80,12 @@ const outerCircleVariants: Variants = {
 
 const innerCircleVariants: Variants = {
   circle: {
-    transform: "scale(1)",
-    borderRadius: "100%",
+    y: 0,
+    borderRadius: "10px",
   },
   square: {
-    transform: "scale(0.8)",
-    borderRadius: "30%",
-  },
-  invisible: {
-    transform: "scale(0)",
-    borderRadius: "100%",
+    y: -10,
+    borderRadius: "40px",
   },
 };
 
@@ -49,25 +97,15 @@ export const RecordButton = () => {
   useEffect(() => {
     (async () => {
       if (hover) {
-        await outerCircleAnimation.start("largeCircle");
-        await outerCircleAnimation.start(["pulseOut", "pulseIn"], {
-          repeat: Infinity,
-          repeatType: "mirror",
-        });
+        Promise.all([
+          outerCircleAnimation.start("largeCircle"),
+          innerCircleAnimation.start("square"),
+        ]);
       } else {
-        await outerCircleAnimation.start("circle");
-      }
-    })();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [hover]);
-
-  useEffect(() => {
-    (async () => {
-      if (hover) {
-        await innerCircleAnimation.start("square");
-        await innerCircleAnimation.start("invisible");
-      } else {
-        await innerCircleAnimation.start("circle");
+        Promise.all([
+          outerCircleAnimation.start("circle"),
+          innerCircleAnimation.start("circle"),
+        ]);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -85,13 +123,25 @@ export const RecordButton = () => {
         animate={outerCircleAnimation}
         variants={outerCircleVariants}
         style={{ ...styles.circle, ...styles.outerCircle }}
-      />
-      <motion.div
+      >
+        <Details>
+          <div>Hi there</div>
+          <ActionButton
+            initial="circle"
+            animate={innerCircleAnimation}
+            variants={innerCircleVariants}
+            style={{ ...styles.circle, ...styles.innerCircle }}
+          >
+            Listen
+          </ActionButton>
+        </Details>
+      </motion.div>
+      {/* <motion.div
         initial="circle"
         animate={innerCircleAnimation}
         variants={innerCircleVariants}
         style={{ ...styles.circle, ...styles.innerCircle }}
-      />
+      /> */}
     </motion.div>
   );
 };
@@ -102,23 +152,23 @@ const styles: Record<string, CSSProperties> = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    width: 150,
-    height: 150,
+    width: 285,
+    height: 175,
+    alignSelf: "center",
+    justifySelf: "center",
+    flexDirection: "column",
+    padding: "2.5em 6px 0 6px",
+    lineHeight: "1.4",
   },
-  circle: {
-    position: "absolute",
-  },
+  circle: {},
   outerCircle: {
     width: "100%",
     height: "100%",
     overflow: "hidden",
-    borderRadius: 9999,
-  },
-  innerCircle: {
-    width: "90%",
-    height: "90%",
-    overflow: "hidden",
-    backgroundColor: RED_COLOR,
+    borderRadius: 0,
+    flexDirection: "column",
+    padding: "2.5em 6px 0 6px",
+    lineHeight: "1.4",
   },
 };
 
