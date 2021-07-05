@@ -35,6 +35,7 @@
     ".gitignore": true,
     ".babelrc": true,
     ".prettierrc": true,
-    "*.code-workspace": true
+    "*.code-workspace": true,
+    ".eslintignore": true
   }
 }

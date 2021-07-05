@@ -2,6 +2,7 @@ import React, { CSSProperties, useState, useEffect } from "react";
 import { motion, useAnimation, Variants } from "framer-motion";
 import styled from "styled-components";
 import ShoesDetails from "./nikeCard/shoesDetails";
+import PortfolioItem from "./PortfolioItemInterface";
 
 // https://codesandbox.io/s/agitated-shockley-cdzuy?file=/src/components/record-button.tsx:1574-1575
 
@@ -88,12 +89,19 @@ const innerCircleVariants: Variants = {
     borderRadius: "40px",
   },
 };
+interface RecordButtonProps {
+  item: PortfolioItem;
+  onClick: () => void;
+}
 
-export const RecordButton = () => {
+export const RecordButton = (props: RecordButtonProps) => {
   const [hover, setHover] = useState<boolean>(false);
   const innerCircleAnimation = useAnimation();
   const outerCircleAnimation = useAnimation();
 
+  const item = props.item;
+  const playButtonStidfaskldfajsdflkajsdflkajsdflkd =
+    item.mediaType == "audio" ? "Listen" : "Watch";
   useEffect(() => {
     (async () => {
       if (hover) {
@@ -125,14 +133,14 @@ export const RecordButton = () => {
         style={{ ...styles.circle, ...styles.outerCircle }}
       >
         <Details>
-          <div>Hi there</div>
+          <div>{item.title}</div>
           <ActionButton
             initial="circle"
             animate={innerCircleAnimation}
             variants={innerCircleVariants}
             style={{ ...styles.circle, ...styles.innerCircle }}
           >
-            Listen
+            {playButtonStidfaskldfajsdflkajsdflkajsdflkd}
           </ActionButton>
         </Details>
       </motion.div>

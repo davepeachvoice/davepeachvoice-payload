@@ -9,24 +9,18 @@ interface PortfolioItemsProps {
 }
 
 export default function PortfolioItems(props: PortfolioItemsProps) {
+  // meaningless comment
   return (
     <Box pad="large" background="dark-1" height="100%">
       <Grid gap="medium" columns={{ count: "fit", size: "small" }}>
-        <RecordButton></RecordButton>
         {props.items.map((item) => (
-          <Card
+          <RecordButton
             key={item.title}
+            item={item}
             onClick={() => {
               alert("Card was Clicked!");
             }}
-          >
-            <CardBody pad="small">
-              <PortfolioItem portfolioItem={item}></PortfolioItem>
-            </CardBody>
-            {/* <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
-              <Text size="xsmall">{item.message}</Text>
-            </CardFooter> */}
-          </Card>
+          ></RecordButton>
         ))}
       </Grid>
     </Box>
