@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import PortfolioItems from "./PortfolioItems";
-import PortfolioItemInterface from "./PortfolioItemInterface";
+import PortfolioItems from './PortfolioItems';
+import PortfolioItemInterface from './PortfolioItemInterface';
 
 export default function Portfolio() {
   const items = [buildPortfolioItem(1), buildPortfolioItem(2)];
@@ -10,10 +10,12 @@ export default function Portfolio() {
 }
 
 function buildPortfolioItem(index) {
-  const mediaType: PortfolioItemInterface["mediaType"] =
-    index % 2 == 0 ? "video" : "audio";
+  const mediaType: PortfolioItemInterface['mediaType'] =
+    index % 2 == 0 ? 'video' : 'audio';
   return {
     title: `hi there ${index}`,
     mediaType: mediaType,
-  };
+    mediaSource: '',
+    thumbnailSource: '/dave-peach-web-netlify-cms/march_madness.png',
+  } as PortfolioItemInterface;
 }

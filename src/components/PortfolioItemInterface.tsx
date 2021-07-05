@@ -1,6 +1,6 @@
-export default interface PortfolioItem {
+export default interface PortfolioItemInterface {
   title: string;
-  mediaType: "audio" | "video";
+  mediaType: 'audio' | 'video';
   mediaSource: string;
   thumbnailSource: string;
 }

@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import NikeCard from "../components/nikeCard/index";
-import PortfolioItemInterface from "./PortfolioItemInterface";
+import NikeCard from '../components/nikeCard/index';
+import PortfolioItemInterface from './PortfolioItemInterface';
 
 interface PortfolioItemProps {
   portfolioItem: PortfolioItemInterface;

@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Heading, Box, Button, Stack } from "grommet";
-import styled from "styled-components";
-import { Play } from "grommet-icons";
+import React, { useState, useEffect } from 'react';
+import { Heading, Box, Button, Stack } from 'grommet';
+import styled from 'styled-components';
+import { Play } from 'grommet-icons';
 
-import { motion } from "framer-motion";
-import AudioVisualizer from "./AudioVisualizer";
+import { motion } from 'framer-motion';
+import AudioVisualizer from './AudioVisualizer';
 
-import { attributes } from "@content/home.md";
+import { attributes } from '@content/home.md';
 
 export const Pulsate = (props) => (
   <motion.div
@@ -14,14 +14,14 @@ export const Pulsate = (props) => (
       scale: [1, 1.1, 1],
       transition: {
         duration: 1,
-        ease: "easeInOut",
+        ease: 'easeInOut',
         times: [0, 0.5, 1],
         loop: Infinity,
         repeatDelay: 0,
       },
     }}
   >
-    {" "}
+    {' '}
     {props.children}
   </motion.div>
 );
@@ -60,7 +60,7 @@ const HomeAudio = () => {
     console.log(audioFile);
     if (audioFile === null) return;
     // TODO: type this (something like React.DetailedHTMLProps<React.AudioHTMLAttributes<HTMLAudioElement>,HTMLAudioElement> but where ContentEditable works)
-    const localAudio: any = document.getElementById("audio");
+    const localAudio: any = document.getElementById('audio');
     console.log(audioFile);
     localAudio.src = URL.createObjectURL(audioFile[0]);
     localAudio.load();
@@ -72,7 +72,7 @@ const HomeAudio = () => {
   return (
     <>
       <Box>
-        <Stack guidingChild="last">
+        <Stack guidingChild='last'>
           <Box fill>
             <AudioVisualizer
               audio={audio}
@@ -80,20 +80,20 @@ const HomeAudio = () => {
             ></AudioVisualizer>
           </Box>
           <Box
-            align="center"
-            justify="center"
-            background={{ color: "brand", opacity: "weak" }}
+            align='center'
+            justify='center'
+            background={{ color: 'brand', opacity: 'weak' }}
           >
-            <Heading size="large" margin="large">
+            <Heading size='large' margin='large'>
               {hero_main_text}
             </Heading>
           </Box>
         </Stack>
-        <Box gridArea="tagline">{hero_sub_text}</Box>
+        <Box gridArea='tagline'>{hero_sub_text}</Box>
         <ButtonWithIcon
           onMouseEnter={() => setAnimateButton(true)}
           onMouseLeave={() => setAnimateButton(false)}
-          gridArea="button"
+          gridArea='button'
         >
           <div>{audio_sample_text}</div>
           <Pulsate>
@@ -104,13 +104,13 @@ const HomeAudio = () => {
         </ButtonWithIcon>
 
         <input
-          type="file"
+          type='file'
           onChange={(event) => setAudioFile(event.target.files)}
-          id="thefile"
-          accept="audio/*"
+          id='thefile'
+          accept='audio/*'
         />
         <Button onClick={() => setPlayingAudio(false)}></Button>
-        <audio id="audio" controls></audio>
+        <audio id='audio' controls></audio>
       </Box>
     </>
   );

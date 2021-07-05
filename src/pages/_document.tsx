@@ -1,6 +1,6 @@
-import React from "react";
-import Document, { Head, Main, NextScript, Html } from "next/document";
-import { ServerStyleSheet } from "styled-components";
+import React from 'react';
+import Document, { Head, Main, NextScript, Html } from 'next/document';
+import { ServerStyleSheet } from 'styled-components';
 
 export default class CustomDocument extends Document {
   // styled-components ssr
@@ -39,7 +39,7 @@ export default class CustomDocument extends Document {
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/grommet/1.10.1/grommet.min.css"
           /> */}
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/grommet/2.17.3/grommet.min.js"></script>
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/grommet/2.17.3/grommet.min.js'></script>
         </Head>
         <body>
           <Main /> {/* each routed page will go inside here */}

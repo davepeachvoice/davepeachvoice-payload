@@ -1,8 +1,8 @@
-import { react as PricingContent } from "../content/pricing.md";
+import { react as PricingContent } from '../content/pricing.md';
 
-import Layout from "../components/Layout";
+import Layout from '../components/Layout';
 
-import React from "react";
+import React from 'react';
 
 const Contact = () => {
   return (

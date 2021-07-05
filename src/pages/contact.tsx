@@ -1,9 +1,9 @@
-import { react as ContactContent } from "../content/contact.md";
+import { react as ContactContent } from '../content/contact.md';
 
-import Layout from "../components/Layout";
+import Layout from '../components/Layout';
 
-import React from "react";
-import Parallax from "../components/Parallax/Parallax";
+import React from 'react';
+import Parallax from '../components/Parallax/Parallax';
 
 const Contact = () => {
   return (

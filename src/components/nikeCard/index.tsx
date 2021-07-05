@@ -1,9 +1,9 @@
-import { motion, useMotionValue, useTransform } from "framer-motion";
-import React from "react";
-import styled from "styled-components";
+import { motion, useMotionValue, useTransform } from 'framer-motion';
+import React from 'react';
+import styled from 'styled-components';
 
-import PortfolioItem from "../PortfolioItemInterface";
-import ShoesDetails from "./shoesDetails";
+import PortfolioItem from '../PortfolioItemInterface';
+import ShoesDetails from './shoesDetails';
 
 const CardWrapper = styled.div`
   width: 100%;
@@ -115,7 +115,7 @@ export default function NikeCard(props: NikeCardProps) {
         drag
         dragElastic={0.16}
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
-        whileTap={{ cursor: "grabbing" }}
+        whileTap={{ cursor: 'grabbing' }}
       >
         <TopContainer>
           <CircleWrapper>
@@ -123,12 +123,12 @@ export default function NikeCard(props: NikeCardProps) {
           </CircleWrapper>
           <ShoesWrapper>
             <Shoes
-              style={{ x, y, rotateX, rotateY, rotate: "-25deg", z: 100000 }}
+              style={{ x, y, rotateX, rotateY, rotate: '-25deg', z: 100000 }}
               drag
               dragElastic={0.12}
-              whileTap={{ cursor: "grabbing" }}
+              whileTap={{ cursor: 'grabbing' }}
             >
-              <img src="/images/air-jordan-transparent.png" />
+              <img src='/images/air-jordan-transparent.png' />
             </Shoes>
           </ShoesWrapper>
           <NikeText>NIKE AIR</NikeText>

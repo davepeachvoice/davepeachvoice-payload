@@ -1,6 +1,6 @@
 // https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
 
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState } from 'react';
 
 const useCanvas = (draw, options?, drawing?, onContextAvailable?) => {
   const [animationFrameId, setAnimationFrameId] = useState(null);
@@ -8,11 +8,11 @@ const useCanvas = (draw, options?, drawing?, onContextAvailable?) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    console.log("using canvas effect");
+    console.log('using canvas effect');
     const canvas = canvasRef.current;
-    const context = canvas.getContext(options?.context ?? "2d");
-    canvas.style.width = "100%";
-    canvas.style.height = "100%";
+    const context = canvas.getContext(options?.context ?? '2d');
+    canvas.style.width = '100%';
+    canvas.style.height = '100%';
     onContextAvailable(context);
     if (!drawing) {
       context.clearRect(0, 0, canvas.width, canvas.height);

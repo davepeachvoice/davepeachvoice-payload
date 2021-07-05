@@ -1,9 +1,9 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 // import circle from "!!raw-loader!./circle.svg";
 // import circleRings from "!!raw-loader!./circle-rings.svg";
-import Svg from "../Svg/Svg";
-import { ParallaxProvider, Parallax } from "react-scroll-parallax";
+import Svg from '../Svg/Svg';
+import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
 const Root = styled.div`
   position: relative;
@@ -34,7 +34,7 @@ const ParallaxOverlap = () => (
   <ParallaxProvider>
     <Root>
       <Container>
-        <Circle className="parallax" y={[-20, 20]} tagOuter="figure">
+        <Circle className='parallax' y={[-20, 20]} tagOuter='figure'>
           {/* <Svg svg={circle} /> */}
         </Circle>
         <CircleRings x={[-20, 20]}>

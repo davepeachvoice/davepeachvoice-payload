@@ -1,5 +1,5 @@
-import React from "react";
-import PropTypes from "prop-types";
+import React from 'react';
+import PropTypes from 'prop-types';
 
 export default function Svg(props) {
   const Element = props.el;
@@ -7,11 +7,11 @@ export default function Svg(props) {
   return (
     <Element
       style={{
-        display: "block",
+        display: 'block',
         svg: {
-          display: "block",
-          width: "100%",
-          height: "auto",
+          display: 'block',
+          width: '100%',
+          height: 'auto',
         },
       }}
       dangerouslySetInnerHTML={{ __html: props.svg }}
@@ -27,5 +27,5 @@ Svg.propTypes = {
 };
 
 Svg.defaultProps = {
-  el: "span",
+  el: 'span',
 };

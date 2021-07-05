@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
-import ReactDOM from "react-dom";
+import React, { useState, useEffect, useRef } from 'react';
+import ReactDOM from 'react-dom';
 import {
   useViewportScroll,
   motion,
   useTransform,
   useMotionValue,
-} from "framer-motion";
-import { useInView } from "react-intersection-observer";
+} from 'framer-motion';
+import { useInView } from 'react-intersection-observer';
 
 // import "./styles.css";
 
@@ -55,8 +55,8 @@ export const Parallax = () => {
   return (
     <>
       <motion.div
-        initial="hidden"
-        animate="visible"
+        initial='hidden'
+        animate='visible'
         variants={{
           hidden: {
             scale: 0.8,
@@ -71,7 +71,7 @@ export const Parallax = () => {
           },
         }}
       >
-        <h1 className="title">Wubba Lubba Dub Dub!</h1>
+        <h1 className='title'>Wubba Lubba Dub Dub!</h1>
       </motion.div>
       {/* <motion.div className="box" style={{ y: y1, x: -50 }} />
       <motion.div

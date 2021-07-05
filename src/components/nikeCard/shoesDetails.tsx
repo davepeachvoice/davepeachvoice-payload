@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import Marginer from "./marginer";
-import PortfolioItem from "../PortfolioItemInterface";
+import React from 'react';
+import styled from 'styled-components';
+import Marginer from './marginer';
+import PortfolioItem from '../PortfolioItemInterface';
 
 const DetailsContainer = styled.div`
   width: 100%;
@@ -63,10 +63,10 @@ export default function ShoesDetails(props: PortfolioItemProps) {
       <SpacedHorizontalContainer>
         <MediumText>{props.portfolioItem.title}</MediumText>
       </SpacedHorizontalContainer>
-      <Marginer direction="vertical" margin="1.2em" />
+      <Marginer direction='vertical' margin='1.2em' />
       <SpacedHorizontalContainer>
         <ActionButton>
-          {props.portfolioItem.mediaType == "video" ? "watch" : "listen"}
+          {props.portfolioItem.mediaType == 'video' ? 'watch' : 'listen'}
         </ActionButton>
       </SpacedHorizontalContainer>
     </DetailsContainer>

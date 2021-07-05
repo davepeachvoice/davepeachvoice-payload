@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import Canvas from "./Canvas";
-import { List } from "immutable";
+import React, { useEffect } from 'react';
+import Canvas from './Canvas';
+import { List } from 'immutable';
 
 // https://github.com/anonymousthing/audio-visualizer/blob/master/visualizer.js
 export default function AudioVisualizer(props) {
@@ -10,8 +10,8 @@ export default function AudioVisualizer(props) {
     audioVisualizerInitialized,
     setAudioVisualizerInitialized,
   ] = React.useState(false);
-  const [songText, setSongText] = React.useState("");
-  const [textSize, setTextSize] = React.useState("10px");
+  const [songText, setSongText] = React.useState('');
+  const [textSize, setTextSize] = React.useState('10px');
   const [multiplier, setMultiplier] = React.useState(null);
   const [finalBins, setFinalBins] = React.useState(null);
   const [logLookupTable, setLogLookupTable] = React.useState(null);
@@ -24,8 +24,8 @@ export default function AudioVisualizer(props) {
   // Configurable variables
   //Note: bins needs to be a power of 2
   const displayBins = 512;
-  const backgroundColour = "#2C2E3B";
-  const barColour = "#EC1A55";
+  const backgroundColour = '#2C2E3B';
+  const barColour = '#EC1A55';
   // const songFont = "15px 'Open Sans'";
   //Where the bottom of the waveform is rendered at (out of 255). I recommend
   //leaving it at 96 since it seems to work well, basically any volume will push
@@ -78,13 +78,13 @@ export default function AudioVisualizer(props) {
           lookupTable[i] = i;
         }
       }
-      console.log("binLengths");
+      console.log('binLengths');
       console.log(binLengths);
       return binLengths;
     }
 
     function setupAudioApi(audioElement) {
-      console.log("Setting up audio api");
+      console.log('Setting up audio api');
       const src = audioContext.createMediaElementSource(audioElement);
       const localAudioAnalyserNode = audioContext.createAnalyser();
       src.connect(localAudioAnalyserNode);
@@ -124,7 +124,7 @@ export default function AudioVisualizer(props) {
 
     function initializeVisualizer(audioElement) {
       try {
-        console.log("audiocontext");
+        console.log('audiocontext');
         console.log(audioContext);
         setupAudioApi(audioElement); // STARTHERE: make canvasWidth available to this function (must get get this from canvas somehow)
       } catch (e) {
@@ -133,14 +133,14 @@ export default function AudioVisualizer(props) {
     }
 
     const play = () => {
-      console.log("playing");
+      console.log('playing');
       initializeVisualizer(props.audio);
 
       // tell Canvas to start drawing
       setDrawing(true);
     };
 
-    console.log("used effect");
+    console.log('used effect');
     if (props.playing) play();
     else stop();
   }, [
@@ -158,12 +158,12 @@ export default function AudioVisualizer(props) {
   };
 
   const stop = () => {
-    console.log("stopping");
+    console.log('stopping');
     setDrawing(false);
   };
 
   const draw = (localCtx) => {
-    console.log("drawing");
+    console.log('drawing');
 
     if (!audioVisualizerInitialized) return;
 
@@ -220,9 +220,9 @@ export default function AudioVisualizer(props) {
     }
 
     if (drawText) {
-      localCtx.fillStyle = "white";
+      localCtx.fillStyle = 'white';
       //Note: the 15's here need to be changed if you change the font size
-      const localSongText = "";
+      const localSongText = '';
       localCtx.fillText(
         songText,
         canvasWidth / 2 - parseInt(textSize, 10) / 2,
@@ -263,9 +263,9 @@ export default function AudioVisualizer(props) {
 
   function getBinHeight(i) {
     const binValue = finalBins[i];
-    console.log("getBinHeight finalBins");
+    console.log('getBinHeight finalBins');
     console.log(finalBins);
-    console.log("binValue");
+    console.log('binValue');
     console.log(binValue);
 
     //Pretty much any volume will push it over [floorLevel] so we set that as the bottom threshold
@@ -274,9 +274,9 @@ export default function AudioVisualizer(props) {
     //Scale to the height of the bar
     //Since we change the base level in the previous operations, 256 should be changed to 160 (i think) if we want it to go all the way to the top
     height = (height / (256 - floorLevel)) * canvasHeight * 0.8;
-    console.log("canvasHeight");
+    console.log('canvasHeight');
     console.log(canvasHeight);
-    console.log("floorLevel");
+    console.log('floorLevel');
     console.log(floorLevel);
     return height;
   }

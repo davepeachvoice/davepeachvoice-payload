@@ -1,8 +1,8 @@
-import React, { CSSProperties, useState, useEffect } from "react";
-import { motion, useAnimation, Variants } from "framer-motion";
-import styled from "styled-components";
-import ShoesDetails from "./nikeCard/shoesDetails";
-import PortfolioItem from "./PortfolioItemInterface";
+import React, { CSSProperties, useState, useEffect } from 'react';
+import { motion, useAnimation, Variants } from 'framer-motion';
+import styled from 'styled-components';
+import ShoesDetails from './nikeCard/shoesDetails';
+import PortfolioItemInterface from './PortfolioItemInterface';
 
 // https://codesandbox.io/s/agitated-shockley-cdzuy?file=/src/components/record-button.tsx:1574-1575
 
@@ -68,12 +68,12 @@ const Details = styled.div`
 
 const outerCircleVariants: Variants = {
   circle: {
-    transform: "scale(1)",
+    transform: 'scale(1)',
     opacity: 0.5,
     boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
   },
   largeCircle: {
-    transform: "scale(1.1)",
+    transform: 'scale(1.1)',
     opacity: 1,
     boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
   },
@@ -82,15 +82,15 @@ const outerCircleVariants: Variants = {
 const innerCircleVariants: Variants = {
   circle: {
     y: 0,
-    borderRadius: "10px",
+    borderRadius: '10px',
   },
   square: {
     y: -10,
-    borderRadius: "40px",
+    borderRadius: '40px',
   },
 };
 interface RecordButtonProps {
-  item: PortfolioItem;
+  item: PortfolioItemInterface;
   onClick: () => void;
 }
 
@@ -101,18 +101,18 @@ export const RecordButton = (props: RecordButtonProps) => {
 
   const item = props.item;
   const playButtonStidfaskldfajsdflkajsdflkajsdflkd =
-    item.mediaType == "audio" ? "Listen" : "Watch";
+    item.mediaType == 'audio' ? 'Listen' : 'Watch';
   useEffect(() => {
     (async () => {
       if (hover) {
         Promise.all([
-          outerCircleAnimation.start("largeCircle"),
-          innerCircleAnimation.start("square"),
+          outerCircleAnimation.start('largeCircle'),
+          innerCircleAnimation.start('square'),
         ]);
       } else {
         Promise.all([
-          outerCircleAnimation.start("circle"),
-          innerCircleAnimation.start("circle"),
+          outerCircleAnimation.start('circle'),
+          innerCircleAnimation.start('circle'),
         ]);
       }
     })();
@@ -127,7 +127,7 @@ export const RecordButton = (props: RecordButtonProps) => {
       onMouseLeave={() => setHover(false)}
     >
       <motion.div
-        initial="circle"
+        initial='circle'
         animate={outerCircleAnimation}
         variants={outerCircleVariants}
         style={{ ...styles.circle, ...styles.outerCircle }}
@@ -135,7 +135,7 @@ export const RecordButton = (props: RecordButtonProps) => {
         <Details>
           <div>{item.title}</div>
           <ActionButton
-            initial="circle"
+            initial='circle'
             animate={innerCircleAnimation}
             variants={innerCircleVariants}
             style={{ ...styles.circle, ...styles.innerCircle }}
@@ -156,27 +156,27 @@ export const RecordButton = (props: RecordButtonProps) => {
 
 const styles: Record<string, CSSProperties> = {
   container: {
-    position: "relative",
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 285,
     height: 175,
-    alignSelf: "center",
-    justifySelf: "center",
-    flexDirection: "column",
-    padding: "2.5em 6px 0 6px",
-    lineHeight: "1.4",
+    alignSelf: 'center',
+    justifySelf: 'center',
+    flexDirection: 'column',
+    padding: '2.5em 6px 0 6px',
+    lineHeight: '1.4',
   },
   circle: {},
   outerCircle: {
-    width: "100%",
-    height: "100%",
-    overflow: "hidden",
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden',
     borderRadius: 0,
-    flexDirection: "column",
-    padding: "2.5em 6px 0 6px",
-    lineHeight: "1.4",
+    flexDirection: 'column',
+    padding: '2.5em 6px 0 6px',
+    lineHeight: '1.4',
   },
 };
 
