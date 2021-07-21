@@ -1,10 +1,10 @@
 import React from 'react';
 import * as Grommet from 'grommet';
-import PortfolioItemInterface from './PortfolioItemInterface';
-import RecordButton from '../components/RecordButton';
+import { PortfolioItemDataInterface } from './PortfolioItemInterface';
+import RecordButton from './RecordButton';
 
 interface PortfolioItemsProps {
-  items: PortfolioItemInterface[];
+  items: PortfolioItemDataInterface[];
 }
 
 export default function PortfolioItems(props: PortfolioItemsProps) {

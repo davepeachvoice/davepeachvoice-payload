@@ -2,7 +2,7 @@ import { motion, useMotionValue, useTransform } from 'framer-motion';
 import React from 'react';
 import styled from 'styled-components';
 
-import PortfolioItem from '../PortfolioItemInterface';
+import { PortfolioItemInterface } from '../PortfolioItems/PortfolioItemInterface';
 import ShoesDetails from './shoesDetails';
 
 const CardWrapper = styled.div`
@@ -97,7 +97,7 @@ const Shoes = styled(motion.div)`
 `;
 
 interface NikeCardProps {
-  portfolioItem: PortfolioItem;
+  portfolioItem: PortfolioItemInterface;
 }
 
 export default function NikeCard(props: NikeCardProps) {

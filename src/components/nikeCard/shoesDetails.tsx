@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Marginer from './marginer';
-import PortfolioItem from '../PortfolioItemInterface';
+import { PortfolioItemInterface } from '../PortfolioItems/PortfolioItemInterface';
 
 const DetailsContainer = styled.div`
   width: 100%;
@@ -54,7 +54,7 @@ const ActionButton = styled.button`
 `;
 
 interface PortfolioItemProps {
-  portfolioItem: PortfolioItem;
+  portfolioItem: PortfolioItemInterface;
 }
 
 export default function ShoesDetails(props: PortfolioItemProps) {

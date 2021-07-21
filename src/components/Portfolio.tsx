@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PortfolioItems from './PortfolioItems';
-import PortfolioItemInterface from './PortfolioItemInterface';
+import PortfolioItems from './PortfolioItems/PortfolioItems';
+import { PortfolioItemInterface } from './PortfolioItems/PortfolioItemInterface';
 
 export default function Portfolio() {
   const items = [buildPortfolioItem(1), buildPortfolioItem(2)];

@@ -1,8 +1,7 @@
 import React, { CSSProperties, useState, useEffect } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
 import styled from 'styled-components';
-import ShoesDetails from './nikeCard/shoesDetails';
-import PortfolioItemInterface from './PortfolioItemInterface';
+import { PortfolioItemDataInterface } from './PortfolioItemInterface';
 
 // https://codesandbox.io/s/agitated-shockley-cdzuy?file=/src/components/record-button.tsx:1574-1575
 
@@ -90,7 +89,7 @@ const innerCircleVariants: Variants = {
   },
 };
 interface RecordButtonProps {
-  item: PortfolioItemInterface;
+  item: PortfolioItemDataInterface;
   onClick: () => void;
 }
 
