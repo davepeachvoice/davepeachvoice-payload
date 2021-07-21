@@ -5,10 +5,10 @@ export interface PortfolioItemInterface {
   thumbnailSource: string;
   homepageVisible: true;
   priority: number;
-  type: 'commercial' | 'sports';
+  type: string;
 }
 
 export type PortfolioItemDataInterface = Pick<
   PortfolioItemInterface,
-  'title' | 'mediaSource' | 'mediaType' | 'thumbnailSource'
+  'title' | 'mediaType' | 'mediaSource' | 'thumbnailSource'
 >;
