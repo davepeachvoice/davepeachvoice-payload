@@ -7,11 +7,11 @@ media_library:
     cloud_name: prestocloud
     api_key: 875834652743413
 collections:
-  - name: 'pages'
-    label: 'Pages'
+  - name: pages
+    label: Pages
     files:
-      - label: 'Home'
-        name: 'home'
+      - label: Home
+        name: home
         file: 'content/home.md'
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
@@ -23,3 +23,23 @@ collections:
             fields:
               - { label: 'Name', name: 'name', widget: 'string' }
               - { label: 'Description', name: 'description', widget: 'text' }
+  - name: portfolio_items
+    label: Portfolio Items
+    folder: 'content/portfolio_items'
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+      - name: mediaType
+        label: Media Type
+        widget: select
+        options:
+          - audio
+          - video
+      - name: media
+        label: Media
+        widget: file
+      - name: thumbnail
+        label: Thumbnail
+        widget: image
