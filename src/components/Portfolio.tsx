@@ -10,12 +10,12 @@ export default function Portfolio() {
 }
 
 function buildPortfolioItem(index) {
-  const mediaType: PortfolioItemInterface['mediaType'] =
+  const mediaType: PortfolioItemInterface['media_type'] =
     index % 2 == 0 ? 'video' : 'audio';
   return {
     title: `hi there ${index}`,
-    mediaType: mediaType,
-    mediaSource: '',
-    thumbnailSource: '/dave-peach-web-netlify-cms/march_madness.png',
+    media_type: mediaType,
+    media_source: '',
+    thumbnail_source: '/dave-peach-web-netlify-cms/march_madness.png',
   } as PortfolioItemInterface;
 }

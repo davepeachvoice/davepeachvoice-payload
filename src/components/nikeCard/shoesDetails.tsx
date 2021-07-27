@@ -66,7 +66,7 @@ export default function ShoesDetails(props: PortfolioItemProps) {
       <Marginer direction='vertical' margin='1.2em' />
       <SpacedHorizontalContainer>
         <ActionButton>
-          {props.portfolioItem.mediaType == 'video' ? 'watch' : 'listen'}
+          {props.portfolioItem.media_type == 'video' ? 'watch' : 'listen'}
         </ActionButton>
       </SpacedHorizontalContainer>
     </DetailsContainer>

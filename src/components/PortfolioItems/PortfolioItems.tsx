@@ -3,7 +3,7 @@ import * as Grommet from 'grommet';
 import { PortfolioItemDataInterface } from './PortfolioItemInterface';
 import RecordButton from './RecordButton';
 
-interface PortfolioItemsProps {
+export interface PortfolioItemsProps {
   items: PortfolioItemDataInterface[];
 }
 

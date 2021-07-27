@@ -100,7 +100,7 @@ export const RecordButton = (props: RecordButtonProps) => {
 
   const item = props.item;
   const playButtonStidfaskldfajsdflkajsdflkajsdflkd =
-    item.mediaType == 'audio' ? 'Listen' : 'Watch';
+    item.media_type == 'audio' ? 'Listen' : 'Watch';
   useEffect(() => {
     (async () => {
       if (hover) {
