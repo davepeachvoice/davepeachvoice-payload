@@ -12,7 +12,7 @@ collections:
     files:
       - label: Home
         name: home
-        file: 'content/home.md'
+        file: content/home.md
         fields:
           - { label: 'Title', name: 'title', widget: 'string' }
           - { label: 'Publish Date', name: 'date', widget: 'datetime' }
@@ -23,23 +23,62 @@ collections:
             fields:
               - { label: 'Name', name: 'name', widget: 'string' }
               - { label: 'Description', name: 'description', widget: 'text' }
-  - name: portfolio_items
-    label: Portfolio Items
-    folder: 'content/portfolio_items'
+  - name: portfolio_categories
+    label: Portfolio Categories
+    folder: content/portfolio_categories
     create: true
     fields:
       - name: title
         label: Title
         widget: string
-      - name: mediaType
+        required: true
+      - name: priority
+        label: Priority
+        widget: number
+        value_type: int
+        step: 1000
+        required: true
+  - name: portfolio_items
+    label: Portfolio Items
+    folder: content/portfolio_items
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
+        required: true
+      - name: media_type
         label: Media Type
         widget: select
         options:
           - audio
           - video
-      - name: media
+        required: true
+      - name: media_source
         label: Media
         widget: file
-      - name: thumbnail
+        required: true
+      - name: thumbnail_source
         label: Thumbnail
         widget: image
+        required: true
+      - name: homepage_visible
+        label: Visible on Homepage
+        widget: boolean
+        default: false
+        required: true
+      - name: priority
+        label: Priority
+        widget: number
+        value_type: int
+        step: 1000
+        required: true
+      - name: category
+        label: Category
+        widget: relation
+        collection: portfolio_categories
+        value_field: title
+        search_fields:
+          - title
+        required: true
+        options_length: 7

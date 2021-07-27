@@ -1,14 +1,15 @@
 export interface PortfolioItemInterface {
   title: string;
-  mediaType: 'audio' | 'video';
-  mediaSource: string;
-  thumbnailSource: string;
-  homepageVisible: true;
+  media_type: 'audio' | 'video';
+  media_source: string;
+  thumbnail_source: string;
+  homepage_visible: true;
   priority: number;
   type: string;
+  category: string;
 }
 
 export type PortfolioItemDataInterface = Pick<
   PortfolioItemInterface,
-  'title' | 'mediaType' | 'mediaSource' | 'thumbnailSource'
+  'title' | 'media_type' | 'media_source' | 'thumbnail_source'
 >;
