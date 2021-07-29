@@ -103,7 +103,7 @@ const Portfolio = () => {
     for (const portfolioCategory of portfolioCategories) {
       categories[portfolioCategory.title] = {
         priority: portfolioCategory.priority,
-        items: portfolioCategory.items,
+        items: [],
       };
     }
 
