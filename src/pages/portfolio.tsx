@@ -100,6 +100,7 @@ const Portfolio = () => {
       Pick<PortfolioCategory, 'priority' | 'items'>
     > = {};
 
+    // build categories
     for (const portfolioCategory of portfolioCategories) {
       categories[portfolioCategory.title] = {
         priority: portfolioCategory.priority,
@@ -107,6 +108,7 @@ const Portfolio = () => {
       };
     }
 
+    // populate categories with matching items
     for (const portfolioItem of portfolioItems) {
       categories[portfolioItem.category].items.push(portfolioItem);
     }
@@ -130,7 +132,6 @@ const Portfolio = () => {
     const sortedCategoriesArray = categoriesArray.sort((firstEl, secondEl) => {
       const firstElCategoryData = firstEl[1];
       const secondElCategoryData = secondEl[1];
-
       if (firstElCategoryData.priority < secondElCategoryData.priority) {
         return -1;
       } else if (firstElCategoryData.priority > secondElCategoryData.priority) {
