@@ -120,7 +120,6 @@ export const RecordButton = (props: RecordButtonProps) => {
 
   return (
     <motion.div
-      drag
       style={styles.container}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
