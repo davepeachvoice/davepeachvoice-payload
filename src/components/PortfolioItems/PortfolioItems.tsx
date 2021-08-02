@@ -7,6 +7,9 @@ export interface PortfolioItemsProps {
   items: PortfolioItemDataInterface[];
 }
 
+/**
+ * Credit: https://github.com/grommet/grommet-site/blob/master/src/screens/Components/Section.js (modified)
+ */
 export default function PortfolioItems(props: PortfolioItemsProps) {
   if (typeof window === 'undefined' || Grid.available) {
     return (

@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
-import Section from '../components/pages/Portfolio/Section';
+import PortfolioSection from '../components/pages/Portfolio/Section';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import RecordButton from '../components/PortfolioItems/RecordButton';
-import PortfolioItems from '../components/PortfolioItems/PortfolioItems';
-import { Box, Anchor, Heading } from 'grommet';
 
 interface PortfolioCategory {
   title: string;
@@ -147,26 +144,13 @@ export default function Portfolio() {
   }
 
   return (
-    // TODO: try Page from original
     <Layout>
       {portfolioData.map((portfolioCategory) => (
-        <Box
-          id={portfolioCategory[0]}
-          pad={{ vertical: 'medium' }}
+        <PortfolioSection
           key={portfolioCategory[0]}
-        >
-          <Box
-            direction='row'
-            justify='between'
-            align='center'
-            margin={{ top: 'none', horizontal: 'small' }}
-          >
-            <Anchor href={`#${portfolioCategory[0]}`} color='white'>
-              <Heading level={2}>{portfolioCategory[0]}</Heading>
-            </Anchor>
-          </Box>
-          <PortfolioItems items={portfolioCategory[1].items}></PortfolioItems>
-        </Box>
+          name={portfolioCategory[0]}
+          items={portfolioCategory[1].items}
+        ></PortfolioSection>
       ))}
     </Layout>
   );

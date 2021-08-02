@@ -1,17 +1,16 @@
 import React from 'react';
-import { Anchor, Box, Grid, Heading } from 'grommet';
+import { Anchor, Box, Heading } from 'grommet';
+import { PortfolioItemInterface } from '../../PortfolioItems/PortfolioItemInterface';
+import PortfolioItems from '../../PortfolioItems/PortfolioItems';
 
 interface Props {
   name: string;
-  children: React.ReactNode;
+  items: PortfolioItemInterface[];
 }
 
-/**
- * Credit: https://github.com/grommet/grommet-site/blob/master/src/screens/Components/Section.js (modified)
- */
 export default function Section(props: Props) {
   return (
-    <Box id={props.name} pad={{ vertical: 'medium' }}>
+    <Box id={props.name} pad={{ vertical: 'medium' }} key={props.name}>
       <Box
         direction='row'
         justify='between'
@@ -22,26 +21,7 @@ export default function Section(props: Props) {
           <Heading level={2}>{props.name}</Heading>
         </Anchor>
       </Box>
-      {typeof window === 'undefined' || Grid.available ? (
-        // Defaults to grid available during server/static renders as this
-        // option represents the majority of browsers.
-        <Grid
-          columns={{ count: 'fill', size: ['small', 'medium'] }}
-          rows='small'
-          gap={{ row: 'medium' }}
-          justifyContent='center'
-        >
-          {props.children}
-        </Grid>
-      ) : (
-        <Box direction='row' wrap>
-          {React.Children.map(props.children, (child) => (
-            <Box basis='medium' pad='small'>
-              <Box basis='small'>{child}</Box>
-            </Box>
-          ))}
-        </Box>
-      )}
+      <PortfolioItems items={props.items}></PortfolioItems>
     </Box>
   );
 }
