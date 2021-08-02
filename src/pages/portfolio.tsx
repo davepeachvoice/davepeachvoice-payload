@@ -1,9 +1,7 @@
-import React, { useEffect, useState } from 'react';
-
-import PortfolioItems from '../components/PortfolioItems/PortfolioItems';
+import React, { useState, useEffect } from 'react';
 import Layout from '../components/Layout';
+import PortfolioSection from '../components/pages/Portfolio/Section';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import { Heading, Main, Box } from 'grommet';
 
 interface PortfolioCategory {
   title: string;
@@ -147,24 +145,13 @@ export default function Portfolio() {
 
   return (
     <Layout>
-      <Main align='center'>
-        <Box
-          width='xlarge'
-          height='large'
-          round='small'
-          align='center'
-          justify='center'
-        >
-          {portfolioData.map((portfolioCategory) => (
-            <Box width='full' key={portfolioCategory[0]}>
-              <Heading level={2}>{portfolioCategory[0]}</Heading>
-              <PortfolioItems
-                items={portfolioCategory[1].items}
-              ></PortfolioItems>
-            </Box>
-          ))}
-        </Box>
-      </Main>
+      {portfolioData.map((portfolioCategory) => (
+        <PortfolioSection
+          key={portfolioCategory[0]}
+          name={portfolioCategory[0]}
+          items={portfolioCategory[1].items}
+        ></PortfolioSection>
+      ))}
     </Layout>
   );
 }
