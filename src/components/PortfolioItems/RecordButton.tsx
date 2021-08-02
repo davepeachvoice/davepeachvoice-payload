@@ -48,44 +48,41 @@ const ActionButton = styled(motion.div)`
   border: 3px solid transparent;
   outline: none;
   cursor: pointer;
-  border-radius: 8px;
   align-self: flex-end;
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
   &:hover {
-    background-color: transparent;
-    color: #fff;
-    border: 3px solid #fbbe01;
+    background-color: #ffd254;
+    color: #272727;
+    /* border: 3px solid #fbbe01; */
   }
 `;
 
 const Details = styled.div`
-  display: flex;
   justify-content: space-between;
-  width: 100%;
-  margin: 30px;
-  bottom: 0;
+  padding: 16px 16px;
+  width: calc(100% - 32px);
+  height: calc(100% - 32px);
 `;
 
-const outerCircleVariants: Variants = {
-  circle: {
+const cardVariants: Variants = {
+  card: {
     transform: 'scale(1)',
-    opacity: 0.5,
-    boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
+    background: '#EEE',
+    boxShadow:
+      'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
   },
-  largeCircle: {
+  largeCard: {
     transform: 'scale(1.1)',
-    opacity: 1,
-    boxShadow: `0px 0px 0px 10px ${RED_COLOR}`,
+    boxShadow:
+      'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
   },
 };
 
 const innerCircleVariants: Variants = {
   circle: {
     y: 0,
-    borderRadius: '10px',
-  },
-  square: {
-    y: -10,
-    borderRadius: '40px',
   },
 };
 interface RecordButtonProps {
@@ -95,8 +92,7 @@ interface RecordButtonProps {
 
 export const RecordButton = (props: RecordButtonProps) => {
   const [hover, setHover] = useState<boolean>(false);
-  const innerCircleAnimation = useAnimation();
-  const outerCircleAnimation = useAnimation();
+  const cardFocusAnimation = useAnimation();
 
   const item = props.item;
   const playButtonStidfaskldfajsdflkajsdflkajsdflkd =
@@ -104,15 +100,9 @@ export const RecordButton = (props: RecordButtonProps) => {
   useEffect(() => {
     (async () => {
       if (hover) {
-        Promise.all([
-          outerCircleAnimation.start('largeCircle'),
-          innerCircleAnimation.start('square'),
-        ]);
+        Promise.all([cardFocusAnimation.start('largeCard')]);
       } else {
-        Promise.all([
-          outerCircleAnimation.start('circle'),
-          innerCircleAnimation.start('circle'),
-        ]);
+        Promise.all([cardFocusAnimation.start('card')]);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -125,16 +115,15 @@ export const RecordButton = (props: RecordButtonProps) => {
       onMouseLeave={() => setHover(false)}
     >
       <motion.div
-        initial='circle'
-        animate={outerCircleAnimation}
-        variants={outerCircleVariants}
+        initial='card'
+        animate={cardFocusAnimation}
+        variants={cardVariants}
         style={{ ...styles.circle, ...styles.outerCircle }}
       >
         <Details>
-          <div>{item.title}</div>
+          <div style={styles.cardTitle}>{item.title}</div>
           <ActionButton
             initial='circle'
-            animate={innerCircleAnimation}
             variants={innerCircleVariants}
             style={{ ...styles.circle, ...styles.innerCircle }}
           >
@@ -163,7 +152,7 @@ const styles: Record<string, CSSProperties> = {
     alignSelf: 'center',
     justifySelf: 'center',
     flexDirection: 'column',
-    padding: '2.5em 6px 0 6px',
+    padding: '0',
     lineHeight: '1.4',
   },
   circle: {},
@@ -172,9 +161,12 @@ const styles: Record<string, CSSProperties> = {
     height: '100%',
     overflow: 'hidden',
     borderRadius: 0,
-    flexDirection: 'column',
-    padding: '2.5em 6px 0 6px',
+    padding: '0',
     lineHeight: '1.4',
+  },
+  cardTitle: {
+    color: '#444',
+    fontSize: '24px',
   },
 };
 
