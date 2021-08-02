@@ -3,6 +3,8 @@ import Layout from '../components/Layout';
 import Section from '../components/pages/Portfolio/Section';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
 import RecordButton from '../components/PortfolioItems/RecordButton';
+import PortfolioItems from '../components/PortfolioItems/PortfolioItems';
+import { Box, Anchor, Heading } from 'grommet';
 
 interface PortfolioCategory {
   title: string;
@@ -148,11 +150,23 @@ export default function Portfolio() {
     // TODO: try Page from original
     <Layout>
       {portfolioData.map((portfolioCategory) => (
-        <Section key={portfolioCategory[0]} name={portfolioCategory[0]}>
-          {portfolioCategory[1].items.map((item) => {
-            return <RecordButton key={item.title} item={item}></RecordButton>;
-          })}
-        </Section>
+        <Box
+          id={portfolioCategory[0]}
+          pad={{ vertical: 'medium' }}
+          key={portfolioCategory[0]}
+        >
+          <Box
+            direction='row'
+            justify='between'
+            align='center'
+            margin={{ top: 'none', horizontal: 'small' }}
+          >
+            <Anchor href={`#${portfolioCategory[0]}`} color='white'>
+              <Heading level={2}>{portfolioCategory[0]}</Heading>
+            </Anchor>
+          </Box>
+          <PortfolioItems items={portfolioCategory[1].items}></PortfolioItems>
+        </Box>
       ))}
     </Layout>
   );
