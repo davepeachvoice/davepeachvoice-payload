@@ -90,7 +90,7 @@ const innerCircleVariants: Variants = {
 };
 interface RecordButtonProps {
   item: PortfolioItemDataInterface;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 export const RecordButton = (props: RecordButtonProps) => {
