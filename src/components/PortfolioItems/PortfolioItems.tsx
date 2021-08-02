@@ -11,6 +11,8 @@ export interface PortfolioItemsProps {
  * Credit: https://github.com/grommet/grommet-site/blob/master/src/screens/Components/Section.js (modified)
  */
 export default function PortfolioItems(props: PortfolioItemsProps) {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore Grid.available exists, but not on the TypeScript type https://github.com/grommet/grommet/issues/5496
   if (typeof window === 'undefined' || Grid.available) {
     return (
       <Grid
