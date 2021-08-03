@@ -1,1 +1,1 @@
-I'd love to hear from you! Reach out and let me know how I can provide excellent value to your business. one oen oenonafo faoen fea fe asdf adsf afd adsf adf adf adf adf adf adfasdf adsfa adfasdf asdf
+Reach out and let me know where I can provide excellent value to your business. Lorem ipsum dolor sit amet, consectetur adipiscing elit.

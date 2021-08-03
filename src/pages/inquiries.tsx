@@ -1,10 +1,11 @@
 import { react as InquiriesContent } from '@content/inquiries.md';
-import ContactForm from '../components/pages/Contact/Form';
+import InquiryForm from '../components/pages/Inquiries/Form';
 
 import Layout from '../components/Layout';
 import { Main, Box, Anchor } from 'grommet';
 import Image from 'next/image';
 import { Twitter, Facebook, Linkedin } from 'grommet-icons';
+import { motion } from 'framer-motion';
 
 import React from 'react';
 
@@ -25,7 +26,25 @@ export default function Inquiries() {
               objectPosition='center top'
             />
           </Box>
-          <ContactForm></ContactForm>
+          <motion.div
+            initial='hidden'
+            animate='visible'
+            variants={{
+              hidden: {
+                scale: 0.8,
+                opacity: 0,
+              },
+              visible: {
+                scale: 1,
+                opacity: 1,
+                transition: {
+                  delay: 0.4,
+                },
+              },
+            }}
+          >
+            <InquiryForm></InquiryForm>
+          </motion.div>
         </Box>
         {/* TODO: duplicate less code for social icons */}
         <Box direction='row'>
@@ -38,6 +57,7 @@ export default function Inquiries() {
                 background: { color: '#111130' },
               }}
               onClick={() => {}}
+              focusIndicator={false}
             >
               <Twitter size='medium' />
             </Box>
@@ -54,6 +74,7 @@ export default function Inquiries() {
                 background: { color: '#111130' },
               }}
               onClick={() => {}}
+              focusIndicator={false}
             >
               <Facebook size='medium' />
             </Box>
@@ -70,6 +91,7 @@ export default function Inquiries() {
                 background: { color: '#111130' },
               }}
               onClick={() => {}}
+              focusIndicator={false}
             >
               <Linkedin size='medium' />
             </Box>
