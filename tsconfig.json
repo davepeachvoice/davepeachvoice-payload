@@ -29,7 +29,7 @@
       "@layouts/*": ["src/layouts/*"],
       "@interfaces/*": ["src/interfaces/*"],
       "@hocs/*": ["src/hocs/*"],
-      "@content/*": ["src/content/*"],
+      "@content/*": ["content/*"],
       "@utils/*": ["src/utils/*"],
       "public/*": ["src/public/*"]
     }

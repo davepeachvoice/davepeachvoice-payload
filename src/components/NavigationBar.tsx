@@ -23,15 +23,9 @@ const NavigationBar = () => (
                 // https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag
                 // (note that it might not matter that much because we have real links outside of the mobile experience that are the same)
                 {
-                  label: <Box pad='small'>Pricing</Box>,
+                  label: <Box pad='small'>Inquiries</Box>,
                   onClick: () => {
-                    Router.push('/pricing');
-                  },
-                },
-                {
-                  label: <Box pad='small'>Contact</Box>,
-                  onClick: () => {
-                    Router.push('/contact');
+                    Router.push('/inquiries');
                   },
                 },
               ]}
@@ -39,11 +33,8 @@ const NavigationBar = () => (
           </Box>
         ) : (
           <Box justify='end' direction='row' gap='medium'>
-            <Link href='/pricing' passHref>
-              <Anchor label='Pricing' />
-            </Link>
-            <Link href='/contact' passHref>
-              <Anchor label='Contact' />
+            <Link href='/inquiries' passHref>
+              <Anchor label='Inquiries' />
             </Link>
           </Box>
         )
