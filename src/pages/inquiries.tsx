@@ -16,7 +16,13 @@ export default function Inquiries() {
         <Box height='small' width='large' justify='center'>
           <InquiriesContent></InquiriesContent>
         </Box>
-        <Box fill='horizontal' direction='row' justify='around' pad='large'>
+        <Box
+          width='xlarge'
+          direction='row'
+          justify='evenly'
+          pad='large'
+          gap='medium'
+        >
           <Box height='500px'>
             <Image
               height='500px'
