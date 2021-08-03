@@ -28,50 +28,45 @@ interface FormState {
 export default function ContactForm() {
   const [value, setValue] = useState<FormState>(defaultValue);
   return (
-    <Box align='center' justify='center'>
-      <Box width='medium'>
-        <Form<FormState>
-          value={value}
-          onChange={(nextValue, { touched }) => {
-            console.log('Change', nextValue, touched);
-            setValue(nextValue);
-          }}
-          onReset={() => setValue(defaultValue)}
-          onSubmit={handleSubmit}
-        >
-          <FormField label='Name' name='name' required />
-          <FormField label='Email' name='email' required>
-            <MaskedInput
-              name='email'
-              mask={[
-                { regexp: /^[\w\-_.]+$/, placeholder: 'example' },
-                { fixed: '@' },
-                { regexp: /^[\w]+$/, placeholder: 'my' },
-                { fixed: '.' },
-                { regexp: /^[\w]+$/, placeholder: 'com' },
-              ]}
-              type='email'
-            />
-          </FormField>
-          <FormField
-            label='What can I do for you?'
-            name='request'
-            component={TextArea}
-            required={false}
+    <Box width='medium'>
+      <Form<FormState>
+        value={value}
+        onChange={(nextValue, { touched }) => {
+          console.log('Change', nextValue, touched);
+          setValue(nextValue);
+        }}
+        onReset={() => setValue(defaultValue)}
+        onSubmit={handleSubmit}
+      >
+        <FormField label='Name' name='name' required />
+        <FormField label='Email' name='email' required>
+          <MaskedInput
+            name='email'
+            mask={[
+              { regexp: /^[\w\-_.]+$/, placeholder: 'example' },
+              { fixed: '@' },
+              { regexp: /^[\w]+$/, placeholder: 'my' },
+              { fixed: '.' },
+              { regexp: /^[\w]+$/, placeholder: 'com' },
+            ]}
+            type='email'
           />
-          <FormField label='How did you hear about me?' name='attribution'>
-            <Select
-              name='attribution'
-              options={['Internet search', 'Word of mouth']}
-              placeholder='Select'
-              clear={{ label: 'Clear selection' }}
-            />
-          </FormField>
-          <Box direction='row' justify='between' margin={{ top: 'medium' }}>
-            <Button type='submit' label='Submit' />
-          </Box>
-        </Form>
-      </Box>
+        </FormField>
+        <FormField label='What can I do for you?' name='request'>
+          <TextArea name='request' size='small' resize='vertical'></TextArea>
+        </FormField>
+        <FormField label='How did you hear about me?' name='attribution'>
+          <Select
+            name='attribution'
+            options={['Internet search', 'Word of mouth']}
+            placeholder='Select'
+            clear={{ label: 'Clear selection' }}
+          />
+        </FormField>
+        <Box direction='row' justify='end' margin={{ top: 'medium' }}>
+          <Button type='submit' label='Submit' />
+        </Box>
+      </Form>
     </Box>
   );
 
