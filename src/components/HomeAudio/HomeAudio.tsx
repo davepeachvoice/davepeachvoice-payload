@@ -69,6 +69,11 @@ const HomeAudio = () => {
     setPlayingAudio(true);
   }, [audioFile]);
 
+  function playAudio() {
+    console.log('playing audio');
+    setPlayingAudio(true);
+  }
+
   return (
     <>
       <Box>
@@ -93,6 +98,7 @@ const HomeAudio = () => {
         <ButtonWithIcon
           onMouseEnter={() => setAnimateButton(true)}
           onMouseLeave={() => setAnimateButton(false)}
+          onClick={() => playAudio()}
           gridArea='button'
         >
           <div>{audio_sample_text}</div>

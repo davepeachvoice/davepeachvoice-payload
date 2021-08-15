@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from 'grommet';
 import { react as HomeContent } from '@content/home.md';
-import { Parallax } from '../components/Parallax/Parallax';
+import { Parallax } from './Parallax/Parallax';
 
 const HomeHero = () => {
   return (

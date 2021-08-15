@@ -1,5 +1,5 @@
 import Layout from '../components/Layout';
-import HomeAudio from '../components/HomeAudio';
+import HomeAudio from '../components/HomeAudio/HomeAudio';
 import HomeHero from '../components/HomeHero';
 import Portfolio from '../components/Portfolio';
 

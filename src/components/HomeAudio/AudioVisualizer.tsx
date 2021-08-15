@@ -48,7 +48,7 @@ export default function AudioVisualizer(props) {
     setAudioContext(
       new window.AudioContext() || new window.webkitAudioContext()
     );
-  }, [props.playing]);
+  }, []);
 
   // wait for audioContext to be available
   useEffect(() => {
@@ -155,6 +155,8 @@ export default function AudioVisualizer(props) {
   const handleContextAvailable = (localCtx) => {
     setCanvasWidth(localCtx.canvas.width);
     setCanvasHeight(localCtx.canvas.height);
+    console.log('localCtx.canvas.width: %d', localCtx.canvas.width);
+    console.log('localCtx.canvas.height: %d', localCtx.canvas.height);
   };
 
   const stop = () => {
