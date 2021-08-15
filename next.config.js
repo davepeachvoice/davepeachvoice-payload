@@ -25,6 +25,14 @@ module.exports = {
       }
     )
 
+    cfg.module.rules.push({
+      test: /\.(jpe?g|png|svg|gif|ico|eot|ttf|woff|woff2|mp4|mp3|pdf|webm|txt)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'static/chunks/[path][name].[hash][ext]'
+      },
+    });
+
     cfg.plugins = cfg.plugins.filter(plugin => plugin.constructor.name !== 'ForkTsCheckerWebpackPlugin')
 
     return cfg;
