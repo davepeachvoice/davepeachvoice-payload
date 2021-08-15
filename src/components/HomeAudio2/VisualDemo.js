@@ -90,7 +90,7 @@ export default function VisualDemo(props) {
         document.getElementById(num))
       for(let i=0; i<props.frequencyBandArray.length; i++){
         let num = props.frequencyBandArray[i]
-        domElements[num].style.backgroundColor = `rgb(0, 255, ${amplitudeValues.current[num]})`
+        domElements[num].style.backgroundColor = `rgb(25, ${amplitudeValues.current[num] / 3}, ${amplitudeValues.current[num] / 3})`
         const percentage = (amplitudeValues.current[num] / 255) * 100;
         domElements[num].style.height = `${percentage}%`
       }
@@ -111,7 +111,7 @@ export default function VisualDemo(props) {
         <Stack guidingChild='last'>
           <div className={classes.flexContainer}>
             {props.frequencyBandArray.map((num) =>
-              <Paper
+              <div
                 className={styles.frequencyBands}
                 elevation={4}
                 id={num}
