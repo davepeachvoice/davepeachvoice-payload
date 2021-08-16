@@ -9,19 +9,21 @@
   ],
   "editor.tabSize": 2,
   "cSpell.words": [
+    "Linkedin",
     "audiocontext",
     "badroute",
     "fontawesome",
     "fortawesome",
+    "frontmatter",
     "marginer",
     "mattddean",
-    "octokit",
-    "repos",
-    "xlarge",
-    "frontmatter",
     "netlifycms",
+    "octokit",
+    "recaptcha",
+    "repos",
+    "sitekey",
     "strengthmate",
-    "Linkedin"
+    "xlarge"
   ],
   "files.exclude": {
     "**/.git": true,

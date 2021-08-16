@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Recaptcha from 'react-google-recaptcha';
 
 import {
   Box,
@@ -25,8 +26,13 @@ interface FormState {
   attribution?: string;
 }
 
+const RECAPTCHA_KEY = '6Lf7CAMcAAAAACNXsN6-hnIxztE0lFyltbvAOnKu';
+
 export default function ContactForm() {
   const [value, setValue] = useState<FormState>(defaultValue);
+  const recaptchaRef = React.createRef();
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+
   return (
     <Box width='medium'>
       <Form<FormState>
@@ -38,6 +44,7 @@ export default function ContactForm() {
         onReset={() => setValue(defaultValue)}
         onSubmit={handleSubmit}
         data-netlify='true'
+        data-netlify-recaptcha='true'
         name='inquiry'
       >
         <FormField label='Name' name='name' required />
@@ -65,6 +72,15 @@ export default function ContactForm() {
             clear={{ label: 'Clear selection' }}
           />
         </FormField>
+        <FormField>
+          <Recaptcha
+            ref={recaptchaRef}
+            sitekey={RECAPTCHA_KEY}
+            size='normal'
+            id='recaptcha-google'
+            onChange={() => setButtonDisabled(false)}
+          />
+        </FormField>
         <Box direction='row' justify='end' margin={{ top: 'medium' }}>
           <Button type='submit' label='Submit' />
         </Box>
@@ -73,15 +89,22 @@ export default function ContactForm() {
   );
 
   function handleSubmit(event: FormExtendedEvent<FormState, Element>) {
-    fetch('/', {
+    event.preventDefault();
+
+    const form = event.target;
+    const recaptchaValue = recaptchaRef.current.getValue();
+
+    const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: encode({ 'form-name': 'inquiry', ...value }),
-    })
-      .then(() => alert('Success!'))
-      .catch((error) => alert(error));
+      body: encode({
+        'form-name': form.getAttribute('name'),
+        'g-recaptcha-response': recaptchaValue,
+        ...value,
+      }),
+    };
 
-    event.preventDefault();
+    fetch('/', options).catch((error) => alert(error));
   }
 }
 
