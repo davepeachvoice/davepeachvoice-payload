@@ -29,10 +29,18 @@ export default class CustomDocument extends Document {
       sheet.seal();
     }
   }
+  // grommet support (ssr I think?)
   render() {
     return (
       <Html>
-        <Head></Head>
+        <Head>
+          {/* This is going to be your global head */}
+          {/* <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/grommet/1.10.1/grommet.min.css"
+          /> */}
+          <script src='https://cdnjs.cloudflare.com/ajax/libs/grommet/2.17.3/grommet.min.js'></script>
+        </Head>
         <body>
           <Main /> {/* each routed page will go inside here */}
           <NextScript /> {/* You don't have to care about this. */}
