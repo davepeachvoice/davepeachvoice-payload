@@ -20,16 +20,26 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+/**
+ * @todo convert to function component
+ */
+
 import React from 'react';
 import VisualDemo from './VisualDemo';
-import soundFile from './audio/bensound-dubstep.mp3'
+import soundFile from './audio/main-home-audio.mp3';
 
 class AudioDataContainer extends React.Component {
+  frequencyBandArray: Array<number>;
+  state: {
+    audioData: AnalyserNode;
+  };
 
   constructor(props) {
     super(props);
-    this.state = {}
-    this.frequencyBandArray = [...Array(25).keys()]
+    this.state = {
+      audioData: null,
+    };
+    this.frequencyBandArray = [...Array(25).keys()];
   }
 
   initializeAudioAnalyser = () => {
@@ -38,24 +48,23 @@ class AudioDataContainer extends React.Component {
     const source = audioContext.createMediaElementSource(audioFile);
     const analyser = audioContext.createAnalyser();
     audioFile.src = soundFile;
-    analyser.fftSize = 64
+    analyser.fftSize = 64;
     source.connect(audioContext.destination);
     source.connect(analyser);
-    audioFile.play()
-      this.setState({
-        audioData: analyser
-      })
-  }
+    audioFile.play();
+    this.setState({
+      audioData: analyser,
+    });
+  };
 
   getFrequencyData = (styleAdjuster) => {
     const bufferLength = this.state.audioData.frequencyBinCount;
     const amplitudeArray = new Uint8Array(bufferLength);
-    this.state.audioData.getByteFrequencyData(amplitudeArray)
-    styleAdjuster(amplitudeArray)
-  }
+    this.state.audioData.getByteFrequencyData(amplitudeArray);
+    styleAdjuster(amplitudeArray);
+  };
 
-  render(){
-
+  render() {
     return (
       <div>
         <VisualDemo
