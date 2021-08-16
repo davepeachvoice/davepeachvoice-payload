@@ -25,7 +25,7 @@
  */
 
 import React from 'react';
-import VisualDemo from './VisualDemo';
+import VisualDemo from './AudioVisualizer';
 import soundFile from './audio/main-home-audio.mp3';
 
 class AudioDataContainer extends React.Component {
