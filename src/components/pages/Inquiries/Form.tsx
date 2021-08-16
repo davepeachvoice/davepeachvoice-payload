@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 
 import {
@@ -30,8 +30,8 @@ const RECAPTCHA_KEY = '6Lf7CAMcAAAAACNXsN6-hnIxztE0lFyltbvAOnKu';
 
 export default function ContactForm() {
   const [value, setValue] = useState<FormState>(defaultValue);
-  const recaptchaRef = React.createRef();
-  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+  const recaptchaRef = useRef<Recaptcha>();
+  const [submitButtonDisabled, setButtonDisabled] = useState(true);
 
   return (
     <Box width='medium'>
@@ -77,12 +77,15 @@ export default function ContactForm() {
             ref={recaptchaRef}
             sitekey={RECAPTCHA_KEY}
             size='normal'
-            id='recaptcha-google'
             onChange={() => setButtonDisabled(false)}
           />
         </FormField>
         <Box direction='row' justify='end' margin={{ top: 'medium' }}>
-          <Button type='submit' label='Submit' />
+          <Button
+            type='submit'
+            disabled={submitButtonDisabled}
+            label='Submit'
+          />
         </Box>
       </Form>
     </Box>
@@ -91,7 +94,8 @@ export default function ContactForm() {
   function handleSubmit(event: FormExtendedEvent<FormState, Element>) {
     event.preventDefault();
 
-    const form = event.target;
+    // TODO: better types
+    const form = event.target as Element;
     const recaptchaValue = recaptchaRef.current.getValue();
 
     const options = {
@@ -108,7 +112,9 @@ export default function ContactForm() {
   }
 }
 
-function encode(data: { 'form-name': string } & FormState) {
+function encode(
+  data: { 'form-name': string; 'g-recaptcha-response': string } & FormState
+) {
   return Object.keys(data)
     .map((key) => encodeURIComponent(key) + '=' + encodeURIComponent(data[key]))
     .join('&');
