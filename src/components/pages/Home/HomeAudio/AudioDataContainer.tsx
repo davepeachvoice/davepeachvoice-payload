@@ -22,7 +22,7 @@
 
 import React from 'react';
 import AudioVisualizer from './AudioVisualizer';
-import soundFile from './audio/main-home-audio.mp3';
+import soundFile from './audio/bensound-dubstep.mp3';
 
 /**
  * @todo convert to function component

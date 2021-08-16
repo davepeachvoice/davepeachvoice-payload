@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 // import circle from "!!raw-loader!./circle.svg";
 // import circleRings from "!!raw-loader!./circle-rings.svg";
-import Svg from '../Svg/Svg';
 import { ParallaxProvider, Parallax } from 'react-scroll-parallax';
 
 const Root = styled.div`

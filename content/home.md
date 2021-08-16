@@ -1,6 +1,6 @@
 ---
 hero_main_text: Give your clients a distinguished touch
-hero_sub_text: With the voice of the Butler Bulldogs
+hero_sub_text: With the voice you need to hear to believe
 audio_sample_text: Hear a sample
 ---
 

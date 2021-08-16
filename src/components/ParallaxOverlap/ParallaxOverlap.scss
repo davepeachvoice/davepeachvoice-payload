@@ -2,7 +2,7 @@
 // Intro Copy
 // ---------------------------
 
-@import "../../styles/colors";
+@import '../../styles/colors';
 
 :local(.root) {
   position: relative;
@@ -11,16 +11,13 @@
   align-items: space-around;
   justify-content: center;
   align-items: center;
-  paddin-top: 25vh;
+  padding-top: 25vh;
   z-index: 1;
 }
 
 :local(.container) {
   position: relative;
   width: 30em;
-}
-
-:local(.circle) {
 }
 
 :local(.circleRings) {

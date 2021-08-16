@@ -111,7 +111,6 @@ export default function NikeCard(props: NikeCardProps) {
     <CardWrapper>
       <CardContainer
         style={{ x, y, rotateX, rotateY, z: 100 }}
-        whileHover={{ rotateX }}
         drag
         dragElastic={0.16}
         dragConstraints={{ top: 0, left: 0, right: 0, bottom: 0 }}
