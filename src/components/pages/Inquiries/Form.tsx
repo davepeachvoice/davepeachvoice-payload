@@ -38,6 +38,7 @@ export default function ContactForm() {
         onReset={() => setValue(defaultValue)}
         onSubmit={handleSubmit}
         data-netlify='true'
+        name='inquiry'
       >
         <FormField label='Name' name='name' required />
         <FormField label='Email' name='email' required>
