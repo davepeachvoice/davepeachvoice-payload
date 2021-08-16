@@ -19,7 +19,9 @@
     "repos",
     "xlarge",
     "frontmatter",
-    "netlifycms"
+    "netlifycms",
+    "strengthmate",
+    "Linkedin"
   ],
   "files.exclude": {
     "**/.git": true,

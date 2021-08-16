@@ -24,3 +24,10 @@
   flex-grow: 1;
   margin-top: auto;
 }
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 100%;
+}

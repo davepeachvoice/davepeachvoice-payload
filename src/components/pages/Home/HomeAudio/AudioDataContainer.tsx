@@ -20,14 +20,13 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
+import React from 'react';
+import AudioVisualizer from './AudioVisualizer';
+import soundFile from './audio/main-home-audio.mp3';
+
 /**
  * @todo convert to function component
  */
-
-import React from 'react';
-import VisualDemo from './AudioVisualizer';
-import soundFile from './audio/main-home-audio.mp3';
-
 class AudioDataContainer extends React.Component {
   frequencyBandArray: Array<number>;
   state: {
@@ -66,14 +65,12 @@ class AudioDataContainer extends React.Component {
 
   render() {
     return (
-      <div>
-        <VisualDemo
-          initializeAudioAnalyser={this.initializeAudioAnalyser}
-          frequencyBandArray={this.frequencyBandArray}
-          getFrequencyData={this.getFrequencyData}
-          audioData={this.state.audioData}
-        />
-      </div>
+      <AudioVisualizer
+        initializeAudioAnalyser={this.initializeAudioAnalyser}
+        frequencyBandArray={this.frequencyBandArray}
+        getFrequencyData={this.getFrequencyData}
+        audioData={this.state.audioData}
+      />
     );
   }
 }

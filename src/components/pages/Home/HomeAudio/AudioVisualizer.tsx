@@ -21,22 +21,12 @@
 // SOFTWARE.
 
 import React, { useRef } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
 import styles from './styles/VisualDemo.module.scss';
 import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
 import styled from 'styled-components';
 import { Play } from 'grommet-icons';
 import { motion } from 'framer-motion';
-
-const useStyles = makeStyles(() => ({
-  flexContainer: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'center',
-    height: '100%',
-  },
-}));
 
 const Circle = styled.div`
   position: relative;
@@ -73,8 +63,6 @@ export const Pulsate = (props) => (
 );
 
 export default function VisualDemo(props) {
-  const classes = useStyles();
-
   const amplitudeValues = useRef(null);
 
   function adjustFreqBandStyle(newAmplitudeData) {
@@ -105,7 +93,7 @@ export default function VisualDemo(props) {
   return (
     <div>
       <Stack guidingChild='last'>
-        <div className={classes.flexContainer}>
+        <div className={styles.flexContainer}>
           {props.frequencyBandArray.map((num) => (
             <div className={styles.frequencyBands} id={num} key={num} />
           ))}
