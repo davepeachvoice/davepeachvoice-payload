@@ -22,10 +22,7 @@ export default function Portfolio() {
     const markdownFiles: string[] = require
       .context('../../content/portfolio_items', false, /\.\/.*\.md$/)
       .keys()
-      .map((relativePath) => {
-        console.log(relativePath);
-        return relativePath.substring(2);
-      });
+      .map((relativePath) => relativePath.substring(2));
 
     type PortfolioItemsMarkdownData = {
       default: {
@@ -33,8 +30,6 @@ export default function Portfolio() {
       };
       attributes: PortfolioItemInterface;
     };
-
-    console.log(markdownFiles);
 
     return Promise.all(
       markdownFiles.map(async (path) => {
