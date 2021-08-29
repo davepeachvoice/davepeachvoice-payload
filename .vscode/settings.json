@@ -18,11 +18,13 @@
     "marginer",
     "mattddean",
     "netlifycms",
+    "nums",
     "octokit",
     "recaptcha",
     "repos",
     "sitekey",
     "strengthmate",
+    "wavesurfer",
     "xlarge"
   ],
   "files.exclude": {
