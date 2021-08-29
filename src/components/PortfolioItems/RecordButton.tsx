@@ -39,13 +39,14 @@ const SpacedHorizontalContainer = styled.div`
 
 const ActionButton = styled(motion.div)`
   padding: 10px 16px;
-  background-color: #fbbe01;
+  background-color: #eee;
   transition: all 290ms ease-in-out;
-  color: #000;
+  color: #444;
   text-transform: uppercase;
   font-size: 16px;
   font-weight: 700;
   border: 3px solid transparent;
+  border-radius: 5px;
   outline: none;
   cursor: pointer;
   align-self: flex-end;
@@ -53,7 +54,7 @@ const ActionButton = styled(motion.div)`
   bottom: 16px;
   right: 16px;
   &:hover {
-    background-color: #ffd254;
+    background-color: #ccc;
     color: #272727;
     /* border: 3px solid #fbbe01; */
   }
@@ -69,7 +70,7 @@ const Details = styled.div`
 const cardVariants: Variants = {
   card: {
     transform: 'scale(1)',
-    background: '#EEE',
+    background: '#222222',
     boxShadow:
       'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
   },
@@ -127,6 +128,7 @@ export const RecordButton = (props: RecordButtonProps) => {
             variants={innerCircleVariants}
             style={{ ...styles.circle, ...styles.innerCircle }}
           >
+            <span style={styles.playButton}>▶</span>&nbsp;&nbsp;&nbsp;
             {playButtonStidfaskldfajsdflkajsdflkajsdflkd}
           </ActionButton>
         </Details>
@@ -160,13 +162,16 @@ const styles: Record<string, CSSProperties> = {
     width: '100%',
     height: '100%',
     overflow: 'hidden',
-    borderRadius: 0,
+    borderRadius: '5px',
     padding: '0',
     lineHeight: '1.4',
   },
   cardTitle: {
-    color: '#444',
+    color: '#EEE',
     fontSize: '24px',
+  },
+  playButton: {
+    fontFamily: 'helvetica neue,Helvetica,Arial,sans-serif',
   },
 };
 
