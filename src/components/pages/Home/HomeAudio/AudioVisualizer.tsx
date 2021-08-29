@@ -42,6 +42,29 @@ const ButtonWithIcon = styled(Button)`
   display: flex;
   justify-content: space-between;
   padding: 10px;
+  right: 0;
+`;
+
+const TaglineContainerLine = styled.div`
+  width: 112px;
+  height: 47px;
+  border-bottom: 1px solid red;
+  -webkit-transform: translateY(-20px) translateX(5px) rotate(27deg);
+`;
+
+const TaglineContainer = styled.div`
+  height: 100%;
+  background: #d9b596;
+  clip-path: polygon(17% 0, 100% 0, 100% 100%, 0% 100%);
+  width: 300px;
+  display: flex;
+  justify-content: flex-end;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  &:hover {
+    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
+    transform: translate3d(0px, -1px, 0px);
+  }
 `;
 
 export const Pulsate = (props) => (
@@ -104,18 +127,25 @@ export default function VisualDemo(props) {
           </Heading>
         </Box>
       </Stack>
-      <Box gridArea='tagline'>{HomeContentAttributes.hero_sub_text}</Box>
-      <ButtonWithIcon
-        onClick={() => handleStartButtonClick()}
-        gridArea='button'
+      <Box
+        direction='row'
+        justify='between'
+        align='center'
+        height='50px'
+        background={{ color: 'white' }}
       >
-        <div>{HomeContentAttributes.audio_sample_text}</div>
-        <Pulsate>
-          <Circle>
-            <Play></Play>
-          </Circle>
-        </Pulsate>
-      </ButtonWithIcon>
+        <Box>{HomeContentAttributes.hero_sub_text}</Box>
+        <TaglineContainer>
+          <ButtonWithIcon onClick={() => handleStartButtonClick()}>
+            <div>{HomeContentAttributes.audio_sample_text}</div>
+            <Pulsate>
+              <Circle>
+                <Play></Play>
+              </Circle>
+            </Pulsate>
+          </ButtonWithIcon>
+        </TaglineContainer>
+      </Box>
     </div>
   );
 }

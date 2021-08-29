@@ -11,11 +11,11 @@ const theme = {
     colors: {
       brand: '#13294B',
       background: {
-        dark: '#111111',
+        dark: '#111115',
         light: '#FFFFFF',
       },
       'background-back': {
-        dark: '#111111',
+        dark: '#111115',
         light: '#EEEEEE',
       },
       'background-front': {

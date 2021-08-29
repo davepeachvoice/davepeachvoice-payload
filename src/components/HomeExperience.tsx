@@ -4,8 +4,10 @@ import { react as HomeContent } from '@content/home.md';
 
 const HomeHero = () => {
   return (
-    <Box height='500px'>
-      <HomeContent></HomeContent>
+    <Box align='center'>
+      <Box height='small' width='large' justify='center'>
+        <HomeContent></HomeContent>
+      </Box>
     </Box>
   );
 };
