@@ -25,7 +25,7 @@ import styles from './styles/VisualDemo.module.scss';
 import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
 import styled from 'styled-components';
-import { Play } from 'grommet-icons';
+import { Microphone } from 'grommet-icons';
 import { motion } from 'framer-motion';
 
 const Circle = styled.div`
@@ -41,8 +41,9 @@ const Circle = styled.div`
 const ButtonWithIcon = styled(Button)`
   display: flex;
   justify-content: space-between;
-  padding: 10px;
+  align-items: center;
   right: 0;
+  gap: 10px;
 `;
 
 const TaglineContainerLine = styled.div`
@@ -134,15 +135,16 @@ export default function VisualDemo(props) {
         height='50px'
         background={{ color: 'white' }}
       >
-        <Box>{HomeContentAttributes.hero_sub_text}</Box>
-        <TaglineContainer>
-          <ButtonWithIcon onClick={() => handleStartButtonClick()}>
+        <Box style={{ paddingLeft: '20px' }}>
+          {HomeContentAttributes.hero_sub_text}
+        </Box>
+        <TaglineContainer
+          style={{ paddingRight: '20px' }}
+          onClick={() => handleStartButtonClick()}
+        >
+          <ButtonWithIcon>
             <div>{HomeContentAttributes.audio_sample_text}</div>
-            <Pulsate>
-              <Circle>
-                <Play></Play>
-              </Circle>
-            </Pulsate>
+            <Microphone></Microphone>
           </ButtonWithIcon>
         </TaglineContainer>
       </Box>
