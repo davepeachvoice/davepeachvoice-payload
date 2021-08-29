@@ -28,34 +28,17 @@ import styled from 'styled-components';
 import { Microphone } from 'grommet-icons';
 import { motion } from 'framer-motion';
 
-const Circle = styled.div`
-  position: relative;
-  border-radius: 50%;
-  background-color: black;
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%;
-  margin-left: 10px;
-`;
-
 const ButtonWithIcon = styled(Button)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  right: 0;
   gap: 10px;
-`;
-
-const TaglineContainerLine = styled.div`
-  width: 112px;
-  height: 47px;
-  border-bottom: 1px solid red;
-  -webkit-transform: translateY(-20px) translateX(5px) rotate(27deg);
 `;
 
 const TaglineContainer = styled.div`
   height: 100%;
-  background: #d9b596;
+  background-color: var(--status-ok);
+  color: white;
   clip-path: polygon(17% 0, 100% 0, 100% 100%, 0% 100%);
   width: 300px;
   display: flex;
@@ -144,7 +127,7 @@ export default function VisualDemo(props) {
         >
           <ButtonWithIcon>
             <div>{HomeContentAttributes.audio_sample_text}</div>
-            <Microphone></Microphone>
+            <Microphone color='white'></Microphone>
           </ButtonWithIcon>
         </TaglineContainer>
       </Box>
