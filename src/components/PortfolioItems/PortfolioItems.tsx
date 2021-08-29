@@ -24,6 +24,9 @@ export default function PortfolioItems(props: PortfolioItemsProps) {
         {props.items.map((item) => (
           <RecordButton key={item.title} item={item}></RecordButton>
         ))}
+        {props.items.map((item) => (
+          <RecordButton key={item.title} item={item}></RecordButton>
+        ))}
       </Grid>
     );
   } else {
