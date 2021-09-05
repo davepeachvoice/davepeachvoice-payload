@@ -1,10 +1,13 @@
 import React from 'react';
 import { Grid, Box } from 'grommet';
-import { PortfolioItemDataInterface } from './PortfolioItemInterface';
+import { PortfolioItemInterface } from './PortfolioItemInterface';
 import RecordButton from './RecordButton';
 
 export interface PortfolioItemsProps {
-  items: PortfolioItemDataInterface[];
+  items: PortfolioItemInterface[];
+  setPlayingPortfolioItem: React.Dispatch<
+    React.SetStateAction<PortfolioItemInterface>
+  >;
 }
 
 /**
@@ -13,7 +16,7 @@ export interface PortfolioItemsProps {
 export default function PortfolioItems(props: PortfolioItemsProps) {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore Grid.available exists, but not on the TypeScript type https://github.com/grommet/grommet/issues/5496
-  if (typeof window === 'undefined' || Grid.available) {
+  if (Grid.available) {
     return (
       <Grid
         columns={{ count: 'fill', size: ['small', 'medium'] }}
@@ -22,20 +25,30 @@ export default function PortfolioItems(props: PortfolioItemsProps) {
         justifyContent='center'
       >
         {props.items.map((item) => (
-          <RecordButton key={item.title} item={item}></RecordButton>
-        ))}
-        {props.items.map((item) => (
-          <RecordButton key={item.title} item={item}></RecordButton>
+          <RecordButton
+            key={item.title}
+            item={item}
+            onClick={() => {
+              console.log('clicked portfolio item action button');
+              return props.setPlayingPortfolioItem(item);
+            }}
+          ></RecordButton>
         ))}
       </Grid>
     );
   } else {
     return (
       <Box direction='row' wrap>
-        {React.Children.map(props.items, (item) => (
-          <Box basis='medium' pad='small'>
+        {props.items.map((item) => (
+          <Box basis='medium' pad='small' key={item.title}>
             <Box basis='small'>
-              {<RecordButton key={item.title} item={item}></RecordButton>}
+              {
+                <RecordButton
+                  key={item.title}
+                  item={item}
+                  onClick={() => props.setPlayingPortfolioItem(item)}
+                ></RecordButton>
+              }
             </Box>
           </Box>
         ))}

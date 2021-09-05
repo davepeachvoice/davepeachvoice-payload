@@ -39,11 +39,12 @@
     "react-dom": "^17.0.2",
     "react-google-recaptcha": "^2.1.0",
     "react-intersection-observer": "^8.31.0",
+    "react-player": "^2.9.0",
     "react-scroll-parallax": "^2.3.5",
     "sass": "^1.37.5",
     "styled-components": "^5.2.3",
-    "wavesurfer.js": "^4.0.0",
-    "wavesurfer-react": "^2.0.8"
+    "wavesurfer-react": "^2.0.8",
+    "wavesurfer.js": "^4.0.0"
   },
   "devDependencies": {
     "@types/node": "^14.17.3",

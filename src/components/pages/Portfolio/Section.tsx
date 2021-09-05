@@ -6,6 +6,9 @@ import PortfolioItems from '../../PortfolioItems/PortfolioItems';
 interface Props {
   name: string;
   items: PortfolioItemInterface[];
+  setPlayingPortfolioItem: React.Dispatch<
+    React.SetStateAction<PortfolioItemInterface>
+  >;
 }
 
 export default function Section(props: Props) {
@@ -21,7 +24,10 @@ export default function Section(props: Props) {
           <Heading level={2}>{props.name}</Heading>
         </Anchor>
       </Box>
-      <PortfolioItems items={props.items}></PortfolioItems>
+      <PortfolioItems
+        items={props.items}
+        setPlayingPortfolioItem={props.setPlayingPortfolioItem}
+      ></PortfolioItems>
     </Box>
   );
 }

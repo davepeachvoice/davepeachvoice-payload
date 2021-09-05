@@ -88,7 +88,7 @@ const innerCircleVariants: Variants = {
 };
 interface RecordButtonProps {
   item: PortfolioItemDataInterface;
-  onClick?: () => void;
+  onClick: () => void;
 }
 
 export const RecordButton = (props: RecordButtonProps) => {
@@ -127,6 +127,7 @@ export const RecordButton = (props: RecordButtonProps) => {
             initial='circle'
             variants={innerCircleVariants}
             style={{ ...styles.circle, ...styles.innerCircle }}
+            onClick={props.onClick}
           >
             <span style={styles.playButton}>▶</span>&nbsp;&nbsp;&nbsp;
             {playButtonStidfaskldfajsdflkajsdflkajsdflkd}
