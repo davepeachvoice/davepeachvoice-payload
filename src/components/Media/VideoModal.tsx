@@ -12,34 +12,26 @@ interface Props {
 
 export default function VideoModal(props: Props) {
   const [currentVideoSource, setCurrentVideoSource] = useState<string>(null);
-  const [playing, setPlaying] = useState(false);
   const [show, setShow] = useState(false);
 
   const openModal = useCallback(() => {
-    setPlaying(true);
     setShow(true);
   }, []);
 
   const closeModal = useCallback(() => {
     props.setPortfolioItem(null);
     setShow(false);
-    setPlaying(false);
   }, [props]);
 
   useEffect(() => {
-    console.log('effect');
-    if (!props.portfolioItem) {
-      console.log('nothing to do');
-      return;
-    }
+    const videoPortfolioItemIsPresent =
+      props.portfolioItem && props.portfolioItem.media_type === 'video';
 
-    if (props.portfolioItem.media_type !== 'video') {
-      console.log('nothing to do');
+    if (!videoPortfolioItemIsPresent) {
       closeModal();
       return;
     }
 
-    console.log('got new portfolio item');
     setCurrentVideoSource(props.portfolioItem.media_source);
 
     openModal();
@@ -51,7 +43,7 @@ export default function VideoModal(props: Props) {
         <Layer onEsc={closeModal} onClickOutside={closeModal}>
           <ReactPlayer
             url={currentVideoSource}
-            playing={playing}
+            playing={true}
             controls={true}
           />
         </Layer>
