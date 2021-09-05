@@ -1,10 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
 import ReactPlayer from 'react-player';
-import { Button, Box, Layer } from 'grommet';
+import { Box, Layer } from 'grommet';
 
 interface Props {
   portfolioItem: PortfolioItemInterface;
+  setPortfolioItem: React.Dispatch<
+    React.SetStateAction<PortfolioItemInterface>
+  >;
 }
 
 export default function VideoModal(props: Props) {
@@ -12,33 +15,50 @@ export default function VideoModal(props: Props) {
   const [playing, setPlaying] = useState(false);
   const [show, setShow] = useState(false);
 
+  const handleVisibility = useCallback(
+    (visibility: boolean) => {
+      console.log('handleVisibility');
+      if (!visibility) {
+        console.log('setting to null!!!');
+        props.setPortfolioItem(null);
+      }
+
+      setPlaying(visibility);
+      setShow(visibility);
+    },
+    [props]
+  );
+
   useEffect(() => {
+    console.log('effect');
     if (!props.portfolioItem) {
+      console.log('nothing to do');
       return;
     }
 
     if (props.portfolioItem.media_type !== 'video') {
-      setPlaying(false);
-      setShow(false);
-      setCurrentVideoSource(null);
+      console.log('nothing to do');
+      handleVisibility(false);
       return;
     }
 
+    console.log('got new portfolio item');
     setCurrentVideoSource(props.portfolioItem.media_source);
-    setShow(true);
-    setPlaying(true);
-  }, [props.portfolioItem]);
+    handleVisibility(true);
+  }, [props.portfolioItem, handleVisibility]);
 
   return (
     <Box>
-      <Button label='show' onClick={() => setShow(true)} />
       {show && (
         <Layer
-          onEsc={() => setShow(false)}
-          onClickOutside={() => setShow(false)}
+          onEsc={() => handleVisibility(false)}
+          onClickOutside={() => handleVisibility(false)}
         >
-          <Button label='close' onClick={() => setShow(false)} />
-          <ReactPlayer url={currentVideoSource} playing={playing} />
+          <ReactPlayer
+            url={currentVideoSource}
+            playing={playing}
+            controls={true}
+          />
         </Layer>
       )}
     </Box>

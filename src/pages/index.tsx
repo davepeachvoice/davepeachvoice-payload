@@ -31,7 +31,10 @@ const Index = () => {
         setPlayingPortfolioItem={setPlayingPortfolioItem}
       ></HomePortfolio>
       <AudioWaveform portfolioItem={playingPortfolioItem}></AudioWaveform>
-      <VideoModal portfolioItem={playingPortfolioItem}></VideoModal>
+      <VideoModal
+        portfolioItem={playingPortfolioItem}
+        setPortfolioItem={setPlayingPortfolioItem}
+      ></VideoModal>
     </Layout>
   );
 };
