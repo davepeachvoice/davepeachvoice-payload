@@ -15,19 +15,16 @@ export default function VideoModal(props: Props) {
   const [playing, setPlaying] = useState(false);
   const [show, setShow] = useState(false);
 
-  const handleVisibility = useCallback(
-    (visibility: boolean) => {
-      console.log('handleVisibility');
-      if (!visibility) {
-        console.log('setting to null!!!');
-        props.setPortfolioItem(null);
-      }
+  const openModal = useCallback(() => {
+    setPlaying(true);
+    setShow(true);
+  }, []);
 
-      setPlaying(visibility);
-      setShow(visibility);
-    },
-    [props]
-  );
+  const closeModal = useCallback(() => {
+    props.setPortfolioItem(null);
+    setShow(false);
+    setPlaying(false);
+  }, [props]);
 
   useEffect(() => {
     console.log('effect');
@@ -38,22 +35,20 @@ export default function VideoModal(props: Props) {
 
     if (props.portfolioItem.media_type !== 'video') {
       console.log('nothing to do');
-      handleVisibility(false);
+      closeModal();
       return;
     }
 
     console.log('got new portfolio item');
     setCurrentVideoSource(props.portfolioItem.media_source);
-    handleVisibility(true);
-  }, [props.portfolioItem, handleVisibility]);
+
+    openModal();
+  }, [props.portfolioItem, openModal, closeModal]);
 
   return (
     <Box>
       {show && (
-        <Layer
-          onEsc={() => handleVisibility(false)}
-          onClickOutside={() => handleVisibility(false)}
-        >
+        <Layer onEsc={closeModal} onClickOutside={closeModal}>
           <ReactPlayer
             url={currentVideoSource}
             playing={playing}
