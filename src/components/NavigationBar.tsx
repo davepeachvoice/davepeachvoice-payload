@@ -5,8 +5,23 @@ import { Menu as MenuIcon } from 'grommet-icons';
 import Link from 'next/link';
 import Router from 'next/router';
 
+//        ***********
+//     ***          ****
+//    **               **
+//   ***********         *
+//  *           *        ****
+//  *           *        *   *
+//   ***********         *   *
+//    *                  *   *
+//    *                  *   *
+//    *                  *   *
+//    *      ******      ****
+//    *     *      *     *
+//    *     *      *     *
+//      ****         ****
+
 const NavigationBar = () => (
-  <Header background='light-4' pad='medium' height='xsmall'>
+  <Header background='black' pad='medium' height='xsmall'>
     <Link href='/'>
       <Anchor label='Dave Peach: Professional Voice' />
     </Link>

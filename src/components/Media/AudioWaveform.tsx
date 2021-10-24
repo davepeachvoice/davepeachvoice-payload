@@ -2,7 +2,7 @@ import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItem
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { WaveSurfer, WaveForm } from 'wavesurfer-react';
-import { PlayFill, PauseFill } from 'grommet-icons';
+import { PlayFill, PauseFill, Down } from 'grommet-icons';
 import { Button } from 'grommet';
 
 const Buttons = styled.div`
@@ -10,7 +10,7 @@ const Buttons = styled.div`
   justify-content: center;
 `;
 
-const LocalButton = styled(Button)`
+const CircleButton = styled(Button)`
   outline: none;
   border: none;
   background: #444;
@@ -28,9 +28,11 @@ interface Props {
 }
 
 export default function Waveform(props: Props) {
+  const HEIGHT = 75;
+
   const [currentAudioSource, setCurrentAudioSource] = useState<string>(null);
   const [playing, setPlaying] = useState<boolean>(false);
-  const [bottomPosition, setBottomPosition] = useState<number>(-125);
+  const [bottomPosition, setBottomPosition] = useState<number>(-HEIGHT);
 
   const wavesurferRef = useRef<WaveSurfer>();
 
@@ -43,6 +45,8 @@ export default function Waveform(props: Props) {
 
     wavesurferRef.current = waveSurfer;
     if (wavesurferRef.current && audioSource) {
+      show();
+
       wavesurferRef.current.load(audioSource);
 
       wavesurferRef.current.on('ready', () => {
@@ -68,9 +72,22 @@ export default function Waveform(props: Props) {
     }
   }
 
-  const play = useCallback(() => {
+  function pause() {
+    wavesurferRef.current.pause();
+  }
+
+  function togglePlay() {
     wavesurferRef.current.playPause();
-  }, []);
+  }
+
+  function hide() {
+    setCurrentAudioSource(null);
+    setBottomPosition(-HEIGHT);
+  }
+
+  function show() {
+    setBottomPosition(0);
+  }
 
   useEffect(() => {
     console.log('audiowaveform found a new portfolioitem');
@@ -87,27 +104,34 @@ export default function Waveform(props: Props) {
     setCurrentAudioSource(props.portfolioItem.media_source);
   }, [props.portfolioItem]);
 
-  // useEffect(() => {
-  //   if (playing) {
-  //     setBottomPosition(0);
-  //   } else {
-  //     setBottomPosition(-125);
-  //   }
-  // }, [playing]);
-
   return (
     <div
       className='App'
       style={{
-        backgroundColor: 'white',
-        height: '125px',
+        height: `${HEIGHT}px`,
         position: 'fixed',
         left: 0,
-        bottom: 0,
+        bottom: bottomPosition,
         right: 0,
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        backgroundColor: 'black',
+        gap: '20px',
+        paddingLeft: '20px',
+        paddingRight: '20px',
       }}
     >
-      <div style={{ marginTop: '10px' }}>
+      <Buttons>
+        <CircleButton onClick={togglePlay}>
+          {playing ? (
+            <PauseFill style={{ marginLeft: '0' }} size='medium'></PauseFill>
+          ) : (
+            <PlayFill style={{ marginLeft: '5px' }} size='medium'></PlayFill>
+          )}
+        </CircleButton>
+      </Buttons>
+      <div style={{ backgroundColor: 'black', width: '100%' }}>
         <WaveSurfer
           key={currentAudioSource}
           onMount={(waveSurfer) =>
@@ -118,24 +142,24 @@ export default function Waveform(props: Props) {
             barWidth={1}
             hideScrollbar={true}
             responsive={true}
-            height={75}
+            height={50}
             barHeight={4}
             barGap={1}
             normalize={true}
             minPxPerSec={100}
             mediaControls={true}
+            waveColor='var(--status-ok)'
           ></WaveForm>
         </WaveSurfer>
-        <Buttons>
-          <LocalButton onClick={play}>
-            {playing ? (
-              <PauseFill style={{ marginLeft: '0' }} size='medium'></PauseFill>
-            ) : (
-              <PlayFill style={{ marginLeft: '5px' }} size='medium'></PlayFill>
-            )}
-          </LocalButton>
-        </Buttons>
       </div>
+      <Button
+        onClick={() => {
+          pause();
+          hide();
+        }}
+      >
+        <Down style={{ width: '35px', height: '35px' }}></Down>
+      </Button>
     </div>
   );
 }

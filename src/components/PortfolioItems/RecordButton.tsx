@@ -70,7 +70,6 @@ const Details = styled.div`
 const cardVariants: Variants = {
   card: {
     transform: 'scale(1)',
-    background: '#222222',
     boxShadow:
       'rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px',
   },
@@ -109,6 +108,21 @@ export const RecordButton = (props: RecordButtonProps) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hover]);
 
+  //        ***********
+  //     ***          ****
+  //    **               **
+  //   ***********         *
+  //  *           *        ****
+  //  *           *        *   *
+  //   ***********         *   *
+  //    *                  *   *
+  //    *                  *   *
+  //    *                  *   *
+  //    *      ******      ****
+  //    *     *      *     *
+  //    *     *      *     *
+  //      ****         ****
+
   return (
     <motion.div
       style={styles.container}
@@ -119,7 +133,11 @@ export const RecordButton = (props: RecordButtonProps) => {
         initial='card'
         animate={cardFocusAnimation}
         variants={cardVariants}
-        style={{ ...styles.circle, ...styles.outerCircle }}
+        style={{
+          backgroundImage: `url("${item.thumbnail_source}")`,
+          ...styles.circle,
+          ...styles.outerCircle,
+        }}
       >
         <Details>
           <div style={styles.cardTitle}>{item.title}</div>
@@ -166,6 +184,10 @@ const styles: Record<string, CSSProperties> = {
     borderRadius: '5px',
     padding: '0',
     lineHeight: '1.4',
+    backgroundColor: '#222',
+    backgroundPosition: 'center top',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: 'cover',
   },
   cardTitle: {
     color: '#EEE',

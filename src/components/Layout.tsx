@@ -9,7 +9,7 @@ const theme = {
   defaultMode: 'light',
   global: {
     colors: {
-      brand: '#13294B',
+      brand: '#DADADA',
       background: {
         dark: '#111115',
         light: '#FFFFFF',
@@ -56,7 +56,7 @@ const theme = {
       'selected-text': 'text-strong',
       'status-critical': '#dd3000',
       'status-warning': '#f0c954',
-      'status-ok': '#008375',
+      'status-ok': '#ff9400',
       'status-unknown': '#C3C5C8',
       'status-disabled': '#C3C5C8',
       'graph-0': 'brand',
@@ -77,6 +77,11 @@ const theme = {
       },
       'grey!': '#646569',
       'graph-2': 'green',
+    },
+    focus: {
+      border: {
+        color: 'transparent',
+      },
     },
     font: {
       family: '"Open Sans"',
@@ -105,6 +110,10 @@ const theme = {
         },
       },
     },
+  },
+  anchor: {
+    color: 'var(--status-ok)',
+    outline: 'none',
   },
   chart: {},
   diagram: {
