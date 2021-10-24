@@ -20,6 +20,8 @@ collections:
       - label: Inquiries
         name: inquiries
         file: content/inquiries.md
+        fields:
+          - { label: 'Title', name: 'title', widget: 'string' }
   - name: portfolio_categories
     label: Portfolio Categories
     folder: content/portfolio_categories
