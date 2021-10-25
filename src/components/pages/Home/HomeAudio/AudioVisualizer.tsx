@@ -20,12 +20,15 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React, { useRef } from 'react';
+// https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
+// https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
+
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './styles/VisualDemo.module.scss';
 import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
 import styled from 'styled-components';
-import { Microphone } from 'grommet-icons';
+import { Microphone, PauseFill } from 'grommet-icons';
 import { motion } from 'framer-motion';
 
 const ButtonWithIcon = styled(Button)`
@@ -46,8 +49,7 @@ const TaglineContainer = styled.div`
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   &:hover {
-    box-shadow: rgba(0, 0, 0, 0.22) 0px 19px 43px;
-    transform: translate3d(0px, -1px, 0px);
+    background-color: #db7f00;
   }
 `;
 
@@ -70,38 +72,57 @@ export const Pulsate = (props) => (
 );
 
 export default function VisualDemo(props) {
+  const {
+    isPlaying,
+    audioDataContainerInitialized,
+    getFrequencyData,
+    initializeAudioAnalyser,
+    pause,
+    frequencyBandArray,
+  } = props;
+
   const amplitudeValues = useRef(null);
 
-  function adjustFreqBandStyle(newAmplitudeData) {
-    amplitudeValues.current = newAmplitudeData;
-    const domElements = props.frequencyBandArray.map((num) =>
-      document.getElementById(num)
-    );
-    for (let i = 0; i < props.frequencyBandArray.length; i++) {
-      const num = props.frequencyBandArray[i];
-      domElements[num].style.backgroundColor = `rgb(25, ${
-        amplitudeValues.current[num] / 3
-      }, ${amplitudeValues.current[num] / 3})`;
-      const percentage = (amplitudeValues.current[num] / 255) * 100;
-      domElements[num].style.height = `${percentage}%`;
+  const runSpectrum = useCallback(() => {
+    function adjustFreqBandStyle(newAmplitudeData) {
+      amplitudeValues.current = newAmplitudeData;
+      const domElements = frequencyBandArray.map((num) =>
+        document.getElementById(num)
+      );
+      for (let i = 0; i < frequencyBandArray.length; i++) {
+        const num = frequencyBandArray[i];
+        domElements[num].style.backgroundColor = `rgb(25, ${
+          amplitudeValues.current[num] / 3
+        }, ${amplitudeValues.current[num] / 3})`;
+        const percentage = (amplitudeValues.current[num] / 255) * 100;
+        domElements[num].style.height = `${percentage}%`;
+      }
+    }
+
+    getFrequencyData(adjustFreqBandStyle);
+    requestAnimationFrame(runSpectrum);
+  }, [getFrequencyData, frequencyBandArray]);
+
+  function toggleAudio() {
+    if (isPlaying()) {
+      pause();
+    } else {
+      initializeAudioAnalyser();
     }
   }
 
-  function runSpectrum() {
-    props.getFrequencyData(adjustFreqBandStyle);
-    requestAnimationFrame(runSpectrum);
-  }
-
-  function handleStartButtonClick() {
-    props.initializeAudioAnalyser();
-    requestAnimationFrame(runSpectrum);
-  }
+  // check for when audioAnalyser has finished initializing
+  useEffect(() => {
+    if (audioDataContainerInitialized && !isPlaying()) {
+      requestAnimationFrame(runSpectrum);
+    }
+  }, [runSpectrum, isPlaying, audioDataContainerInitialized]);
 
   return (
     <div>
       <Stack guidingChild='last'>
         <div className={styles.flexContainer}>
-          {props.frequencyBandArray.map((num) => (
+          {frequencyBandArray.map((num) => (
             <div className={styles.frequencyBands} id={num} key={num} />
           ))}
         </div>
@@ -123,11 +144,15 @@ export default function VisualDemo(props) {
         </Box>
         <TaglineContainer
           style={{ paddingRight: '20px' }}
-          onClick={() => handleStartButtonClick()}
+          onClick={toggleAudio}
         >
           <ButtonWithIcon>
             <div>{HomeContentAttributes.audio_sample_text}</div>
-            <Microphone color='white'></Microphone>
+            {isPlaying() ? (
+              <PauseFill color='white'></PauseFill>
+            ) : (
+              <Microphone color='white'></Microphone>
+            )}
           </ButtonWithIcon>
         </TaglineContainer>
       </Box>

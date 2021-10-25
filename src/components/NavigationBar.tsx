@@ -21,9 +21,27 @@ import Router from 'next/router';
 //      ****         ****
 
 const NavigationBar = () => (
-  <Header background='black' pad='medium' height='xsmall'>
+  <Header
+    background='black'
+    pad='medium'
+    height='xsmall'
+    style={{
+      padding: '12px 24px',
+      height: '96px',
+    }}
+  >
     <Link href='/'>
-      <Anchor label='Dave Peach: Professional Voice' />
+      <Anchor
+        style={{
+          fontFamily: 'Orbitron',
+          fontSize: '24px',
+          fontWeight: 'normal',
+        }}
+      >
+        Dave Peach:
+        <br />
+        Professional Voice
+      </Anchor>
     </Link>
     <ResponsiveContext.Consumer>
       {(size) =>
@@ -32,7 +50,8 @@ const NavigationBar = () => (
             <Menu
               a11yTitle='Navigation Menu'
               dropProps={{ align: { top: 'bottom', right: 'right' } }}
-              icon={<MenuIcon color='brand' />}
+              icon={<MenuIcon />}
+              dropBackground='#252529'
               items={[
                 // TODO: make this use an anchor for each that has an href for SEO purposes
                 // https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag

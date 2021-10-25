@@ -20,59 +20,68 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React from 'react';
+// https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
+// https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
+
+import React, { useState } from 'react';
 import AudioVisualizer from './AudioVisualizer';
 import soundFile from './audio/bensound-dubstep.mp3';
 
-/**
- * @todo convert to function component
- */
-class AudioDataContainer extends React.Component {
-  frequencyBandArray: Array<number>;
-  state: {
-    audioData: AnalyserNode;
-  };
+export default function AudioDataContainer() {
+  const [audioData, setAudioData] = useState<AnalyserNode>(null);
+  const [audioFile, setAudioFile] = useState<HTMLAudioElement>(null);
+  const [initialized, setInitialized] = useState(false);
+  const frequencyBandArray = [...Array(25).keys()];
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      audioData: null,
-    };
-    this.frequencyBandArray = [...Array(25).keys()];
-  }
+  function initializeAudioAnalyser() {
+    const localAudioFile = new Audio();
 
-  initializeAudioAnalyser = () => {
-    const audioFile = new Audio();
     const audioContext = new AudioContext();
-    const source = audioContext.createMediaElementSource(audioFile);
+    const source = audioContext.createMediaElementSource(localAudioFile);
     const analyser = audioContext.createAnalyser();
-    audioFile.src = soundFile;
+    localAudioFile.src = soundFile;
     analyser.fftSize = 64;
     source.connect(audioContext.destination);
     source.connect(analyser);
-    audioFile.play();
-    this.setState({
-      audioData: analyser,
-    });
-  };
+    localAudioFile.play();
+    setAudioFile(localAudioFile);
 
-  getFrequencyData = (styleAdjuster) => {
-    const bufferLength = this.state.audioData.frequencyBinCount;
-    const amplitudeArray = new Uint8Array(bufferLength);
-    this.state.audioData.getByteFrequencyData(amplitudeArray);
-    styleAdjuster(amplitudeArray);
-  };
+    console.log(analyser);
+    setAudioData(analyser);
 
-  render() {
-    return (
-      <AudioVisualizer
-        initializeAudioAnalyser={this.initializeAudioAnalyser}
-        frequencyBandArray={this.frequencyBandArray}
-        getFrequencyData={this.getFrequencyData}
-        audioData={this.state.audioData}
-      />
-    );
+    console.log('audio analyer initialized');
+
+    setInitialized(true);
   }
-}
 
-export default AudioDataContainer;
+  function pause() {
+    console.log('pausing');
+    audioFile.pause();
+  }
+
+  function play() {
+    audioFile.play();
+  }
+
+  function isPlaying() {
+    return audioFile?.duration > 0 && !audioFile.paused;
+  }
+
+  function getFrequencyData(styleAdjuster) {
+    const bufferLength = audioData.frequencyBinCount;
+    const amplitudeArray = new Uint8Array(bufferLength);
+    audioData.getByteFrequencyData(amplitudeArray);
+    styleAdjuster(amplitudeArray);
+  }
+
+  return (
+    <AudioVisualizer
+      initializeAudioAnalyser={initializeAudioAnalyser}
+      frequencyBandArray={frequencyBandArray}
+      getFrequencyData={getFrequencyData}
+      isPlaying={isPlaying}
+      pause={pause}
+      audioDataContainerInitialized={initialized}
+    />
+  );
+}

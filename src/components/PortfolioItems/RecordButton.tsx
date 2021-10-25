@@ -65,6 +65,7 @@ const Details = styled.div`
   padding: 16px 16px;
   width: calc(100% - 32px);
   height: calc(100% - 32px);
+  cursor: default;
 `;
 
 const cardVariants: Variants = {
@@ -107,21 +108,6 @@ export const RecordButton = (props: RecordButtonProps) => {
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [hover]);
-
-  //        ***********
-  //     ***          ****
-  //    **               **
-  //   ***********         *
-  //  *           *        ****
-  //  *           *        *   *
-  //   ***********         *   *
-  //    *                  *   *
-  //    *                  *   *
-  //    *                  *   *
-  //    *      ******      ****
-  //    *     *      *     *
-  //    *     *      *     *
-  //      ****         ****
 
   return (
     <motion.div
