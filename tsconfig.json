@@ -32,7 +32,8 @@
       "@content/*": ["content/*"],
       "@utils/*": ["src/utils/*"],
       "public/*": ["src/public/*"]
-    }
+    },
+    "downLevelIteration": true
   },
   "exclude": [
     "node_modules"
