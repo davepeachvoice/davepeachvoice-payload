@@ -100,8 +100,6 @@ export default function VisualDemo(props) {
       }
     }
 
-    console.log('running spectrum');
-
     getFrequencyData(adjustFreqBandStyle);
     setAnimationFrameId(requestAnimationFrame(runSpectrumA));
   }, [getFrequencyData, frequencyBandArray]);
