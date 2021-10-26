@@ -23,7 +23,7 @@
 // https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
 // https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
 
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import styles from './styles/VisualDemo.module.scss';
 import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
@@ -73,7 +73,6 @@ export const Pulsate = (props) => (
 
 export default function VisualDemo(props) {
   const {
-    audioDataContainerInitialized,
     getFrequencyData,
     initializeAudioAnalyser,
     pause,
@@ -81,7 +80,7 @@ export default function VisualDemo(props) {
   } = props;
 
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [sus, setSus] = React.useState(0);
+  const [animationFrameId, setAnimationFrameId] = React.useState(0);
 
   const amplitudeValues = useRef(null);
 
@@ -104,53 +103,21 @@ export default function VisualDemo(props) {
     console.log('running spectrum');
 
     getFrequencyData(adjustFreqBandStyle);
-    setSus(requestAnimationFrame(runSpectrumA));
+    setAnimationFrameId(requestAnimationFrame(runSpectrumA));
   }, [getFrequencyData, frequencyBandArray]);
-
-  function adjustFreqBandStyle(newAmplitudeData) {
-    amplitudeValues.current = newAmplitudeData;
-    const domElements = frequencyBandArray.map((num) =>
-      document.getElementById(num)
-    );
-    for (let i = 0; i < frequencyBandArray.length; i++) {
-      const num = frequencyBandArray[i];
-      domElements[num].style.backgroundColor = `rgb(25, ${
-        amplitudeValues.current[num] / 3
-      }, ${amplitudeValues.current[num] / 3})`;
-      const percentage = (amplitudeValues.current[num] / 255) * 100;
-      domElements[num].style.height = `${percentage}%`;
-    }
-  }
-  /*
-  function runSpectrum() {
-    console.log('fuck');
-    getFrequencyData(adjustFreqBandStyle);
-    sus = requestAnimationFrame(runSpectrum);
-  }
-  */
 
   function toggleAudio() {
     if (isPlaying) {
       pause();
       setIsPlaying(false);
-      cancelAnimationFrame(sus);
+      cancelAnimationFrame(animationFrameId);
     } else {
       initializeAudioAnalyser();
 
       setIsPlaying(true);
-      setSus(requestAnimationFrame(runSpectrumA));
+      setAnimationFrameId(requestAnimationFrame(runSpectrumA));
     }
   }
-
-  /*
-  // check for when audioAnalyser has finished initializing
-  useEffect(() => {
-    console.log('useEffect');
-    if (audioDataContainerInitialized && isPlaying) {
-      requestAnimationFrame(runSpectrum);
-    }
-  }, [runSpectrum, isPlaying, audioDataContainerInitialized]);
-  */
 
   return (
     <div>
