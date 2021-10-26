@@ -25,6 +25,7 @@ collections:
               name: 'audio_sample_text',
               widget: 'string',
             }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
       - label: Inquiries
         name: inquiries
         file: content/inquiries.md
@@ -42,8 +43,9 @@ collections:
           - {
               label: 'Attribution field options',
               name: 'attribution_field_options',
-              widget: list,
+              widget: 'list',
             }
+          - { label: 'Body', name: 'body', widget: 'markdown' }
   - name: portfolio_categories
     label: Portfolio Categories
     folder: content/portfolio_categories
