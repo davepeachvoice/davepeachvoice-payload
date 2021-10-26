@@ -33,7 +33,7 @@
       "@utils/*": ["src/utils/*"],
       "public/*": ["src/public/*"]
     },
-    "downLevelIteration": true
+    "downlevelIteration": true
   },
   "exclude": [
     "node_modules"
