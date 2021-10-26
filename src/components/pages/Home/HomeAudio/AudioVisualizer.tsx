@@ -53,24 +53,11 @@ const TaglineContainer = styled.div`
   }
 `;
 
-export const Pulsate = (props) => (
-  <motion.div
-    whileHover={{
-      scale: [1, 1.1, 1],
-      transition: {
-        duration: 1,
-        ease: 'easeInOut',
-        times: [0, 0.5, 1],
-        loop: Infinity,
-        repeatDelay: 0,
-      },
-    }}
-  >
-    {' '}
-    {props.children}
-  </motion.div>
-);
-
+/**
+ * @todo type props
+ * @todo make bars disappear when user clicks the pause button (currently they freeze where they
+ * are because the animation frame is cancelled right away)
+ */
 export default function VisualDemo(props) {
   const {
     getFrequencyData,
