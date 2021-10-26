@@ -1,49 +1,42 @@
 {
+  "javascript.validate.enable": false,
+  "javascript.format.enable": false,
+  "javascript.format.semicolons": "insert",
+  "javascript.preferences.quoteStyle": "single",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.suggest.completeFunctionCalls": true,
+  "typescript.preferences.quoteStyle": "single",
+  "typescript.format.enable": false,
+  "typescript.validate.enable": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.tsdk": "./node_modules/typescript/lib",
+  "[typescript]": {
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+  },
+  "typescript.suggest.completeFunctionCalls": true,
+  "eslint.format.enable": true,
+  "eslint.lintTask.enable": true,
+  "typescript.surveys.enabled": false,
+  "typescript.format.semicolons": "insert",
+  "npm.autoDetect": "on",
+  "git.inputValidationLength": 1000,
+  "git.inputValidationSubjectLength": 100,
+  "eslint.codeActionsOnSave.mode": "all",
+  "eslint.onIgnoredFiles": "off",
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
+    "source.organizeImports": true,
+    "source.fixAll": true
   },
-  "eslint.validate": [
-    "javascript",
-    "typescript",
-  ],
-  "editor.tabSize": 2,
-  "cSpell.words": [
-    "audiocontext",
-    "badroute",
-    "bensound",
-    "dubstep",
-    "fontawesome",
-    "fortawesome",
-    "frontmatter",
-    "Linkedin",
-    "marginer",
-    "mattddean",
-    "netlifycms",
-    "nums",
-    "octokit",
-    "recaptcha",
-    "repos",
-    "sitekey",
-    "strengthmate",
-    "wavesurfer",
-    "xlarge"
-  ],
-  "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "**/node_modules": true,
-    "**/.next": true,
-    "tsconfig.json": true,
-    "resolve-tsconfig-path-to-webpack-alias.js": true,
-    "next.config.js": true,
-    "package-lock.json": true,
-    "next-env.d.ts": true,
-    ".eslintrc.js": true,
-    ".gitignore": true,
-    ".babelrc": true,
-    ".prettierrc": true,
-    "*.code-workspace": true,
-    ".eslintignore": true
+  "files.associations": {
+    "package.json": "jsonc"
+  },
+  "files.watcherExclude": {
+    ".git": true,
+    "node_modules": true,
+    "dist": true
   }
 }
