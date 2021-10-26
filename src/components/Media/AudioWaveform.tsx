@@ -1,5 +1,5 @@
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { WaveSurfer, WaveForm } from 'wavesurfer-react';
 import { PlayFill, PauseFill, Down } from 'grommet-icons';

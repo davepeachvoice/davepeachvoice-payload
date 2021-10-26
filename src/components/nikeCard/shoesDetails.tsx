@@ -18,13 +18,6 @@ const MediumText = styled.span`
   text-transform: uppercase;
 `;
 
-const SmallText = styled.span`
-  font-size: 11px;
-  color: #fff;
-  font-weight: 700;
-  text-transform: uppercase;
-`;
-
 const SpacedHorizontalContainer = styled.div`
   width: 100%;
   display: flex;

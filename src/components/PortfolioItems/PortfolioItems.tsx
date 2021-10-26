@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Box } from 'grommet';
+import { Grid } from 'grommet';
 import { PortfolioItemInterface } from './PortfolioItemInterface';
 import RecordButton from './RecordButton';
 

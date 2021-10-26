@@ -2,9 +2,8 @@ import { react as InquiriesContent } from '@content/inquiries.md';
 import InquiryForm from '../components/pages/Inquiries/Form';
 
 import Layout from '../components/Layout';
-import { Main, Box, Anchor } from 'grommet';
+import { Main, Box } from 'grommet';
 import Image from 'next/image';
-import SocialIcons from '@components/SocialIcons';
 import { motion } from 'framer-motion';
 
 import React from 'react';

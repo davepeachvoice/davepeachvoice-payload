@@ -29,7 +29,6 @@ import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
 import styled from 'styled-components';
 import { Microphone, PauseFill } from 'grommet-icons';
-import { motion } from 'framer-motion';
 
 const ButtonWithIcon = styled(Button)`
   display: flex;
