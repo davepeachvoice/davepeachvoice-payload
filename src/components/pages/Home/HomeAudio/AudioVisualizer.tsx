@@ -20,7 +20,10 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-import React, { useRef } from 'react';
+// https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
+// https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
+
+import React, { useCallback, useEffect, useRef } from 'react';
 import styles from './styles/VisualDemo.module.scss';
 import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
@@ -68,17 +71,41 @@ export const Pulsate = (props) => (
   </motion.div>
 );
 
-const floppyDisk: { isPlaying: boolean } = {
-  isPlaying: false,
-};
-
 export default function VisualDemo(props) {
-  const amplitudeValues = useRef(null);
-
-  const { getFrequencyData, frequencyBandArray } = props;
+  const {
+    audioDataContainerInitialized,
+    getFrequencyData,
+    initializeAudioAnalyser,
+    pause,
+    frequencyBandArray,
+  } = props;
 
   const [isPlaying, setIsPlaying] = React.useState(false);
-  let audioDataContainerInitialized = false;
+  const [sus, setSus] = React.useState(0);
+
+  const amplitudeValues = useRef(null);
+
+  const runSpectrumA = useCallback(() => {
+    function adjustFreqBandStyle(newAmplitudeData) {
+      amplitudeValues.current = newAmplitudeData;
+      const domElements = frequencyBandArray.map((num) =>
+        document.getElementById(num)
+      );
+      for (let i = 0; i < frequencyBandArray.length; i++) {
+        const num = frequencyBandArray[i];
+        domElements[num].style.backgroundColor = `rgb(25, ${
+          amplitudeValues.current[num] / 3
+        }, ${amplitudeValues.current[num] / 3})`;
+        const percentage = (amplitudeValues.current[num] / 255) * 100;
+        domElements[num].style.height = `${percentage}%`;
+      }
+    }
+
+    console.log('running spectrum');
+
+    getFrequencyData(adjustFreqBandStyle);
+    setSus(requestAnimationFrame(runSpectrumA));
+  }, [getFrequencyData, frequencyBandArray]);
 
   function adjustFreqBandStyle(newAmplitudeData) {
     amplitudeValues.current = newAmplitudeData;
@@ -94,59 +121,36 @@ export default function VisualDemo(props) {
       domElements[num].style.height = `${percentage}%`;
     }
   }
-
-  floppyDisk.isPlaying = isPlaying;
-  const runSpectrum = function (floppyDisk) {
-    if (!floppyDisk.isPlaying) {
-      return;
-    }
-
-    console.log(`Run: floppyDisk is ${floppyDisk.isPlaying}`);
+  /*
+  function runSpectrum() {
+    console.log('fuck');
     getFrequencyData(adjustFreqBandStyle);
-    requestAnimationFrame(() => {
-      runSpectrum(floppyDisk);
-    });
-  }.bind(floppyDisk);
-
-  // const runSpectrum = React.useCallback(() => {
-
-  // }, [isPlaying, getFrequencyData, frequencyBandArray]);
-
-  // React.useEffect(() => {
-  //   floppyDisk.isPlaying = isPlaying;
-  //   console.log(`floppyDisk is ${floppyDisk.isPlaying}`);
-  //   runSpectrum();
-  // }, [isPlaying, runSpectrum]);
+    sus = requestAnimationFrame(runSpectrum);
+  }
+  */
 
   function toggleAudio() {
     if (isPlaying) {
-      props.pause();
-      floppyDisk.isPlaying = false;
+      pause();
+      setIsPlaying(false);
+      cancelAnimationFrame(sus);
     } else {
-      if (!audioDataContainerInitialized) {
-        props.initializeAudioAnalyser(); // should this be ita container instead
-        //MARK: SUS
-        //TODO:
-        //        ***********
-        //     ***          ****
-        //    **               **
-        //   ***********         *
-        //  *           *        ****
-        //  *           *        *   *
-        //   ***********         *   *
-        //    *                  *   *
-        //    *                  *   *
-        //    *                  *   *
-        //    *      ******      ****
-        //    *     *      *     *
-        //    *     *      *     *
-        //      ****         ****
-        audioDataContainerInitialized = true;
-      }
-      floppyDisk.isPlaying = true;
-      runSpectrum(floppyDisk);
+      initializeAudioAnalyser();
+
+      setIsPlaying(true);
+      setSus(requestAnimationFrame(runSpectrumA));
     }
   }
+
+  /*
+  // check for when audioAnalyser has finished initializing
+  useEffect(() => {
+    console.log('useEffect');
+    if (audioDataContainerInitialized && isPlaying) {
+      requestAnimationFrame(runSpectrum);
+    }
+  }, [runSpectrum, isPlaying, audioDataContainerInitialized]);
+  */
 
   return (
     <div>

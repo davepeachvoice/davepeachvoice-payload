@@ -23,44 +23,34 @@
 // https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
 // https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
 
-import React, { useState } from 'react';
+import React from 'react';
 import AudioVisualizer from './AudioVisualizer';
 import soundFile from './audio/bensound-dubstep.mp3';
 
 export default function AudioDataContainer() {
-  const [audioData, setAudioData] = useState<AnalyserNode>(null);
-  const [audioFile, setAudioFile] = useState<HTMLAudioElement>(null);
-  const [initialized, setInitialized] = useState(false);
   const frequencyBandArray = [...Array(25).keys()];
+  let audioFile: HTMLAudioElement;
+  let audioData: AnalyserNode;
 
   function initializeAudioAnalyser() {
-    const localAudioFile = new Audio();
+    audioFile = new Audio();
 
     const audioContext = new AudioContext();
-    const source = audioContext.createMediaElementSource(localAudioFile);
-    const analyser = audioContext.createAnalyser();
-    localAudioFile.src = soundFile;
-    analyser.fftSize = 64;
+    const source = audioContext.createMediaElementSource(audioFile);
+    audioData = audioContext.createAnalyser();
+
+    audioFile.src = soundFile;
+    audioData.fftSize = 64;
+
     source.connect(audioContext.destination);
-    source.connect(analyser);
-    localAudioFile.play();
-    setAudioFile(localAudioFile);
+    source.connect(audioData);
 
-    console.log(analyser);
-    setAudioData(analyser);
-
-    console.log('audio analyer initialized');
-
-    setInitialized(true);
+    audioFile.play();
   }
 
   function pause() {
     console.log('pausing');
     audioFile.pause();
-  }
-
-  function play() {
-    audioFile.play();
   }
 
   function isPlaying() {
@@ -81,7 +71,6 @@ export default function AudioDataContainer() {
       getFrequencyData={getFrequencyData}
       isPlaying={isPlaying}
       pause={pause}
-      audioDataContainerInitialized={initialized}
     />
   );
 }
