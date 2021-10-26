@@ -5,21 +5,6 @@ import { Menu as MenuIcon } from 'grommet-icons';
 import Link from 'next/link';
 import Router from 'next/router';
 
-//        ***********
-//     ***          ****
-//    **               **
-//   ***********         *
-//  *           *        ****
-//  *           *        *   *
-//   ***********         *   *
-//    *                  *   *
-//    *                  *   *
-//    *                  *   *
-//    *      ******      ****
-//    *     *      *     *
-//    *     *      *     *
-//      ****         ****
-
 const NavigationBar = () => (
   <Header
     background='black'
@@ -67,6 +52,9 @@ const NavigationBar = () => (
           </Box>
         ) : (
           <Box justify='end' direction='row' gap='medium'>
+            <Link href='/portfolio' passHref>
+              <Anchor label='Portfolio' />
+            </Link>
             <Link href='/inquiries' passHref>
               <Anchor label='Inquiries' />
             </Link>

@@ -1,6 +1,7 @@
 import NavigationBar from './NavigationBar';
 import { Grommet, Box } from 'grommet';
 import React from 'react';
+import SocialIcons from './SocialIcons';
 
 const theme = {
   name: 'aruba',
@@ -207,6 +208,19 @@ export default function Layout(props) {
       <Box fill>
         <NavigationBar></NavigationBar>
         <div style={contentStyle}>{props.children}</div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            minHeight: '200px',
+            alignItems: 'flex-end',
+            paddingBottom: 75,
+          }}
+        >
+          <div style={{ bottom: 0 }}>
+            <SocialIcons></SocialIcons>
+          </div>
+        </div>
       </Box>
     </Grommet>
   );
