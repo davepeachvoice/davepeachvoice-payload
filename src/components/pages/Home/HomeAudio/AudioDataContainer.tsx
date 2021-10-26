@@ -25,7 +25,6 @@
 
 import React from 'react';
 import AudioVisualizer from './AudioVisualizer';
-import soundFile from './audio/bensound-dubstep.mp3';
 
 export default function AudioDataContainer() {
   const frequencyBandArray = [...Array(25).keys()];
@@ -39,7 +38,9 @@ export default function AudioDataContainer() {
     const source = audioContext.createMediaElementSource(audioFile);
     audioData = audioContext.createAnalyser();
 
-    audioFile.src = soundFile;
+    audioFile.crossOrigin = 'anonymous';
+    audioFile.src =
+      'https://res.cloudinary.com/prestocloud/video/upload/v1635110958/dave-peach-web-netlify-cms/commercial-sample_v49stm.mp3';
     audioData.fftSize = 64;
 
     source.connect(audioContext.destination);
