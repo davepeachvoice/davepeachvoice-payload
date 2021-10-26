@@ -73,13 +73,14 @@ export const Pulsate = (props) => (
 
 export default function VisualDemo(props) {
   const {
-    isPlaying,
     audioDataContainerInitialized,
     getFrequencyData,
     initializeAudioAnalyser,
     pause,
     frequencyBandArray,
   } = props;
+
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
   const amplitudeValues = useRef(null);
 
@@ -99,21 +100,29 @@ export default function VisualDemo(props) {
       }
     }
 
+    console.log('running spectrum');
+
     getFrequencyData(adjustFreqBandStyle);
-    requestAnimationFrame(runSpectrum);
-  }, [getFrequencyData, frequencyBandArray]);
+
+    if (isPlaying) {
+      requestAnimationFrame(runSpectrum);
+    }
+  }, [getFrequencyData, frequencyBandArray, isPlaying]);
 
   function toggleAudio() {
-    if (isPlaying()) {
+    if (isPlaying) {
       pause();
+      setIsPlaying(false);
     } else {
       initializeAudioAnalyser();
+      setIsPlaying(true);
     }
   }
 
   // check for when audioAnalyser has finished initializing
   useEffect(() => {
-    if (audioDataContainerInitialized && !isPlaying()) {
+    console.log('useEffect');
+    if (audioDataContainerInitialized && isPlaying) {
       requestAnimationFrame(runSpectrum);
     }
   }, [runSpectrum, isPlaying, audioDataContainerInitialized]);
@@ -148,7 +157,7 @@ export default function VisualDemo(props) {
         >
           <ButtonWithIcon>
             <div>{HomeContentAttributes.audio_sample_text}</div>
-            {isPlaying() ? (
+            {isPlaying ? (
               <PauseFill color='white'></PauseFill>
             ) : (
               <Microphone color='white'></Microphone>
