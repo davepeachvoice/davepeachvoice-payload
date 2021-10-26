@@ -14,14 +14,36 @@ collections:
         name: home
         file: content/home.md
         fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
-          - { label: 'Publish Date', name: 'date', widget: 'datetime' }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
+          - {
+              label: 'Hero main text',
+              name: 'hero_main_text',
+              widget: 'string',
+            }
+          - { label: 'Hero sub text', name: 'hero_sub_text', widget: 'string' }
+          - {
+              label: 'Audio sample text',
+              name: 'audio_sample_text',
+              widget: 'string',
+            }
       - label: Inquiries
         name: inquiries
         file: content/inquiries.md
         fields:
-          - { label: 'Title', name: 'title', widget: 'string' }
+          - {
+              label: 'Request field prompt',
+              name: 'request_field_prompt',
+              widget: string,
+            }
+          - {
+              label: 'Attribution field prompt',
+              name: 'attribution_field_prompt',
+              widget: 'string',
+            }
+          - {
+              label: 'Attribution field options',
+              name: 'attribution_field_options',
+              widget: list,
+            }
   - name: portfolio_categories
     label: Portfolio Categories
     folder: content/portfolio_categories

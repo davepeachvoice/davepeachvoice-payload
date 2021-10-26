@@ -1,6 +1,8 @@
-import { react as InquiriesContent } from '@content/inquiries.md';
+import {
+  react as InquiriesContent,
+  attributes as InquiriesAttributes,
+} from '@content/inquiries.md';
 import InquiryForm from '../components/pages/Inquiries/Form';
-
 import Layout from '../components/Layout';
 import { Main, Box } from 'grommet';
 import Image from 'next/image';
@@ -48,7 +50,15 @@ export default function Inquiries() {
               },
             }}
           >
-            <InquiryForm></InquiryForm>
+            <InquiryForm
+              requestFieldPrompt={InquiriesAttributes.request_field_prompt}
+              attributionFieldPrompt={
+                InquiriesAttributes.attribution_field_prompt
+              }
+              attributionFieldOptions={
+                InquiriesAttributes.attribution_field_options
+              }
+            ></InquiryForm>
           </motion.div>
         </Box>
       </Main>

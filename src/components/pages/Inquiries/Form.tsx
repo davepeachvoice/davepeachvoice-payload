@@ -28,7 +28,13 @@ interface FormState {
 
 const RECAPTCHA_KEY = '6Lf7CAMcAAAAACNXsN6-hnIxztE0lFyltbvAOnKu';
 
-export default function ContactForm() {
+interface Props {
+  requestFieldPrompt: string;
+  attributionFieldPrompt: string;
+  attributionFieldOptions: string[];
+}
+
+export default function ContactForm(props: Props) {
   const [value, setValue] = useState<FormState>(defaultValue);
   const recaptchaRef = useRef<Recaptcha>();
   const [submitButtonDisabled, setButtonDisabled] = useState(true);
@@ -61,13 +67,13 @@ export default function ContactForm() {
             type='email'
           />
         </FormField>
-        <FormField label='What can I do for you?' name='request'>
+        <FormField label={props.requestFieldPrompt} name='request'>
           <TextArea name='request' size='small' resize='vertical'></TextArea>
         </FormField>
-        <FormField label='How did you hear about me?' name='attribution'>
+        <FormField label={props.attributionFieldPrompt} name='attribution'>
           <Select
             name='attribution'
-            options={['Internet search', 'Word of mouth']}
+            options={props.attributionFieldOptions}
             placeholder='Select'
             clear={{ label: 'Clear selection' }}
           />
