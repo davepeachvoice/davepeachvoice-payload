@@ -31,10 +31,10 @@ collections:
               widget: 'string',
             }
           - { label: 'Body', name: 'body', widget: 'markdown' }
-      - label: Inquiries
-        label_singular: Inquiry
-        name: inquiries
-        file: content/inquiries.md
+      - label: Services
+        label_singular: Service
+        name: services
+        file: content/services.md
         fields:
           - {
               label: 'Request field prompt',
@@ -120,4 +120,14 @@ collections:
         value_field: title
         search_fields:
           - title
+        required: true
+  - name: services
+    label: Services
+    label_singular: Service
+    folder: content/services
+    create: true
+    fields:
+      - name: title
+        label: Title
+        widget: string
         required: true

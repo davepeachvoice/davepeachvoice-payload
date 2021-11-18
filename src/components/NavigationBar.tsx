@@ -1,9 +1,8 @@
-import React from 'react';
-
-import { Header, Anchor, Box, ResponsiveContext, Menu } from 'grommet';
+import { Anchor, Box, Header, Menu, ResponsiveContext } from 'grommet';
 import { Menu as MenuIcon } from 'grommet-icons';
 import Link from 'next/link';
 import Router from 'next/router';
+import React from 'react';
 
 const NavigationBar = () => (
   <Header
@@ -42,9 +41,9 @@ const NavigationBar = () => (
                 // https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag
                 // (note that it might not matter that much because we have real links outside of the mobile experience that are the same)
                 {
-                  label: <Box pad='small'>Inquiries</Box>,
+                  label: <Box pad='small'>Services</Box>,
                   onClick: () => {
-                    Router.push('/inquiries');
+                    Router.push('/services');
                   },
                 },
               ]}
@@ -55,8 +54,8 @@ const NavigationBar = () => (
             <Link href='/portfolio' passHref>
               <Anchor label='Portfolio' />
             </Link>
-            <Link href='/inquiries' passHref>
-              <Anchor label='Inquiries' />
+            <Link href='/services' passHref>
+              <Anchor label='Services' />
             </Link>
           </Box>
         )

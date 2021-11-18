@@ -12,7 +12,7 @@ export interface PortfolioCategory {
  */
 export async function importPortfolioItems() {
   const markdownFiles: string[] = require
-    .context('../content/portfolio_items', false, /\.\/.*\.md$/)
+    .context('@content/portfolio_items', false, /\.\/.*\.md$/)
     .keys()
     .map((relativePath) => relativePath.substring(2));
 
@@ -26,7 +26,7 @@ export async function importPortfolioItems() {
   return Promise.all(
     markdownFiles.map(async (path) => {
       const markdown: PortfolioItemsMarkdownData = await import(
-        `../content/portfolio_items/${path}`
+        `@content/portfolio_items/${path}`
       );
       return { ...markdown };
     })
@@ -35,7 +35,7 @@ export async function importPortfolioItems() {
 
 export async function importPortfolioCategories() {
   const markdownFiles: string[] = require
-    .context('../content/portfolio_categories', false, /\.\/.*\.md$/)
+    .context('@content/portfolio_categories', false, /\.\/.*\.md$/)
     .keys()
     .map((relativePath) => relativePath.substring(2));
 
@@ -49,7 +49,7 @@ export async function importPortfolioCategories() {
   return Promise.all(
     markdownFiles.map(async (path) => {
       const markdown: PortfolioCategoriesMarkdownData = await import(
-        `../content/portfolio_categories/${path}`
+        `@content/portfolio_categories/${path}`
       );
       return { ...markdown };
     })

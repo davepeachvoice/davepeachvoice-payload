@@ -12,7 +12,7 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "typescript.tsdk": "./node_modules/typescript/lib",
   "[typescript]": {
-    "editor.defaultFormatter": "dbaeumer.vscode-eslint"
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "typescript.suggest.completeFunctionCalls": true,
   "eslint.format.enable": true,
@@ -26,11 +26,11 @@
   "eslint.onIgnoredFiles": "off",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.organizeImports": true,
-    "source.fixAll": true
-  },
+  "editor.formatOnSave": false,
+  "editor.codeActionsOnSave": [
+    "source.organizeImports",
+    "source.fixAll"
+  ],
   "files.associations": {
     "package.json": "jsonc"
   },
@@ -38,5 +38,22 @@
     ".git": true,
     "node_modules": true,
     "dist": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.DS_Store": true,
+    "node_modules": true,
+    "tsconfig.json": true,
+    "resolve-tsconfig-path-to-webpack-alias.js": true,
+    "next-env.d.ts": true,
+    "next.config.js": true,
+    ".next": true,
+    "netlify.toml": true,
+    ".prettierignore": true,
+    ".prettierrc.yaml": true,
+    ".babelrc": true,
+    ".eslintignore": true,
+    ".eslintrc.js": true,
+    ".gitignore": true
   }
 }
