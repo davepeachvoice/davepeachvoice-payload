@@ -101,26 +101,25 @@ export function ContactForm(props: Props) {
             </Box>
           ))}
         </Grid>
-        {fullFormVisible ? (
-          <Box
-            margin={{
-              top: '40px',
-            }}
-          >
-            <RenderFormBody
-              formStep={formStep}
-              readyToNavigateToNextStep={readyToNavigateToNextStep}
-              readyToNavigateToPreviousStep={readyToNavigateToPreviousStep}
-              step0Header={props.step0Header}
-              step1Header={props.step1Header}
-              attributionFieldPrompt={props.attributionFieldPrompt}
-              attributionFieldOptions={props.attributionFieldOptions}
-              submitButtonEnabled={submitButtonEnabled}
-              setSubmitButtonEnabled={setSubmitButtonEnabled}
-              recaptchaRef={recaptchaRef}
-            />
-          </Box>
-        ) : null}
+        <Box
+          margin={{
+            top: '40px',
+          }}
+        >
+          <RenderFormBody
+            visible={fullFormVisible}
+            formStep={formStep}
+            readyToNavigateToNextStep={readyToNavigateToNextStep}
+            readyToNavigateToPreviousStep={readyToNavigateToPreviousStep}
+            step0Header={props.step0Header}
+            step1Header={props.step1Header}
+            attributionFieldPrompt={props.attributionFieldPrompt}
+            attributionFieldOptions={props.attributionFieldOptions}
+            submitButtonEnabled={submitButtonEnabled}
+            setSubmitButtonEnabled={setSubmitButtonEnabled}
+            recaptchaRef={recaptchaRef}
+          />
+        </Box>
       </Form>
     </Box>
   );
@@ -155,6 +154,7 @@ function encode(
 }
 
 interface RenderFormBodyInput {
+  visible: boolean;
   step0Header: string;
   step1Header: string;
   setSubmitButtonEnabled: (newValue: boolean) => void;
@@ -168,24 +168,24 @@ interface RenderFormBodyInput {
 }
 
 function RenderFormBody(input: RenderFormBodyInput) {
-  switch (input.formStep) {
-    case 0:
-      return <Step0 {...input}></Step0>;
-    case 1:
-      return <Step1 {...input}></Step1>;
-    default:
-      return null;
-  }
+  return (
+    <div style={{ display: input.visible ? undefined : 'none' }}>
+      <Step0 {...input} visible={input.formStep === 0}></Step0>
+      <Step1 {...input} visible={input.formStep === 1}></Step1>
+    </div>
+  );
 }
 
 interface Step0Props {
   step0Header: string;
   readyToNavigateToNextStep: () => void;
+  visible: boolean;
 }
 
 function Step0(props: Step0Props) {
+  console.log('step0 visible', props.visible);
   return (
-    <Box>
+    <Box style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step0Header}></StepHeader>
       <FormTextArea></FormTextArea>
       <Box align='end'>
@@ -203,11 +203,13 @@ interface Step1Props {
   attributionFieldPrompt: string;
   attributionFieldOptions: string[];
   step1Header: string;
+  visible: boolean;
 }
 
 function Step1(props: Step1Props) {
+  console.log('step1 visible', props.visible);
   return (
-    <Box>
+    <Box style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step1Header}></StepHeader>
       <FormField label='Name' name='name' required />
       <FormField label='Email' name='email' required>
