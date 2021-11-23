@@ -18,9 +18,6 @@ export default function Services() {
     async function setInitialProps() {
       const servicesMarkdownData = await importServices();
 
-      console.log('got services');
-      console.log(servicesMarkdownData);
-
       const localServices = servicesMarkdownData.map(
         (localServiceMarkdownData) => localServiceMarkdownData.attributes
       );
@@ -59,7 +56,8 @@ export default function Services() {
             <Box>
               <ContactForm
                 services={services}
-                requestFieldPrompt={ServicesAttributes.request_field_prompt}
+                step0Header={ServicesAttributes.step0_header}
+                step1Header={ServicesAttributes.step1_header}
                 attributionFieldPrompt={
                   ServicesAttributes.attribution_field_prompt
                 }

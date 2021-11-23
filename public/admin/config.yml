@@ -37,9 +37,14 @@ collections:
         file: content/services.md
         fields:
           - {
-              label: 'Request field prompt',
-              name: 'request_field_prompt',
+              label: 'Step 0 Header',
+              name: 'step0_header',
               widget: string,
+            }
+          - {
+            label: 'Step 1 Header',
+            name: 'step1_header',
+            widget: string,
             }
           - {
               label: 'Attribution field prompt',

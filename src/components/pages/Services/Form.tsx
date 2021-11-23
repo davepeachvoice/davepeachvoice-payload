@@ -7,12 +7,13 @@ import {
   FormField,
   Grid,
   MaskedInput,
+  Select,
   TextArea,
 } from 'grommet';
 import React, { useRef, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 
-const defaultValue = {
+const defaultValue: FormState = {
   name: '',
   email: '',
   request: '',
@@ -23,12 +24,14 @@ interface FormState {
   name: string;
   email: string;
   request?: string;
+  attribution?: string;
 }
 
 const RECAPTCHA_KEY = '6Lf7CAMcAAAAACNXsN6-hnIxztE0lFyltbvAOnKu';
 
 interface Props {
-  requestFieldPrompt: string;
+  step0Header: string;
+  step1Header: string;
   attributionFieldPrompt: string;
   attributionFieldOptions: string[];
   services: ServiceInterface[];
@@ -108,7 +111,10 @@ export function ContactForm(props: Props) {
               formStep={formStep}
               readyToNavigateToNextStep={readyToNavigateToNextStep}
               readyToNavigateToPreviousStep={readyToNavigateToPreviousStep}
-              requestFieldPrompt={props.requestFieldPrompt}
+              step0Header={props.step0Header}
+              step1Header={props.step1Header}
+              attributionFieldPrompt={props.attributionFieldPrompt}
+              attributionFieldOptions={props.attributionFieldOptions}
               submitButtonEnabled={submitButtonEnabled}
               setSubmitButtonEnabled={setSubmitButtonEnabled}
               recaptchaRef={recaptchaRef}
@@ -149,13 +155,16 @@ function encode(
 }
 
 interface RenderFormBodyInput {
-  requestFieldPrompt: string;
+  step0Header: string;
+  step1Header: string;
   setSubmitButtonEnabled: (newValue: boolean) => void;
   submitButtonEnabled: boolean;
   recaptchaRef: React.MutableRefObject<Recaptcha>;
   formStep: number;
   readyToNavigateToNextStep: () => void;
   readyToNavigateToPreviousStep: () => void;
+  attributionFieldPrompt: string;
+  attributionFieldOptions: string[];
 }
 
 function RenderFormBody(input: RenderFormBodyInput) {
@@ -170,14 +179,15 @@ function RenderFormBody(input: RenderFormBodyInput) {
 }
 
 interface Step0Props {
-  requestFieldPrompt: string;
+  step0Header: string;
   readyToNavigateToNextStep: () => void;
 }
 
 function Step0(props: Step0Props) {
   return (
     <Box>
-      <FormTextArea label={props.requestFieldPrompt}></FormTextArea>
+      <StepHeader text={props.step0Header}></StepHeader>
+      <FormTextArea></FormTextArea>
       <Box align='end'>
         <FormButton onClick={props.readyToNavigateToNextStep} label='Next' />
       </Box>
@@ -190,11 +200,15 @@ interface Step1Props {
   submitButtonEnabled: boolean;
   recaptchaRef: React.MutableRefObject<Recaptcha>;
   readyToNavigateToPreviousStep: () => void;
+  attributionFieldPrompt: string;
+  attributionFieldOptions: string[];
+  step1Header: string;
 }
 
 function Step1(props: Step1Props) {
   return (
     <Box>
+      <StepHeader text={props.step1Header}></StepHeader>
       <FormField label='Name' name='name' required />
       <FormField label='Email' name='email' required>
         <MaskedInput
@@ -207,6 +221,14 @@ function Step1(props: Step1Props) {
             { regexp: /^[\w]+$/, placeholder: 'com' },
           ]}
           type='email'
+        />
+      </FormField>
+      <FormField label={props.attributionFieldPrompt} name='attribution'>
+        <Select
+          name='attribution'
+          options={props.attributionFieldOptions}
+          placeholder='Select'
+          clear={{ label: 'Clear selection' }}
         />
       </FormField>
       <FormField>
@@ -263,19 +285,12 @@ function FormButton(props: FormButtonProps) {
 }
 
 interface FormTextAreaProps {
-  label: string;
+  label?: string;
 }
 
 function FormTextArea(props: FormTextAreaProps) {
   return (
-    <FormField
-      label={
-        <div style={{ fontSize: '24px', marginBottom: '10px' }}>
-          {props.label}
-        </div>
-      }
-      name='request'
-    >
+    <FormField label={props.label} name='request'>
       <TextArea
         style={{
           backgroundColor: '#eee',
@@ -287,5 +302,15 @@ function FormTextArea(props: FormTextAreaProps) {
         resize='vertical'
       ></TextArea>
     </FormField>
+  );
+}
+
+interface StepHeaderProps {
+  text: string;
+}
+
+function StepHeader(props: StepHeaderProps) {
+  return (
+    <div style={{ fontSize: '24px', marginBottom: '20px' }}>{props.text}</div>
   );
 }

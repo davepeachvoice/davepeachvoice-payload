@@ -1,8 +1,9 @@
 ---
-request_field_prompt: What can I do for you?
-attribution_field_prompt: How did you hear about me?
+step0_header: What can I do for you?
+step1_header: 'One last thing: how should I reach out to you?'
+attribution_field_prompt: Want to help me out? Tell me how you heard about me!
 attribution_field_options:
   - Internet search
   - Word of mouth
 ---
-Reach out and let me know where I can provide excellent value to your business. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Reach out and let me know where I can provide excellent value to your business.
