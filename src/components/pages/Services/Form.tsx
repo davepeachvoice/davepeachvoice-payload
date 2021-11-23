@@ -247,6 +247,7 @@ function FormButton(props: FormButtonProps) {
     <Button
       size='medium'
       label={props.label}
+      type={props.type}
       style={{
         width: '150px',
         borderRadius: '5px',
