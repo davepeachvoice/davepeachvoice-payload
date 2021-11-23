@@ -61,7 +61,7 @@ export function ContactForm(props: Props) {
         onSubmit={handleSubmit}
         data-netlify='true'
         data-netlify-recaptcha='true'
-        name='service'
+        name='BasicServiceRequest'
       >
         <Grid
           columns={{ count: props.services.length, size: ['small', 'small'] }}
