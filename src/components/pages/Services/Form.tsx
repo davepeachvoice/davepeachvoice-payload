@@ -7,6 +7,7 @@ import {
   FormField,
   Grid,
   MaskedInput,
+  ResponsiveContext,
   Select,
   TextArea,
 } from 'grommet';
@@ -14,6 +15,7 @@ import React, { useRef, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
 
 const defaultValue: FormState = {
+  type: '',
   name: '',
   email: '',
   request: '',
@@ -21,6 +23,7 @@ const defaultValue: FormState = {
 };
 
 interface FormState {
+  type: string;
   name: string;
   email: string;
   request?: string;
@@ -66,46 +69,33 @@ export function ContactForm(props: Props) {
         data-netlify-recaptcha='true'
         name='BasicServiceRequest'
       >
-        <Grid
-          columns={{ count: props.services.length, size: ['small', 'small'] }}
-          rows='xxsmall'
-          gap={{ row: 'medium' }}
-          justifyContent='center'
-          justify='center'
-          alignContent='center'
-        >
-          {props.services.map((item) => (
-            <Box
-              width='100%'
-              key={item.title}
-              background={selectedService === item.title ? '#eee' : 'grey'}
-              border={{
-                color: 'black',
-              }}
-              align='center'
-              justify='center'
-              style={{
-                cursor: 'pointer',
-              }}
-              onClick={() => {
-                if (selectedService !== item.title) {
-                  setSelectedService(item.title);
+        <ResponsiveContext.Consumer>
+          {(size) =>
+            size === 'small' || size === 'medium' ? (
+              <Select
+                name='type'
+                options={props.services.map((service) => service.title)}
+                value={value.type}
+                onChange={({ option }) => {
+                  setSelectedService(option);
                   setFullFormVisible(true);
-                } else {
-                  setSelectedService(undefined);
-                  setFullFormVisible(false);
-                }
-              }}
-            >
-              {item.title}
-            </Box>
-          ))}
-        </Grid>
-        <Box
-          margin={{
-            top: '40px',
-          }}
-        >
+                }}
+                clear={{ label: 'Clear selection' }}
+              />
+            ) : (
+              <HorizontalSelector
+                services={props.services}
+                selectedService={selectedService}
+                setSelectedService={setSelectedService}
+                setFullFormVisible={setFullFormVisible}
+                value={value}
+                setValue={setValue}
+              ></HorizontalSelector>
+            )
+          }
+        </ResponsiveContext.Consumer>
+
+        <Box margin={{ top: '40px' }}>
           <RenderFormBody
             visible={fullFormVisible}
             formStep={formStep}
@@ -143,6 +133,59 @@ export function ContactForm(props: Props) {
 
     fetch('/', options).catch((error) => alert(error));
   }
+}
+
+interface HorizontalSelectorProps {
+  services: ServiceInterface[];
+  selectedService: string;
+  setSelectedService: React.Dispatch<React.SetStateAction<string>>;
+  setFullFormVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  value: FormState;
+  setValue: React.Dispatch<React.SetStateAction<FormState>>;
+}
+
+/**
+ * @todo implement this with a Grommet Select
+ */
+function HorizontalSelector(props: HorizontalSelectorProps) {
+  return (
+    <Grid
+      columns={{
+        count: props.services.length,
+        size: ['small', 'small'],
+      }}
+      rows='xxsmall'
+      gap={{ row: 'medium' }}
+      justifyContent='center'
+      justify='center'
+      alignContent='center'
+    >
+      {props.services.map((item) => (
+        <Box
+          width='100%'
+          key={item.title}
+          background={props.selectedService === item.title ? '#eee' : 'grey'}
+          border={{ color: 'black' }}
+          align='center'
+          justify='center'
+          style={{ cursor: 'pointer' }}
+          onClick={() => {
+            if (props.selectedService !== item.title) {
+              props.setValue({ ...props.value, type: item.title });
+              props.setSelectedService(item.title);
+              props.setFullFormVisible(true);
+            } else {
+              props.setValue({ ...props.value, type: undefined });
+              props.setSelectedService(undefined);
+              props.setFullFormVisible(false);
+            }
+          }}
+        >
+          {item.title}
+        </Box>
+      ))}
+    </Grid>
+  );
 }
 
 function encode(
@@ -183,7 +226,6 @@ interface Step0Props {
 }
 
 function Step0(props: Step0Props) {
-  console.log('step0 visible', props.visible);
   return (
     <Box style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step0Header}></StepHeader>
@@ -207,7 +249,6 @@ interface Step1Props {
 }
 
 function Step1(props: Step1Props) {
-  console.log('step1 visible', props.visible);
   return (
     <Box style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step1Header}></StepHeader>
@@ -261,7 +302,7 @@ interface FormButtonProps {
   onClick?: () => void;
   label: string;
   disabled?: boolean;
-  // TODO: consider getting type's type from Grommet's Button
+  // TODO: consider getting type's TS type from Grommet's Button
   type?: 'button' | 'submit' | 'reset';
   unfilled?: boolean;
 }
