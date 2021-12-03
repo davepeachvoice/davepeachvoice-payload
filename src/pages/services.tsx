@@ -30,44 +30,50 @@ export default function Services() {
 
   return (
     <Layout>
-      <Main align='center'>
+      <Main align='center' pad='large'>
         <Box height='small' width='large' justify='center'>
           <ServicesContent></ServicesContent>
         </Box>
 
-        <motion.div
-          initial='hidden'
-          animate='visible'
-          variants={{
-            hidden: {
-              scale: 0.8,
-              opacity: 0,
-            },
-            visible: {
-              scale: 1,
-              opacity: 1,
-              transition: {
-                delay: 0.4,
+        <Box width='large'>
+          <motion.div
+            style={{
+              // allow shrinking on smaller screens
+              width: '100%',
+            }}
+            initial='hidden'
+            animate='visible'
+            variants={{
+              hidden: {
+                scale: 0.8,
+                opacity: 0,
               },
-            },
-          }}
-        >
-          <Box width='100%' alignContent='center'>
-            <Box>
-              <ContactForm
-                services={services}
-                step0Header={ServicesAttributes.step0_header}
-                step1Header={ServicesAttributes.step1_header}
-                attributionFieldPrompt={
-                  ServicesAttributes.attribution_field_prompt
-                }
-                attributionFieldOptions={
-                  ServicesAttributes.attribution_field_options
-                }
-              ></ContactForm>
+              visible: {
+                scale: 1,
+                opacity: 1,
+                transition: {
+                  delay: 0.4,
+                },
+              },
+            }}
+          >
+            <Box width='100%' alignContent='center'>
+              <Box>
+                <ContactForm
+                  services={services}
+                  step0Header={ServicesAttributes.step0_header}
+                  step1Header={ServicesAttributes.step1_header}
+                  attributionFieldPrompt={
+                    ServicesAttributes.attribution_field_prompt
+                  }
+                  attributionFieldOptions={
+                    ServicesAttributes.attribution_field_options
+                  }
+                ></ContactForm>
+              </Box>
             </Box>
-          </Box>
-        </motion.div>
+          </motion.div>
+        </Box>
         <Box
           width='xlarge'
           direction='row'
