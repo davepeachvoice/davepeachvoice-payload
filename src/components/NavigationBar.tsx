@@ -41,6 +41,12 @@ const NavigationBar = () => (
                 // https://nextjs.org/docs/api-reference/next/link#if-the-child-is-a-custom-component-that-wraps-an-a-tag
                 // (note that it might not matter that much because we have real links outside of the mobile experience that are the same)
                 {
+                  label: <Box pad='small'>Portfolio</Box>,
+                  onClick: () => {
+                    Router.push('/portfolio');
+                  },
+                },
+                {
                   label: <Box pad='small'>Services</Box>,
                   onClick: () => {
                     Router.push('/services');
