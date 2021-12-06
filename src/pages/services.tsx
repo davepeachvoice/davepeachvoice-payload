@@ -92,7 +92,7 @@ export default function Services() {
           </Box>
         </Box>
         <Button
-          href='mailto:inquiries@davepeachvoice.com'
+          href='mailto:davepeachvoice@gmail.com'
           label='Email Dave'
           color='brand'
           size='large'

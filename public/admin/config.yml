@@ -6,8 +6,8 @@ media_library:
   config:
     cloud_name: prestocloud
     api_key: 875834652743413
-site_url: https://davepeachvoice.netlify.app/
-display_url: https://davepeachvoice.netlify.app/
+site_url: https://davepeachvoice.com/
+display_url: https://davepeachvoice.com/
 editor:
   preview: false
 collections:
