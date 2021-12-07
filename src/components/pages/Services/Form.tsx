@@ -45,9 +45,8 @@ export function ContactForm(props: Props) {
   const recaptchaRef = useRef<Recaptcha>();
   const [submitButtonEnabled, setSubmitButtonEnabled] = useState(false);
   const [fullFormVisible, setFullFormVisible] = React.useState(false);
-  const [selectedService, setSelectedService] = React.useState<string>(
-    undefined
-  );
+  const [selectedService, setSelectedService] =
+    React.useState<string>(undefined);
   const [formStep, setFormStep] = useState(0);
 
   function readyToNavigateToNextStep() {

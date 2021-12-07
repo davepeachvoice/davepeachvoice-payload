@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import PortfolioSection from '../components/pages/Portfolio/Section';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
+import React, { useEffect, useState } from 'react';
+import PortfolioSection from '../components/pages/Portfolio/Section';
 import {
-  importPortfolioItems,
   importPortfolioCategories,
+  importPortfolioItems,
   PortfolioCategory,
 } from '../import-portfolio-data';
 
@@ -26,7 +26,8 @@ export default function Portfolio(props: Props) {
         (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
       );
 
-      const portfolioItemsCategoriesMarkdownData = await importPortfolioCategories();
+      const portfolioItemsCategoriesMarkdownData =
+        await importPortfolioCategories();
 
       const portfolioCategories = portfolioItemsCategoriesMarkdownData.map(
         (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
