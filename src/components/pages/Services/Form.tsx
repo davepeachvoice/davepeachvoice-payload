@@ -74,6 +74,7 @@ export function ContactForm(props: Props) {
             size === 'small' || size === 'medium' ? (
               <Select
                 name='type'
+                placeholder='Select a Service'
                 options={props.services.map((service) => service.title)}
                 value={value.type}
                 onChange={({ option }) => {
