@@ -14,7 +14,7 @@ const NavigationBar = () => (
       height: '96px',
     }}
   >
-    <Link href='/'>
+    <Link href='/' passHref>
       <Anchor
         style={{
           fontFamily: 'Orbitron',

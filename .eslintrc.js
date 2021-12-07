@@ -5,8 +5,9 @@ module.exports = {
       "extends": [
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended",
-        "prettier", // eslint-config-prettier
-        "plugin:prettier/recommended"
+        "prettier",
+        "plugin:prettier/recommended",
+        "next/core-web-vitals"
       ],
       "plugins": [
         "react",
