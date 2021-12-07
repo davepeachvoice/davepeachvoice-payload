@@ -1,8 +1,8 @@
-import React from 'react';
-import { Box } from 'grommet';
 import { react as HomeContent } from '@content/home.md';
+import { Box } from 'grommet';
+import React from 'react';
 
-const HomeHero = () => {
+const HomeExperience = () => {
   return (
     <Box align='center'>
       <Box height='small' width='large' justify='center'>
@@ -12,4 +12,4 @@ const HomeHero = () => {
   );
 };
 
-export default HomeHero;
+export default HomeExperience;

@@ -1,7 +1,7 @@
-import React from 'react';
 import { Grid } from 'grommet';
+import React from 'react';
+import Card from './Card';
 import { PortfolioItemInterface } from './PortfolioItemInterface';
-import RecordButton from './RecordButton';
 
 export interface PortfolioItemsProps {
   items: PortfolioItemInterface[];
@@ -24,14 +24,14 @@ export default function PortfolioItems(props: PortfolioItemsProps) {
       justifyContent='center'
     >
       {props.items.map((item) => (
-        <RecordButton
+        <Card
           key={item.title}
           item={item}
           onClick={() => {
             console.log('clicked portfolio item action button');
             return props.setPlayingPortfolioItem(item);
           }}
-        ></RecordButton>
+        ></Card>
       ))}
     </Grid>
   );

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import NikeCard from '../nikeCard/index';
 import { PortfolioItemInterface } from './PortfolioItemInterface';
 

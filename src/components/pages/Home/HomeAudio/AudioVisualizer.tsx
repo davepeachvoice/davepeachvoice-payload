@@ -23,12 +23,12 @@
 // https://betterprogramming.pub/using-react-ui-components-to-visualize-real-time-spectral-data-of-an-audio-source-17a498a6d8d7
 // https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
 
-import React, { useCallback, useRef } from 'react';
-import styles from './styles/VisualDemo.module.scss';
-import { Stack, Box, Heading, Button } from 'grommet';
 import { attributes as HomeContentAttributes } from '@content/home.md';
-import styled from 'styled-components';
+import { Box, Button, Heading, Stack } from 'grommet';
 import { Microphone, PauseFill } from 'grommet-icons';
+import React, { useCallback, useRef } from 'react';
+import styled from 'styled-components';
+import styles from './styles/AudioVisualizer.module.scss';
 
 const ButtonWithIcon = styled(Button)`
   display: flex;
@@ -57,7 +57,7 @@ const TaglineContainer = styled.div`
  * @todo make bars disappear when user clicks the pause button (currently they freeze where they
  * are because the animation frame is cancelled right away)
  */
-export default function VisualDemo(props) {
+export default function AudioVisualizer(props) {
   const {
     getFrequencyData,
     initializeAudioAnalyser,

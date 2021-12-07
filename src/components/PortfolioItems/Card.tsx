@@ -1,5 +1,5 @@
-import React, { CSSProperties, useState, useEffect } from 'react';
 import { motion, useAnimation, Variants } from 'framer-motion';
+import React, { CSSProperties, useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { PortfolioItemDataInterface } from './PortfolioItemInterface';
 
@@ -54,12 +54,12 @@ const innerCircleVariants: Variants = {
     y: 0,
   },
 };
-interface RecordButtonProps {
+interface CardProps {
   item: PortfolioItemDataInterface;
   onClick: () => void;
 }
 
-export const RecordButton = (props: RecordButtonProps) => {
+export const Card = (props: CardProps) => {
   const [hover, setHover] = useState<boolean>(false);
   const cardFocusAnimation = useAnimation();
 
@@ -152,4 +152,4 @@ const styles: Record<string, CSSProperties> = {
   },
 };
 
-export default RecordButton;
+export default Card;
