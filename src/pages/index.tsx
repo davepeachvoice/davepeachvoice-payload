@@ -5,13 +5,29 @@ import Layout from '@components/Layout';
 import VideoModal from '@components/Media/VideoModal';
 import HomeAudio from '@components/pages/Home/HomeAudio/HomeAudio';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
+import type { InferGetStaticPropsType } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
+import { importPortfolioItems } from 'src/import-portfolio-data';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
 });
 
-const Index = () => {
+export async function getStaticProps() {
+  const portfolioItemsMarkdownData = await importPortfolioItems();
+
+  const portfolioItems = portfolioItemsMarkdownData.map(
+    (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
+  );
+
+  return {
+    props: {
+      portfolioItems,
+    },
+  };
+}
+
+export function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
   const [playingPortfolioItem, setPlayingPortfolioItem] =
     useState<PortfolioItemInterface>(null);
 
@@ -27,6 +43,7 @@ const Index = () => {
       <HomeExperience></HomeExperience>
       <HomePortfolio
         setPlayingPortfolioItem={setPlayingPortfolioItem}
+        portfolioItems={props.portfolioItems}
       ></HomePortfolio>
       <AudioWaveform portfolioItem={playingPortfolioItem}></AudioWaveform>
       <VideoModal
@@ -35,6 +52,6 @@ const Index = () => {
       ></VideoModal>
     </Layout>
   );
-};
+}
 
 export default Index;
