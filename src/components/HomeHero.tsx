@@ -26,7 +26,6 @@ const HomeHero = () => {
         src={cloudinaryId}
         objectPosition='center top'
         alt='Dave Peach announcing at March Madness in 2021'
-        // image is visible above the fold
         placeholder='blur'
         blurDataURL='https://res.cloudinary.com/prestocloud/image/upload/w_10,q_auto,f_auto/dave-peach-web-netlify-cms/march_madness.png'
       />

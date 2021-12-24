@@ -13,7 +13,7 @@ export default function PortfolioPage() {
     useState<PortfolioItemInterface>(null);
 
   return (
-    <Layout>
+    <Layout title='Portfolio'>
       <Portfolio setPlayingPortfolioItem={setPlayingPortfolioItem}></Portfolio>
       <AudioWaveform portfolioItem={playingPortfolioItem}></AudioWaveform>
       <VideoModal

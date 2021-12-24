@@ -29,7 +29,7 @@ export default function Services() {
   }, []);
 
   return (
-    <Layout>
+    <Layout title='Services'>
       <Main align='center' pad='large'>
         <Box height='small' width='large' justify='center'>
           <ServicesContent></ServicesContent>
@@ -89,6 +89,8 @@ export default function Services() {
               src='/dave-peach-web-netlify-cms/march_madness.png'
               objectPosition='center top'
               alt='Dave Peach announcing at March Madness in 2021'
+              placeholder='blur'
+              blurDataURL='https://res.cloudinary.com/prestocloud/image/upload/w_10,q_auto,f_auto/dave-peach-web-netlify-cms/march_madness.png'
             />
           </Box>
         </Box>
