@@ -28,7 +28,7 @@ export default function PortfolioItems(props: PortfolioItemsProps) {
           key={item.title}
           item={item}
           onClick={() => {
-            console.log('clicked portfolio item action button');
+            console.debug('clicked portfolio item action button');
             return props.setPlayingPortfolioItem(item);
           }}
         ></Card>

@@ -14,8 +14,6 @@ const HomeHero = () => {
     },
   });
 
-  console.log(url);
-
   return (
     <Box height='500px'>
       <Image

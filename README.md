@@ -12,9 +12,10 @@ npm run dev
 
 ## TODO
 
-- Upgrade to Next.js 12
-- Create a mobile version of the services bar (probably just a dropdown)
 - Give an indication that the user's services form submission was received and un-display the form
+- Fix audio playback on mobile for audio bar at bottom: may have something to do with iOS preventing auto-play even though the playback is not automatic
+- Use AVIF/WebP
+- font-display: https://web.dev/font-display/?utm_source=lighthouse&utm_medium=devtools
 
 ### Services
 

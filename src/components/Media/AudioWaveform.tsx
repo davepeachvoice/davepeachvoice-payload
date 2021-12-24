@@ -1,9 +1,9 @@
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
+import { Button } from 'grommet';
+import { Down, PauseFill, PlayFill } from 'grommet-icons';
 import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { WaveSurfer, WaveForm } from 'wavesurfer-react';
-import { PlayFill, PauseFill, Down } from 'grommet-icons';
-import { Button } from 'grommet';
+import { WaveForm, WaveSurfer } from 'wavesurfer-react';
 
 const Buttons = styled.div`
   display: flex;
@@ -37,7 +37,7 @@ export default function Waveform(props: Props) {
   const wavesurferRef = useRef<WaveSurfer>();
 
   function handleWSMount(waveSurfer, audioSource) {
-    console.log('handling mount');
+    console.debug('handling mount');
 
     if (wavesurferRef.current) {
       wavesurferRef.current.destroy();
@@ -50,16 +50,16 @@ export default function Waveform(props: Props) {
       wavesurferRef.current.load(audioSource);
 
       wavesurferRef.current.on('ready', () => {
-        console.log('WaveSurfer is ready');
+        console.debug('WaveSurfer is ready');
         wavesurferRef.current.play();
       });
 
       wavesurferRef.current.on('region-removed', (region) => {
-        console.log('region-removed --> ', region);
+        console.debug('region-removed --> ', region);
       });
 
       wavesurferRef.current.on('loading', (data) => {
-        console.log('loading --> ', data);
+        console.debug('loading --> ', data);
       });
 
       wavesurferRef.current.on('pause', () => {
@@ -90,8 +90,8 @@ export default function Waveform(props: Props) {
   }
 
   useEffect(() => {
-    console.log('audiowaveform found a new portfolioitem');
-    console.log('audio: %s', JSON.stringify(props.portfolioItem));
+    console.debug('audiowaveform found a new portfolioitem');
+    console.debug('audio: %s', JSON.stringify(props.portfolioItem));
     if (!props.portfolioItem) {
       return;
     }

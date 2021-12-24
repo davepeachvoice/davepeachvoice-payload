@@ -13,27 +13,15 @@ const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
 });
 
-export async function getStaticProps() {
-  const portfolioItemsMarkdownData = await importPortfolioItems();
-
-  const portfolioItems = portfolioItemsMarkdownData.map(
-    (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
-  );
-
-  return {
-    props: {
-      portfolioItems,
-    },
-  };
-}
-
-export function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
+export default function Index(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   const [playingPortfolioItem, setPlayingPortfolioItem] =
     useState<PortfolioItemInterface>(null);
 
   useEffect(() => {
-    console.log('got new playing portfolio item');
-    console.log(playingPortfolioItem);
+    console.debug('got new playing portfolio item');
+    console.debug(playingPortfolioItem);
   }, [playingPortfolioItem]);
 
   return (
@@ -54,4 +42,16 @@ export function Index(props: InferGetStaticPropsType<typeof getStaticProps>) {
   );
 }
 
-export default Index;
+export async function getStaticProps() {
+  const portfolioItemsMarkdownData = await importPortfolioItems();
+
+  const portfolioItems = portfolioItemsMarkdownData.map(
+    (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
+  );
+
+  return {
+    props: {
+      portfolioItems,
+    },
+  };
+}
