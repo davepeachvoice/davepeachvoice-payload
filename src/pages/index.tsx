@@ -21,7 +21,7 @@ const Index = () => {
   }, [playingPortfolioItem]);
 
   return (
-    <Layout>
+    <Layout title=''>
       <HomeHero></HomeHero>
       <HomeAudio></HomeAudio>
       <HomeExperience></HomeExperience>

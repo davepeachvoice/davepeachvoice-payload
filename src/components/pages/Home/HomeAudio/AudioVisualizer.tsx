@@ -112,7 +112,7 @@ export default function AudioVisualizer(props) {
           ))}
         </div>
         <Box background={{ color: 'brand', opacity: 'weak' }} height='100%'>
-          <Heading size='large' margin='large' textAlign='center'>
+          <Heading level={1} size='large' margin='large' textAlign='center'>
             {HomeContentAttributes.hero_main_text}
           </Heading>
         </Box>

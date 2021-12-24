@@ -1,6 +1,7 @@
+import { Box, Grommet } from 'grommet';
+import Head from 'next/head';
+import { useRouter } from 'next/router';
 import NavigationBar from './NavigationBar';
-import { Grommet, Box } from 'grommet';
-import React from 'react';
 import SocialIcons from './SocialIcons';
 
 const theme = {
@@ -202,26 +203,55 @@ const contentStyle = {
   flexDirection: 'column' as const,
 };
 
-export default function Layout(props) {
+interface Props {
+  title: string;
+  children?: React.ReactNode;
+}
+
+export default function Layout(props: Props) {
+  const mainTitle = 'Dave Peach: Professional Voice';
+  const fullTitle = props.title ? `${props.title} - ${mainTitle}` : mainTitle;
+
+  const description =
+    'Dave Peach is a male voice actor ready to help your clients build their brands. Learn how today.';
+
+  // TODO: is there some way to generate the cloudinary part programmatically using next/image
+  const metaImage =
+    'https://res.cloudinary.com/prestocloud/image/upload/f_auto,c_limit,w_640,q_auto/dave-peach-web-netlify-cms/march_madness.png';
+
+  // only used to get the current path for meta properties
+  const router = useRouter();
+
   return (
-    <Grommet cssVars={true} full theme={theme} themeMode='dark'>
-      <Box fill>
-        <NavigationBar></NavigationBar>
-        <div style={contentStyle}>{props.children}</div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'center',
-            minHeight: '200px',
-            alignItems: 'flex-end',
-            paddingBottom: 75,
-          }}
-        >
-          <div style={{ bottom: 0 }}>
-            <SocialIcons></SocialIcons>
+    <>
+      <Head>
+        <title>{fullTitle}</title>
+        <meta name='description' content={description}></meta>
+        <meta property='og:title' content={fullTitle}></meta>
+        <meta property='og:type' content='article'></meta>
+        <meta property='og:url' content={router.asPath}></meta>
+        <meta property='og:image' content={metaImage}></meta>
+        <meta property='og:description' content={description}></meta>
+      </Head>
+      <Grommet cssVars={true} full theme={theme} themeMode='dark'>
+        <Box fill>
+          <NavigationBar></NavigationBar>
+          <article style={contentStyle}>{props.children}</article>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'center',
+              minHeight: '200px',
+              alignItems: 'flex-end',
+              paddingBottom: 75,
+            }}
+          >
+            <div style={{ bottom: 0 }}>
+              <SocialIcons></SocialIcons>
+            </div>
           </div>
-        </div>
-      </Box>
-    </Grommet>
+        </Box>
+      </Grommet>
+    </>
   );
 }
