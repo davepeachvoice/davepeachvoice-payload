@@ -5,6 +5,7 @@ import Layout from '@components/Layout';
 import VideoModal from '@components/Media/VideoModal';
 import HomeAudio from '@components/pages/Home/HomeAudio/HomeAudio';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
+import { buildImageUrl } from 'cloudinary-build-url';
 import type { InferGetStaticPropsType } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
@@ -26,7 +27,7 @@ export default function Index(
 
   return (
     <Layout title=''>
-      <HomeHero></HomeHero>
+      <HomeHero imageBlurDataUrl={props.heroImageBlurData}></HomeHero>
       <HomeAudio></HomeAudio>
       <HomeExperience></HomeExperience>
       <HomePortfolio
@@ -49,9 +50,23 @@ export async function getStaticProps() {
     (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
   );
 
+  const url = buildImageUrl('/dave-peach-web-netlify-cms/march_madness.png', {
+    cloud: { cloudName: 'prestocloud' },
+    transformations: {
+      quality: 1,
+      format: 'auto',
+      resize: {
+        width: 10,
+        type: 'scale',
+        aspectRatio: '1',
+      },
+    },
+  });
+
   return {
     props: {
       portfolioItems,
+      heroImageBlurData: url,
     },
   };
 }
