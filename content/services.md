@@ -6,4 +6,4 @@ attribution_field_options:
   - Internet search
   - Word of mouth
 ---
-Reach out and let me know where I can provide excellent value to your business.
+Reach out and let me know where I can provide value to your business.

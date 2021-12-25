@@ -11,16 +11,13 @@ export default function HomeHero(props: Props) {
     <Box>
       <div
         style={{
-          width: '500px',
+          minHeight: '500px',
           position: 'relative',
-          marginLeft: 'auto',
-          marginRight: 'auto',
         }}
       >
         <Image
-          height='100%'
-          width='100%'
-          layout='responsive'
+          className='next-image'
+          layout='fill'
           objectFit='contain'
           src='/dave-peach-web-netlify-cms/march_madness.png'
           objectPosition='center top'

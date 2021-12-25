@@ -3,7 +3,8 @@ const resolveTsconfigPathsToAlias = require('./resolve-tsconfig-path-to-webpack-
 module.exports = {
   images: {
     loader: 'cloudinary',
-    path: 'https://res.cloudinary.com/prestocloud/image/upload/'
+    path: 'https://res.cloudinary.com/prestocloud/image/upload/',
+    formats: ['image/avif', 'image/webp']
   },
   webpack: (cfg) => {
     cfg.plugins = cfg.plugins || []

@@ -5,11 +5,11 @@ import Layout from '@components/Layout';
 import VideoModal from '@components/Media/VideoModal';
 import HomeAudio from '@components/pages/Home/HomeAudio/HomeAudio';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import { buildImageUrl } from 'cloudinary-build-url';
 import type { InferGetStaticPropsType } from 'next';
 import dynamic from 'next/dynamic';
 import React, { useEffect, useState } from 'react';
 import { importPortfolioItems } from 'src/import-portfolio-data';
+import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
 });
@@ -27,7 +27,7 @@ export default function Index(
 
   return (
     <Layout title=''>
-      <HomeHero imageBlurDataUrl={props.heroImageBlurData}></HomeHero>
+      <HomeHero imageBlurDataUrl={props.heroImageBlurDataUrl}></HomeHero>
       <HomeAudio></HomeAudio>
       <HomeExperience></HomeExperience>
       <HomePortfolio
@@ -50,23 +50,12 @@ export async function getStaticProps() {
     (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
   );
 
-  const url = buildImageUrl('/dave-peach-web-netlify-cms/march_madness.png', {
-    cloud: { cloudName: 'prestocloud' },
-    transformations: {
-      quality: 1,
-      format: 'auto',
-      resize: {
-        width: 10,
-        type: 'scale',
-        aspectRatio: '1',
-      },
-    },
-  });
-
   return {
     props: {
       portfolioItems,
-      heroImageBlurData: url,
+      heroImageBlurDataUrl: buildBlurDataUrl(
+        '/dave-peach-web-netlify-cms/march_madness.png'
+      ),
     },
   };
 }

@@ -1,33 +1,20 @@
 import { ContactForm } from '@components/pages/Services/Form';
 import { importServices } from '@components/services/service-data';
-import { ServiceInterface } from '@components/services/ServiceInterface';
 import {
   attributes as ServicesAttributes,
   react as ServicesContent,
 } from '@content/services.md';
 import { motion } from 'framer-motion';
 import { Box, Button, Main } from 'grommet';
+import type { InferGetStaticPropsType } from 'next';
 import Image from 'next/image';
 import React from 'react';
+import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
 import Layout from '../components/Layout';
 
-export default function Services() {
-  const [services, setServices] = React.useState<ServiceInterface[]>([]);
-
-  React.useEffect(() => {
-    async function setInitialProps() {
-      const servicesMarkdownData = await importServices();
-
-      const localServices = servicesMarkdownData.map(
-        (localServiceMarkdownData) => localServiceMarkdownData.attributes
-      );
-
-      setServices(localServices);
-    }
-
-    setInitialProps();
-  }, []);
-
+export default function Services(
+  props: InferGetStaticPropsType<typeof getStaticProps>
+) {
   return (
     <Layout title='Services'>
       <Main align='center' pad='large'>
@@ -60,7 +47,7 @@ export default function Services() {
             <Box width='100%' alignContent='center'>
               <Box>
                 <ContactForm
-                  services={services}
+                  services={props.services}
                   step0Header={ServicesAttributes.step0_header}
                   step1Header={ServicesAttributes.step1_header}
                   attributionFieldPrompt={
@@ -81,17 +68,26 @@ export default function Services() {
           pad='large'
           gap='medium'
         >
-          <Box height='500px'>
-            <Image
-              height='500px'
-              width='400px'
-              objectFit='contain'
-              src='/dave-peach-web-netlify-cms/march_madness.png'
-              objectPosition='center top'
-              alt='Dave Peach announcing at March Madness in 2021'
-              placeholder='blur'
-              blurDataURL='https://res.cloudinary.com/prestocloud/image/upload/w_10,q_auto,f_auto/dave-peach-web-netlify-cms/march_madness.png'
-            />
+          <Box>
+            <div
+              style={{
+                minHeight: '500px',
+                // TODO: try to avoid the need to specify a width
+                minWidth: '500px',
+                position: 'relative',
+              }}
+            >
+              <Image
+                className='next-image'
+                layout='fill'
+                objectFit='contain'
+                src='/dave-peach-web-netlify-cms/march_madness.png'
+                objectPosition='center top'
+                alt='Dave Peach announcing at March Madness in 2021'
+                placeholder='blur'
+                blurDataURL={props.mainImageBlurDataUrl}
+              />
+            </div>
           </Box>
         </Box>
         <Button
@@ -103,4 +99,21 @@ export default function Services() {
       </Main>
     </Layout>
   );
+}
+
+export async function getStaticProps() {
+  const servicesMarkdownData = await importServices();
+
+  const services = servicesMarkdownData.map(
+    (localServiceMarkdownData) => localServiceMarkdownData.attributes
+  );
+
+  return {
+    props: {
+      services,
+      mainImageBlurDataUrl: buildBlurDataUrl(
+        '/dave-peach-web-netlify-cms/march_madness.png'
+      ),
+    },
+  };
 }
