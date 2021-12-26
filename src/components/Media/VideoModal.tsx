@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import ReactPlayer from 'react-player';
 import { Box, Layer } from 'grommet';
+import { FormClose } from 'grommet-icons';
+import React, { useCallback, useEffect, useState } from 'react';
+import ReactPlayer from 'react-player';
 
 interface Props {
   portfolioItem: PortfolioItemInterface;
@@ -40,12 +41,28 @@ export default function VideoModal(props: Props) {
   return (
     <Box>
       {show && (
-        <Layer onEsc={closeModal} onClickOutside={closeModal}>
-          <ReactPlayer
-            url={currentVideoSource}
-            playing={true}
-            controls={true}
-          />
+        <Layer
+          onEsc={closeModal}
+          onClickOutside={closeModal}
+          full
+          style={{
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <div style={{ top: 0, right: 0, position: 'absolute' }}>
+            <FormClose size='large' onClick={closeModal}></FormClose>
+          </div>
+
+          <Box responsive margin='large' width='xlarge' height='large'>
+            <ReactPlayer
+              url={currentVideoSource}
+              playing={true}
+              controls={true}
+              width='100%'
+              height='100%'
+            />
+          </Box>
         </Layer>
       )}
     </Box>
