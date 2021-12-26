@@ -3,6 +3,15 @@ import { Menu as MenuIcon } from 'grommet-icons';
 import Link from 'next/link';
 import Router from 'next/router';
 import React from 'react';
+import styled from 'styled-components';
+
+const SmallableAnchor = styled(Anchor)`
+  font-size: 24px;
+  @media screen and (max-width: 400px) {
+    font-size: 5vw;
+    line-height: 7vw;
+  }
+`;
 
 const NavigationBar = () => (
   <Header
@@ -15,17 +24,16 @@ const NavigationBar = () => (
     }}
   >
     <Link href='/' passHref>
-      <Anchor
+      <SmallableAnchor
         style={{
           fontFamily: 'Orbitron',
-          fontSize: '24px',
           fontWeight: 'normal',
         }}
       >
         Dave Peach:
         <br />
         Professional Voice
-      </Anchor>
+      </SmallableAnchor>
     </Link>
     <ResponsiveContext.Consumer>
       {(size) =>

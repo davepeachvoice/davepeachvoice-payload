@@ -11,7 +11,7 @@ export default function HomeHero(props: Props) {
     <Box>
       <div
         style={{
-          minHeight: '500px',
+          height: '50vh',
           position: 'relative',
         }}
       >

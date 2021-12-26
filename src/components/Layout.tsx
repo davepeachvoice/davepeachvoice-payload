@@ -241,7 +241,7 @@ export default function Layout(props: Props) {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              minHeight: '200px',
+              minHeight: '30vh',
               alignItems: 'flex-end',
               paddingBottom: 75,
             }}

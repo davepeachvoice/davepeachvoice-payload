@@ -52,6 +52,20 @@ const TaglineContainer = styled.div`
   }
 `;
 
+const NewHeading = styled(Heading)`
+  @media screen and (max-width: 400px) {
+    font-size: 12vw;
+    line-height: 13vw;
+  }
+`;
+
+const SmallableSpan = styled.span`
+  @media screen and (max-width: 400px) {
+    font-size: 5vw;
+    line-height: 5vw;
+  }
+`;
+
 /**
  * @todo type props
  * @todo make bars disappear when user clicks the pause button (currently they freeze where they
@@ -112,27 +126,31 @@ export default function AudioVisualizer(props) {
           ))}
         </div>
         <Box background={{ color: 'brand', opacity: 'weak' }} height='100%'>
-          <Heading level={1} size='large' margin='large' textAlign='center'>
+          <NewHeading level={1} size='large' margin='large' textAlign='center'>
             {HomeContentAttributes.hero_main_text}
-          </Heading>
+          </NewHeading>
         </Box>
       </Stack>
       <Box
         direction='row'
         justify='between'
         align='center'
-        height='50px'
+        height='60px'
         background={{ color: 'white' }}
       >
         <Box style={{ paddingLeft: '20px' }}>
-          {HomeContentAttributes.hero_sub_text}
+          <SmallableSpan>{HomeContentAttributes.hero_sub_text}</SmallableSpan>
         </Box>
         <TaglineContainer
           style={{ paddingRight: '20px' }}
           onClick={toggleAudio}
         >
           <ButtonWithIcon>
-            <div>{HomeContentAttributes.audio_sample_text}</div>
+            <div style={{ textAlign: 'right' }}>
+              <SmallableSpan>
+                {HomeContentAttributes.audio_sample_text}
+              </SmallableSpan>
+            </div>
             {isPlaying ? (
               <PauseFill color='white'></PauseFill>
             ) : (
