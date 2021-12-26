@@ -31,7 +31,7 @@ export default class CustomDocument extends Document {
   }
   render() {
     return (
-      <Html>
+      <Html lang='en'>
         <Head></Head>
         <body>
           <Main /> {/* each routed page will go inside here */}
