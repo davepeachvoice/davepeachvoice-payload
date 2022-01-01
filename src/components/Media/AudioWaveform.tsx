@@ -49,7 +49,7 @@ export default function Waveform(props: Props) {
       // part of solution to Safari not working on initial MediaElement .play()
       wavesurferRef.current.backend.loadElt(props.mediaElement);
 
-      wavesurferRef.current.load(audioSource, undefined, 'metadata');
+      wavesurferRef.current.load(audioSource);
 
       wavesurferRef.current.on('ready', () => {
         wavesurferRef.current.play();
