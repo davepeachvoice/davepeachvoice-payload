@@ -46,32 +46,6 @@ export default function Index(
     setMediaElementUnlocked(true);
   }
 
-  // useEffect(() => {
-  //   const mediaElementToUnlock = document.createElement('audio');
-  //   // mediaElementToUnlock.play();
-
-  //   setMediaElement(mediaElementToUnlock);
-
-  //   document.body.addEventListener(
-  //     'touchstart',
-  //     function () {
-  //       if (!mediaElement || mediaElementUnlocked) {
-  //         console.debug('mediaElement not found or already unlocked');
-  //         return;
-  //       }
-
-  //       mediaElement.play();
-  //       mediaElement.pause();
-  //       mediaElement.currentTime = 0;
-
-  //       setMediaElementUnlocked(true);
-  //     },
-  //     false
-  //   );
-  //   // we really only want this to run once
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
     console.debug('got new playing portfolio item');
     console.debug(playingPortfolioItem);

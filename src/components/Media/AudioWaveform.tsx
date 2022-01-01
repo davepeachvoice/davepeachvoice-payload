@@ -48,19 +48,10 @@ export default function Waveform(props: Props) {
     if (wavesurferRef.current && audioSource) {
       show();
 
-      console.debug('backend');
-      console.debug(wavesurferRef.current.backend);
-
+      // part of solution to Safari not working on initial media element play
       wavesurferRef.current.backend.loadElt(props.mediaElement);
-      // console.debug('immediate play');
-      // wavesurferRef.current.play();
 
       wavesurferRef.current.load(audioSource, undefined, 'metadata');
-
-      // console.debug('Calling wavesurferRef.current.play()');
-
-      // console.log(wavesurferRef.current.backend.play);
-      // wavesurferRef.current.backend.play();
 
       wavesurferRef.current.on('ready', () => {
         console.debug('ready - finished loading');
@@ -104,18 +95,6 @@ export default function Waveform(props: Props) {
     if (!props.portfolioItem) {
       return;
     }
-
-    // const mediaElement = document.createElement('audio');
-    // // mediaElement.play();
-
-    // mediaElement.src = props.portfolioItem.media_source;
-
-    // if (props.portfolioItem.media_type !== 'audio') {
-    //   setCurrentAudioSource(null);
-    //   return;
-    // }
-
-    // // setMediaElement(mediaElement)
 
     setCurrentAudioSource(props.portfolioItem.media_source);
   }, [props.portfolioItem]);
