@@ -10,6 +10,7 @@ import {
   importPortfolioItems,
   PortfolioCategory,
 } from '../import-portfolio-data';
+import * as UnlockMediaElement from '../lib/unlock-media-element';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
 });
@@ -19,19 +20,37 @@ export default function PortfolioPage(
 ) {
   const [playingPortfolioItem, setPlayingPortfolioItem] =
     useState<PortfolioItemInterface>(null);
+  const [mediaElement, setMediaElement] = useState<HTMLAudioElement>(null);
+
+  function handleFirstUserInteraction() {
+    // did we already handle the first user interaction?
+    if (mediaElement) {
+      return;
+    }
+
+    setMediaElement(UnlockMediaElement.constructUnlockedMediaElement());
+  }
 
   return (
-    <Layout title='Portfolio'>
-      <Portfolio
-        portfolioData={props.portfolioData}
-        setPlayingPortfolioItem={setPlayingPortfolioItem}
-      ></Portfolio>
-      <AudioWaveform portfolioItem={playingPortfolioItem}></AudioWaveform>
-      <VideoModal
-        portfolioItem={playingPortfolioItem}
-        setPortfolioItem={setPlayingPortfolioItem}
-      ></VideoModal>
-    </Layout>
+    <div
+      onTouchStart={handleFirstUserInteraction}
+      onClick={handleFirstUserInteraction}
+    >
+      <Layout title='Portfolio'>
+        <Portfolio
+          portfolioData={props.portfolioData}
+          setPlayingPortfolioItem={setPlayingPortfolioItem}
+        ></Portfolio>
+        <AudioWaveform
+          portfolioItem={playingPortfolioItem}
+          mediaElement={mediaElement}
+        ></AudioWaveform>
+        <VideoModal
+          portfolioItem={playingPortfolioItem}
+          setPortfolioItem={setPlayingPortfolioItem}
+        ></VideoModal>
+      </Layout>
+    </div>
   );
 }
 
