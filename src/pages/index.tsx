@@ -7,7 +7,7 @@ import HomeAudio from '@components/pages/Home/HomeAudio/HomeAudio';
 import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
 import type { InferGetStaticPropsType } from 'next';
 import dynamic from 'next/dynamic';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { importPortfolioItems } from 'src/import-portfolio-data';
 import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
@@ -25,31 +25,18 @@ export default function Index(
 
   function handleTouchStart() {
     if (mediaElementUnlocked) {
-      console.debug('mediaElement already unlocked');
       return;
     }
 
     const localMediaElement = document.createElement('audio');
 
-    console.debug('calling play');
     localMediaElement.play();
-
-    console.debug('calling pause');
     localMediaElement.pause();
-
-    console.debug('setting current time');
     localMediaElement.currentTime = 0;
-
-    console.debug('setting media element');
 
     setMediaElement(localMediaElement);
     setMediaElementUnlocked(true);
   }
-
-  useEffect(() => {
-    console.debug('got new playing portfolio item');
-    console.debug(playingPortfolioItem);
-  }, [playingPortfolioItem]);
 
   return (
     <div

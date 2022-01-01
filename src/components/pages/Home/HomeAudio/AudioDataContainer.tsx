@@ -50,7 +50,6 @@ export default function AudioDataContainer() {
   }
 
   function pause() {
-    console.debug('pausing');
     audioFile.pause();
   }
 
