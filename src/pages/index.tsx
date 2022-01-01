@@ -19,30 +19,32 @@ export default function Index(
 ) {
   const [playingPortfolioItem, setPlayingPortfolioItem] =
     useState<PortfolioItemInterface>(null);
-
   const [mediaElement, setMediaElement] = useState<HTMLAudioElement>(null);
-  const [mediaElementUnlocked, setMediaElementUnlocked] = useState(false);
 
-  function handleTouchStart() {
-    if (mediaElementUnlocked) {
+  // Deal with Safari auto-play blocking. On the first user interaction, call play() on the
+  // MediaElement that AudioWaveform will use. This will "unlock" the MediaElement such that
+  //subsequent .play() calls performed by Waveform.js will succeed.
+  // https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari
+  function constructUnlockedMediaElement() {
+    // did we already handle the first touchStart
+    if (mediaElement) {
       return;
     }
 
     const localMediaElement = document.createElement('audio');
 
-    localMediaElement.play();
+    // this will fail, so we catch it so that the user doesn't see it in the browser logs
+    localMediaElement.play().catch(() => {});
     localMediaElement.pause();
     localMediaElement.currentTime = 0;
 
     setMediaElement(localMediaElement);
-    setMediaElementUnlocked(true);
   }
 
   return (
     <div
-      onTouchStart={handleTouchStart}
-      onClickCapture={handleTouchStart}
-      onClick={handleTouchStart}
+      onTouchStart={constructUnlockedMediaElement}
+      onClick={constructUnlockedMediaElement}
     >
       <Layout title=''>
         <HomeHero imageBlurDataUrl={props.heroImageBlurDataUrl}></HomeHero>
