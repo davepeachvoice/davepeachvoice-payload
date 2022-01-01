@@ -38,8 +38,6 @@ export default function Waveform(props: Props) {
   const wavesurferRef = useRef<WaveSurfer>();
 
   function handleWSMount(waveSurfer: WaveSurfer, audioSource: string) {
-    console.debug('handling mount');
-
     if (wavesurferRef.current) {
       wavesurferRef.current.destroy();
     }
@@ -48,18 +46,13 @@ export default function Waveform(props: Props) {
     if (wavesurferRef.current && audioSource) {
       show();
 
-      // part of solution to Safari not working on initial media element play
+      // part of solution to Safari not working on initial MediaElement .play()
       wavesurferRef.current.backend.loadElt(props.mediaElement);
 
       wavesurferRef.current.load(audioSource, undefined, 'metadata');
 
       wavesurferRef.current.on('ready', () => {
-        console.debug('ready - finished loading');
         wavesurferRef.current.play();
-      });
-
-      wavesurferRef.current.on('loading', (percentage: number) => {
-        console.debug('loading -->', percentage);
       });
 
       wavesurferRef.current.on('pause', () => {
@@ -90,8 +83,6 @@ export default function Waveform(props: Props) {
   }
 
   useEffect(() => {
-    console.debug('audiowaveform found a new portfolioitem');
-    console.debug('audio: %s', JSON.stringify(props.portfolioItem));
     if (!props.portfolioItem) {
       return;
     }
@@ -143,7 +134,7 @@ export default function Waveform(props: Props) {
             normalize={true}
             minPxPerSec={100}
             mediaControls={true}
-            backend={getWavesurferBackend()}
+            backend='MediaElement'
             waveColor='white'
           ></WaveForm>
         </WaveSurfer>
@@ -158,20 +149,4 @@ export default function Waveform(props: Props) {
       </Button>
     </div>
   );
-}
-
-function getWavesurferBackend() {
-  // https://github.com/katspaugh/wavesurfer.js/issues/1215#issuecomment-415083308
-
-  // Only use MediaElement backend for Safari
-  const isSafari =
-    /^((?!chrome|android).)*safari/i.test(navigator.userAgent || '') ||
-    /iPad|iPhone|iPod/i.test(navigator.userAgent || '');
-
-  if (isSafari) {
-    console.debug('using MediaElement backend');
-    return 'MediaElement';
-  }
-
-  // return undefined to use the default backend if not safari
 }
