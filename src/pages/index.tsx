@@ -20,26 +20,87 @@ export default function Index(
   const [playingPortfolioItem, setPlayingPortfolioItem] =
     useState<PortfolioItemInterface>(null);
 
+  const [mediaElement, setMediaElement] = useState<HTMLAudioElement>(null);
+  const [mediaElementUnlocked, setMediaElementUnlocked] = useState(false);
+
+  function handleTouchStart() {
+    if (mediaElementUnlocked) {
+      console.debug('mediaElement already unlocked');
+      return;
+    }
+
+    const localMediaElement = document.createElement('audio');
+
+    console.debug('calling play');
+    localMediaElement.play();
+
+    console.debug('calling pause');
+    localMediaElement.pause();
+
+    console.debug('setting current time');
+    localMediaElement.currentTime = 0;
+
+    console.debug('setting media element');
+
+    setMediaElement(localMediaElement);
+    setMediaElementUnlocked(true);
+  }
+
+  // useEffect(() => {
+  //   const mediaElementToUnlock = document.createElement('audio');
+  //   // mediaElementToUnlock.play();
+
+  //   setMediaElement(mediaElementToUnlock);
+
+  //   document.body.addEventListener(
+  //     'touchstart',
+  //     function () {
+  //       if (!mediaElement || mediaElementUnlocked) {
+  //         console.debug('mediaElement not found or already unlocked');
+  //         return;
+  //       }
+
+  //       mediaElement.play();
+  //       mediaElement.pause();
+  //       mediaElement.currentTime = 0;
+
+  //       setMediaElementUnlocked(true);
+  //     },
+  //     false
+  //   );
+  //   // we really only want this to run once
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
   useEffect(() => {
     console.debug('got new playing portfolio item');
     console.debug(playingPortfolioItem);
   }, [playingPortfolioItem]);
 
   return (
-    <Layout title=''>
-      <HomeHero imageBlurDataUrl={props.heroImageBlurDataUrl}></HomeHero>
-      <HomeAudio></HomeAudio>
-      <HomeExperience></HomeExperience>
-      <HomePortfolio
-        setPlayingPortfolioItem={setPlayingPortfolioItem}
-        portfolioItems={props.portfolioItems}
-      ></HomePortfolio>
-      <AudioWaveform portfolioItem={playingPortfolioItem}></AudioWaveform>
-      <VideoModal
-        portfolioItem={playingPortfolioItem}
-        setPortfolioItem={setPlayingPortfolioItem}
-      ></VideoModal>
-    </Layout>
+    <div
+      onTouchStart={handleTouchStart}
+      onClickCapture={handleTouchStart}
+      onClick={handleTouchStart}
+    >
+      <Layout title=''>
+        <HomeHero imageBlurDataUrl={props.heroImageBlurDataUrl}></HomeHero>
+        <HomeAudio></HomeAudio>
+        <HomeExperience></HomeExperience>
+        <HomePortfolio
+          setPlayingPortfolioItem={setPlayingPortfolioItem}
+          portfolioItems={props.portfolioItems}
+        ></HomePortfolio>
+        <AudioWaveform
+          portfolioItem={playingPortfolioItem}
+          mediaElement={mediaElement}
+        ></AudioWaveform>
+        <VideoModal
+          portfolioItem={playingPortfolioItem}
+          setPortfolioItem={setPlayingPortfolioItem}
+        ></VideoModal>
+      </Layout>
+    </div>
   );
 }
 

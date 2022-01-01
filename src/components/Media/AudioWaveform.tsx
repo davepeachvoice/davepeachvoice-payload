@@ -25,6 +25,7 @@ const CircleButton = styled(Button)`
 
 interface Props {
   portfolioItem: PortfolioItemInterface;
+  mediaElement: HTMLAudioElement;
 }
 
 export default function Waveform(props: Props) {
@@ -36,7 +37,7 @@ export default function Waveform(props: Props) {
 
   const wavesurferRef = useRef<WaveSurfer>();
 
-  function handleWSMount(waveSurfer, audioSource) {
+  function handleWSMount(waveSurfer: WaveSurfer, audioSource: string) {
     console.debug('handling mount');
 
     if (wavesurferRef.current) {
@@ -47,19 +48,27 @@ export default function Waveform(props: Props) {
     if (wavesurferRef.current && audioSource) {
       show();
 
-      wavesurferRef.current.load(audioSource);
+      console.debug('backend');
+      console.debug(wavesurferRef.current.backend);
+
+      wavesurferRef.current.backend.loadElt(props.mediaElement);
+      // console.debug('immediate play');
+      // wavesurferRef.current.play();
+
+      wavesurferRef.current.load(audioSource, undefined, 'metadata');
+
+      // console.debug('Calling wavesurferRef.current.play()');
+
+      // console.log(wavesurferRef.current.backend.play);
+      // wavesurferRef.current.backend.play();
 
       wavesurferRef.current.on('ready', () => {
-        console.debug('WaveSurfer is ready');
+        console.debug('ready - finished loading');
         wavesurferRef.current.play();
       });
 
-      wavesurferRef.current.on('region-removed', (region) => {
-        console.debug('region-removed --> ', region);
-      });
-
-      wavesurferRef.current.on('loading', (data) => {
-        console.debug('loading --> ', data);
+      wavesurferRef.current.on('loading', (percentage: number) => {
+        console.debug('loading -->', percentage);
       });
 
       wavesurferRef.current.on('pause', () => {
@@ -96,10 +105,17 @@ export default function Waveform(props: Props) {
       return;
     }
 
-    if (props.portfolioItem.media_type !== 'audio') {
-      setCurrentAudioSource(null);
-      return;
-    }
+    // const mediaElement = document.createElement('audio');
+    // // mediaElement.play();
+
+    // mediaElement.src = props.portfolioItem.media_source;
+
+    // if (props.portfolioItem.media_type !== 'audio') {
+    //   setCurrentAudioSource(null);
+    //   return;
+    // }
+
+    // // setMediaElement(mediaElement)
 
     setCurrentAudioSource(props.portfolioItem.media_source);
   }, [props.portfolioItem]);
@@ -134,7 +150,7 @@ export default function Waveform(props: Props) {
       <div style={{ backgroundColor: 'black', width: '100%' }}>
         <WaveSurfer
           key={currentAudioSource}
-          onMount={(waveSurfer) =>
+          onMount={(waveSurfer: WaveSurfer) =>
             handleWSMount(waveSurfer, currentAudioSource)
           }
         >
@@ -148,7 +164,8 @@ export default function Waveform(props: Props) {
             normalize={true}
             minPxPerSec={100}
             mediaControls={true}
-            waveColor='var(--status-ok)'
+            backend={getWavesurferBackend()}
+            waveColor='white'
           ></WaveForm>
         </WaveSurfer>
       </div>
@@ -162,4 +179,20 @@ export default function Waveform(props: Props) {
       </Button>
     </div>
   );
+}
+
+function getWavesurferBackend() {
+  // https://github.com/katspaugh/wavesurfer.js/issues/1215#issuecomment-415083308
+
+  // Only use MediaElement backend for Safari
+  const isSafari =
+    /^((?!chrome|android).)*safari/i.test(navigator.userAgent || '') ||
+    /iPad|iPhone|iPod/i.test(navigator.userAgent || '');
+
+  if (isSafari) {
+    console.debug('using MediaElement backend');
+    return 'MediaElement';
+  }
+
+  // return undefined to use the default backend if not safari
 }
