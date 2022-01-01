@@ -133,7 +133,6 @@ export default function Waveform(props: Props) {
             barGap={1}
             normalize={true}
             minPxPerSec={100}
-            mediaControls={true}
             backend='MediaElement'
             waveColor='white'
           ></WaveForm>
