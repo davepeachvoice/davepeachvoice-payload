@@ -48,6 +48,7 @@ export function ContactForm(props: Props) {
   const [selectedService, setSelectedService] =
     React.useState<string>(undefined);
   const [formStep, setFormStep] = useState(0);
+  const [formSubmissionMessage, setFormSubmissionMessage] = useState(undefined);
 
   function readyToNavigateToNextStep() {
     setFormStep(formStep + 1);
@@ -108,6 +109,7 @@ export function ContactForm(props: Props) {
             submitButtonEnabled={submitButtonEnabled}
             setSubmitButtonEnabled={setSubmitButtonEnabled}
             recaptchaRef={recaptchaRef}
+            submissionMessage={formSubmissionMessage}
           />
         </Box>
       </Form>
@@ -131,7 +133,22 @@ export function ContactForm(props: Props) {
       }),
     };
 
-    fetch('/', options).catch((error) => alert(error));
+    fetch('/', options)
+      .then(() => {
+        showFormSubmissionMessageStep(
+          "Thanks for reaching out. I'll be in touch soon."
+        );
+      })
+      .catch(() => {
+        showFormSubmissionMessageStep(
+          'Unable to submit your inquiry. Sorry for the inconvenience. Please reach out to me directly at davepeachvoice@gmail.com.'
+        );
+      });
+  }
+
+  function showFormSubmissionMessageStep(message: string) {
+    setFormSubmissionMessage(message);
+    readyToNavigateToNextStep();
   }
 }
 
@@ -208,6 +225,7 @@ interface RenderFormBodyInput {
   readyToNavigateToPreviousStep: () => void;
   attributionFieldPrompt: string;
   attributionFieldOptions: string[];
+  submissionMessage: string;
 }
 
 function RenderFormBody(input: RenderFormBodyInput) {
@@ -215,6 +233,10 @@ function RenderFormBody(input: RenderFormBodyInput) {
     <div style={{ display: input.visible ? undefined : 'none' }}>
       <Step0 {...input} visible={input.formStep === 0}></Step0>
       <Step1 {...input} visible={input.formStep === 1}></Step1>
+      <SubmissionMessageStep
+        {...input}
+        visible={input.formStep === 2}
+      ></SubmissionMessageStep>
     </div>
   );
 }
@@ -294,6 +316,19 @@ function Step1(props: Step1Props) {
           disabled={!props.submitButtonEnabled}
         />
       </Box>
+    </Box>
+  );
+}
+
+interface SubmissionMessageStepProps {
+  submissionMessage: string;
+  visible: boolean;
+}
+
+function SubmissionMessageStep(props: SubmissionMessageStepProps) {
+  return (
+    <Box style={{ display: props.visible ? undefined : 'none' }}>
+      {props.submissionMessage}
     </Box>
   );
 }
