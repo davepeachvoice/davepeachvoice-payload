@@ -1,4 +1,4 @@
-import { Box, Grommet } from 'grommet';
+import { Box, Grommet, Text } from 'grommet';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import NavigationBar from './NavigationBar';
@@ -237,7 +237,7 @@ export default function Layout(props: Props) {
         <Box fill>
           <NavigationBar></NavigationBar>
           <article style={contentStyle}>{props.children}</article>
-          <div
+          <footer
             style={{
               display: 'flex',
               justifyContent: 'center',
@@ -246,10 +246,19 @@ export default function Layout(props: Props) {
               paddingBottom: 75,
             }}
           >
-            <div style={{ bottom: 0 }}>
+            <Box
+              align='center'
+              gap='medium'
+              style={{
+                bottom: 0,
+              }}
+            >
               <SocialIcons></SocialIcons>
-            </div>
-          </div>
+              <Text size='small' color='silver'>
+                Copyright © {new Date().getFullYear()} Dave Peach
+              </Text>
+            </Box>
+          </footer>
         </Box>
       </Grommet>
     </>
