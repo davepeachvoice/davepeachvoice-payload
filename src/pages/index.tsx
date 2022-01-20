@@ -10,6 +10,7 @@ import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import { importPortfolioItems } from 'src/import-portfolio-data';
 import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
+import { comparePriorities } from '../lib/compare-priorities';
 import * as UnlockMediaElement from '../lib/unlock-media-element';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
@@ -63,6 +64,8 @@ export async function getStaticProps() {
   const portfolioItems = portfolioItemsMarkdownData.map(
     (portfolioItemMarkdownData) => portfolioItemMarkdownData.attributes
   );
+
+  portfolioItems.sort(comparePriorities);
 
   return {
     props: {

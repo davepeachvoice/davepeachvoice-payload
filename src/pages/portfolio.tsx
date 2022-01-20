@@ -10,6 +10,7 @@ import {
   importPortfolioItems,
   PortfolioCategory,
 } from '../import-portfolio-data';
+import { comparePriorities } from '../lib/compare-priorities';
 import * as UnlockMediaElement from '../lib/unlock-media-element';
 const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
   ssr: false,
@@ -106,16 +107,7 @@ function buildPortfolioCategories(
 
   // sort portfolio items within each category
   for (const category in categories) {
-    categories[category].items = categories[category].items.sort(
-      (firstEl, secondEl) => {
-        if (firstEl.priority < secondEl.priority) {
-          return -1;
-        } else if (firstEl.priority > secondEl.priority) {
-          return 1;
-        }
-        return 0;
-      }
-    );
+    categories[category].items.sort(comparePriorities);
   }
 
   // sort categories by category priority
