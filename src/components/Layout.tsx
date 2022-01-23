@@ -241,23 +241,33 @@ export default function Layout(props: Props) {
             style={{
               display: 'flex',
               justifyContent: 'center',
-              minHeight: '30vh',
-              alignItems: 'flex-end',
-              paddingBottom: 75,
+              alignItems: 'center',
+              paddingBottom: 25,
+              marginTop: 100,
+              width: '100%',
             }}
           >
-            <Box
-              align='center'
-              gap='medium'
+            <div
               style={{
-                bottom: 0,
+                display: 'flex',
+                flexWrap: 'wrap',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 5,
               }}
             >
               <SocialIcons></SocialIcons>
-              <Text size='small' color='silver'>
+              <Text
+                textAlign='center'
+                style={{
+                  width: '100%',
+                }}
+                size='small'
+                color='silver'
+              >
                 Copyright © {new Date().getFullYear()} Dave Peach
               </Text>
-            </Box>
+            </div>
           </footer>
         </Box>
       </Grommet>

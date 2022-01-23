@@ -19,7 +19,7 @@ export default function Services(
   return (
     <Layout title='Services'>
       <Main align='center' pad='large'>
-        <Box height='small' width='large' justify='center'>
+        <Box width='large' justify='center'>
           <ServicesContent></ServicesContent>
         </Box>
 
@@ -69,26 +69,23 @@ export default function Services(
           pad='large'
           gap='medium'
         >
-          <Box>
-            <div
-              style={{
-                minHeight: '500px',
-                // TODO: try to avoid the need to specify a width
-                minWidth: '500px',
-                position: 'relative',
-              }}
-            >
-              <Image
-                className='next-image'
-                layout='fill'
-                objectFit='contain'
-                src='/dave-peach-web-netlify-cms/march_madness'
-                objectPosition='center top'
-                alt='Dave Peach announcing at March Madness in 2021'
-                placeholder='blur'
-                blurDataURL={props.mainImageBlurDataUrl}
-              />
-            </div>
+          <Box
+            style={{
+              minHeight: '50vh',
+              width: '100%',
+              position: 'relative',
+            }}
+          >
+            <Image
+              className='next-image'
+              layout='fill'
+              objectFit='contain'
+              src='/dave-peach-web-netlify-cms/march_madness'
+              objectPosition='center top'
+              alt='Dave Peach announcing at March Madness in 2021'
+              placeholder='blur'
+              blurDataURL={props.mainImageBlurDataUrl}
+            />
           </Box>
         </Box>
         <Button
@@ -96,6 +93,9 @@ export default function Services(
           label='Email Dave'
           color='brand'
           size='large'
+          style={{
+            marginTop: '40px',
+          }}
         />
       </Main>
     </Layout>

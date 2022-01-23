@@ -1,11 +1,11 @@
+import { Anchor, Box } from 'grommet';
+import { Facebook, Linkedin, Twitter } from 'grommet-icons';
 import React from 'react';
-import { Box, Anchor } from 'grommet';
-import { Twitter, Facebook, Linkedin } from 'grommet-icons';
 
 export default function SocialIcons() {
   return (
-    <Box>
-      <Box direction='row'>
+    <Box style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+      <Box justify='center' direction='row'>
         <Anchor href='https://twitter.com/davepeach101' target='_blank'>
           <Box
             pad='small'
