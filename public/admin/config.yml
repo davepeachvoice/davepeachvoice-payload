@@ -136,3 +136,9 @@ collections:
         label: Title
         widget: string
         required: true
+      - name: priority
+        label: Priority
+        widget: number
+        value_type: int
+        step: 1000
+        required: true

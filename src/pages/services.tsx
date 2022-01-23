@@ -11,6 +11,7 @@ import Image from 'next/image';
 import React from 'react';
 import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
 import Layout from '../components/Layout';
+import { comparePriorities } from '../lib/compare-priorities';
 
 export default function Services(
   props: InferGetStaticPropsType<typeof getStaticProps>
@@ -107,6 +108,8 @@ export async function getStaticProps() {
   const services = servicesMarkdownData.map(
     (localServiceMarkdownData) => localServiceMarkdownData.attributes
   );
+
+  services.sort(comparePriorities);
 
   return {
     props: {
