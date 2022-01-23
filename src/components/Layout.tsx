@@ -232,6 +232,28 @@ export default function Layout(props: Props) {
         <meta property='og:url' content={router.asPath}></meta>
         <meta property='og:image' content={metaImage}></meta>
         <meta property='og:description' content={description}></meta>
+
+        <link
+          rel='apple-touch-icon'
+          sizes='180x180'
+          href='https://res.cloudinary.com/prestocloud/image/upload/v1642970801/dave-peach-web-netlify-cms/favicon/apple-touch-icon.png'
+        />
+        <link
+          rel='icon'
+          type='image/png'
+          sizes='32x32'
+          href='https://res.cloudinary.com/prestocloud/image/upload/v1642970801/dave-peach-web-netlify-cms/favicon/favicon-32x32.png'
+        />
+        <link
+          rel='icon'
+          type='image/png'
+          sizes='16x16'
+          href='https://res.cloudinary.com/prestocloud/image/upload/v1642970801/dave-peach-web-netlify-cms/favicon/favicon-16x16.png'
+        />
+        <link
+          rel='manifest'
+          href='https://res.cloudinary.com/prestocloud/raw/upload/v1642970801/dave-peach-web-netlify-cms/favicon/site.webmanifest'
+        />
       </Head>
       <Grommet cssVars={true} full theme={theme} themeMode='dark'>
         <Box fill>
