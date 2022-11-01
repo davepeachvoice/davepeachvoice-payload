@@ -6,7 +6,7 @@ import { ServiceInterface } from './ServiceInterface';
  */
 export async function importServices() {
   const markdownFiles: string[] = require
-    .context('@content/services', false, /\.\/.*\.md$/)
+    .context('/content/services', false, /\.\/.*\.md$/)
     .keys()
     .map((relativePath) => relativePath.substring(2));
 
@@ -20,7 +20,7 @@ export async function importServices() {
   return Promise.all(
     markdownFiles.map(async (path) => {
       const markdown: ServicesMarkdownData = await import(
-        `@content/services/${path}`
+        `/content/services/${path}`
       );
       return { ...markdown };
     })

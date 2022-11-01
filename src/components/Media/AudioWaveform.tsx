@@ -1,27 +1,9 @@
-import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import { Button } from 'grommet';
-import { Down, PauseFill, PlayFill } from 'grommet-icons';
-import React, { useEffect, useRef, useState } from 'react';
-import styled from 'styled-components';
+'use client';
+
+import { useEffect, useRef, useState } from 'react';
+import { FaArrowDown, FaPauseCircle, FaPlayCircle } from 'react-icons/fa';
 import { WaveForm, WaveSurfer } from 'wavesurfer-react';
-
-const Buttons = styled.div`
-  display: flex;
-  justify-content: center;
-`;
-
-const CircleButton = styled(Button)`
-  outline: none;
-  border: none;
-  background: #444;
-  border-radius: 100%;
-  width: 40px;
-  height: 40px;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
+import { PortfolioItemInterface } from '../PortfolioItems/PortfolioItemInterface';
 
 interface Props {
   portfolioItem: PortfolioItemInterface;
@@ -47,7 +29,7 @@ export default function Waveform(props: Props) {
       show();
 
       // part of solution to Safari not working on initial MediaElement .play()
-      wavesurferRef.current.backend.loadElt(props.mediaElement);
+      // wavesurferRef.current.load(props.mediaElement);
 
       wavesurferRef.current.load(audioSource);
 
@@ -108,15 +90,29 @@ export default function Waveform(props: Props) {
         paddingRight: '20px',
       }}
     >
-      <Buttons>
-        <CircleButton onClick={togglePlay}>
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div
+          onClick={togglePlay}
+          style={{
+            outline: 'none',
+            border: 'none',
+            background: '#444',
+            borderRadius: '100%',
+            width: '40px',
+            height: '40px',
+            overflow: 'hidden',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+          }}
+        >
           {playing ? (
-            <PauseFill style={{ marginLeft: '0' }} size='medium'></PauseFill>
+            <FaPauseCircle style={{ marginLeft: '0' }} size='medium' />
           ) : (
-            <PlayFill style={{ marginLeft: '5px' }} size='medium'></PlayFill>
+            <FaPlayCircle style={{ marginLeft: '5px' }} size='medium' />
           )}
-        </CircleButton>
-      </Buttons>
+        </div>
+      </div>
       <div style={{ backgroundColor: 'black', width: '100%' }}>
         <WaveSurfer
           key={currentAudioSource}
@@ -125,6 +121,7 @@ export default function Waveform(props: Props) {
           }
         >
           <WaveForm
+            id='waveform'
             barWidth={1}
             hideScrollbar={true}
             responsive={true}
@@ -138,14 +135,14 @@ export default function Waveform(props: Props) {
           ></WaveForm>
         </WaveSurfer>
       </div>
-      <Button
+      <button
         onClick={() => {
           pause();
           hide();
         }}
       >
-        <Down style={{ width: '35px', height: '35px' }}></Down>
-      </Button>
+        <FaArrowDown style={{ width: '35px', height: '35px' }} />
+      </button>
     </div>
   );
 }

@@ -1,18 +1,9 @@
-import { ServiceInterface } from '@components/services/ServiceInterface';
-import {
-  Box,
-  Button,
-  Form,
-  FormExtendedEvent,
-  FormField,
-  Grid,
-  MaskedInput,
-  ResponsiveContext,
-  Select,
-  TextArea,
-} from 'grommet';
+'use client';
+
+import classNames from 'classnames';
 import React, { useRef, useState } from 'react';
 import Recaptcha from 'react-google-recaptcha';
+import { ServiceInterface } from '../../services/ServiceInterface';
 
 const defaultValue: FormState = {
   type: '',
@@ -59,44 +50,46 @@ export function ContactForm(props: Props) {
   }
 
   return (
-    <Box width='large'>
-      <Form<FormState>
-        value={value}
-        onChange={setValue}
+    <div className='max-w-xl mx-auto bg-white'>
+      <form
+        // value={value}
+        // onChange={(e) => setValue(e.target)}
         onReset={() => setValue(defaultValue)}
         onSubmit={handleSubmit}
         data-netlify='true'
         data-netlify-recaptcha='true'
         name='BasicServiceRequest'
       >
-        <ResponsiveContext.Consumer>
-          {(size) =>
-            size === 'small' || size === 'medium' ? (
-              <Select
-                name='type'
-                placeholder='Select a Service'
-                options={props.services.map((service) => service.title)}
-                value={value.type}
-                onChange={({ option }) => {
-                  setSelectedService(option);
-                  setFullFormVisible(true);
-                }}
-                clear={{ label: 'Clear selection' }}
-              />
-            ) : (
-              <HorizontalSelector
-                services={props.services}
-                selectedService={selectedService}
-                setSelectedService={setSelectedService}
-                setFullFormVisible={setFullFormVisible}
-                value={value}
-                setValue={setValue}
-              ></HorizontalSelector>
-            )
-          }
-        </ResponsiveContext.Consumer>
+        <div className='visible lg:invisible'>
+          <select
+            name='type'
+            placeholder='Select a Service'
+            value={value.type}
+            // onChange={({ option }) => {
+            //   setSelectedService(option);
+            //   setFullFormVisible(true);
+            // }}
+            // clear={{ label: 'Clear selection' }}
+          >
+            {props.services.map((service) => (
+              <option key={service.title}>{service.title}</option>
+            ))}
+          </select>
+        </div>
+        <div className='invisible lg:visible'>
+          <HorizontalSelector
+            services={props.services}
+            selectedService={selectedService}
+            setSelectedService={setSelectedService}
+            setFullFormVisible={setFullFormVisible}
+            value={value}
+            setValue={setValue}
+          ></HorizontalSelector>
+        </div>
 
-        <Box margin={{ top: '40px' }}>
+        <div className='h-12' />
+
+        <div>
           <RenderFormBody
             visible={fullFormVisible}
             formStep={formStep}
@@ -111,12 +104,12 @@ export function ContactForm(props: Props) {
             recaptchaRef={recaptchaRef}
             submissionMessage={formSubmissionMessage}
           />
-        </Box>
-      </Form>
-    </Box>
+        </div>
+      </form>
+    </div>
   );
 
-  function handleSubmit(event: FormExtendedEvent<FormState, Element>) {
+  function handleSubmit(event: any) {
     event.preventDefault();
 
     // TODO: better types
@@ -161,31 +154,16 @@ interface HorizontalSelectorProps {
   setValue: React.Dispatch<React.SetStateAction<FormState>>;
 }
 
-/**
- * @todo implement this with a Grommet Select
- */
 function HorizontalSelector(props: HorizontalSelectorProps) {
   return (
-    <Grid
-      columns={{
-        count: props.services.length,
-        size: ['small', 'small'],
-      }}
-      rows='xxsmall'
-      gap={{ row: 'medium' }}
-      justifyContent='center'
-      justify='center'
-      alignContent='center'
-    >
+    <div className='flex gap-4 justify-center align-center'>
       {props.services.map((item) => (
-        <Box
-          width='100%'
+        <div
+          className={classNames(
+            'w-full border border-black align-center justify-center cursor-pointer',
+            props.selectedService === item.title ? 'bg-[#eee]' : 'bg-gray'
+          )}
           key={item.title}
-          background={props.selectedService === item.title ? '#eee' : 'grey'}
-          border={{ color: 'black' }}
-          align='center'
-          justify='center'
-          style={{ cursor: 'pointer' }}
           onClick={() => {
             if (props.selectedService !== item.title) {
               props.setValue({ ...props.value, type: item.title });
@@ -199,9 +177,9 @@ function HorizontalSelector(props: HorizontalSelectorProps) {
           }}
         >
           {item.title}
-        </Box>
+        </div>
       ))}
-    </Grid>
+    </div>
   );
 }
 
@@ -249,13 +227,13 @@ interface Step0Props {
 
 function Step0(props: Step0Props) {
   return (
-    <Box style={{ display: props.visible ? undefined : 'none' }}>
+    <div style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step0Header}></StepHeader>
       <FormTextArea></FormTextArea>
-      <Box align='end'>
+      <div className='align-bottom'>
         <FormButton onClick={props.readyToNavigateToNextStep} label='Next' />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
@@ -272,39 +250,28 @@ interface Step1Props {
 
 function Step1(props: Step1Props) {
   return (
-    <Box style={{ display: props.visible ? undefined : 'none' }}>
+    <div style={{ display: props.visible ? undefined : 'none' }}>
       <StepHeader text={props.step1Header}></StepHeader>
-      <FormField label='Name' name='name' required />
-      <FormField label='Email' name='email' required>
-        <MaskedInput
-          name='email'
-          mask={[
-            { regexp: /^[\w\-_.]+$/, placeholder: 'example' },
-            { fixed: '@' },
-            { regexp: /^[\w]+$/, placeholder: 'my' },
-            { fixed: '.' },
-            { regexp: /^[\w]+$/, placeholder: 'com' },
-          ]}
-          type='email'
-        />
-      </FormField>
-      <FormField label={props.attributionFieldPrompt} name='attribution'>
-        <Select
-          name='attribution'
-          options={props.attributionFieldOptions}
-          placeholder='Select'
-          clear={{ label: 'Clear selection' }}
-        />
-      </FormField>
-      <FormField>
+      <label htmlFor='name'>Name</label>
+      <input name='email' required></input>
+      <label htmlFor='name'>Email</label>
+      <input name='email' required></input>
+      <label htmlFor='attribution'>Attribution</label>
+      <select name='attribution' placeholder='Select'>
+        {props.attributionFieldOptions.map((option) => (
+          <option key={option}>{option}</option>
+        ))}
+      </select>
+      <div>
         <Recaptcha
           ref={props.recaptchaRef}
           sitekey={RECAPTCHA_KEY}
           size='normal'
           onChange={() => props.setSubmitButtonEnabled(true)}
         />
-      </FormField>
-      <Box direction='row' justify='between' margin={{ top: 'medium' }}>
+      </div>
+      <div className='h-5' />
+      <div className='flex flex-row justify-between'>
         <FormButton
           label='Back'
           unfilled
@@ -315,8 +282,8 @@ function Step1(props: Step1Props) {
           type='submit'
           disabled={!props.submitButtonEnabled}
         />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
 
@@ -327,9 +294,9 @@ interface SubmissionMessageStepProps {
 
 function SubmissionMessageStep(props: SubmissionMessageStepProps) {
   return (
-    <Box style={{ display: props.visible ? undefined : 'none' }}>
+    <div style={{ display: props.visible ? undefined : 'none' }}>
       {props.submissionMessage}
-    </Box>
+    </div>
   );
 }
 
@@ -337,28 +304,28 @@ interface FormButtonProps {
   onClick?: () => void;
   label: string;
   disabled?: boolean;
-  // TODO: consider getting type's TS type from Grommet's Button
   type?: 'button' | 'submit' | 'reset';
   unfilled?: boolean;
 }
 
 function FormButton(props: FormButtonProps) {
   return (
-    <Button
-      size='medium'
-      label={props.label}
-      type={props.type}
-      style={{
-        width: '150px',
-        borderRadius: '5px',
-        paddingTop: '5px',
-        paddingBottom: '5px',
-        backgroundColor: props.unfilled ? '#222' : null,
-        color: props.unfilled ? 'white' : null,
-      }}
-      onClick={props.onClick}
-      disabled={props.disabled}
-    />
+    <>
+      <label>{props.label}</label>
+      <button
+        type={props.type}
+        style={{
+          width: '150px',
+          borderRadius: '5px',
+          paddingTop: '5px',
+          paddingBottom: '5px',
+          backgroundColor: props.unfilled ? '#222' : null,
+          color: props.unfilled ? 'white' : null,
+        }}
+        onClick={props.onClick}
+        disabled={props.disabled}
+      />
+    </>
   );
 }
 
@@ -368,18 +335,17 @@ interface FormTextAreaProps {
 
 function FormTextArea(props: FormTextAreaProps) {
   return (
-    <FormField label={props.label} name='request'>
-      <TextArea
+    <>
+      <label>{props.label}</label>
+      <textarea
         style={{
           backgroundColor: '#eee',
           color: '#444',
         }}
         color='red'
         name='request'
-        size='small'
-        resize='vertical'
-      ></TextArea>
-    </FormField>
+      ></textarea>
+    </>
   );
 }
 

@@ -1,22 +1,14 @@
-const resolveTsconfigPathsToAlias = require('./resolve-tsconfig-path-to-webpack-alias')
-
-module.exports = {
+/** @type {import("next").NextConfig} */
+const config = {
   images: {
     loader: 'cloudinary',
     path: 'https://res.cloudinary.com/prestocloud/image/upload/',
     formats: ['image/avif', 'image/webp']
   },
+  experimental: {
+    appDir: true
+  },
   webpack: (cfg) => {
-    cfg.plugins = cfg.plugins || []
-
-    cfg.resolve.alias = {
-      ...cfg.resolve.alias,
-      ...resolveTsconfigPathsToAlias(),
-    }
-
-    cfg.plugins = [
-      ...cfg.plugins,]
-
     cfg.module.rules.push(
       {
         test: /\.md$/,
@@ -33,8 +25,8 @@ module.exports = {
       },
     });
 
-    cfg.plugins = cfg.plugins.filter(plugin => plugin.constructor.name !== 'ForkTsCheckerWebpackPlugin')
-
     return cfg;
   }
 }
+
+export default config

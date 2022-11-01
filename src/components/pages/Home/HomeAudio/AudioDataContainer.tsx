@@ -1,3 +1,5 @@
+'use client';
+
 // MIT License
 
 // Copyright (c) 2019 strengthmate
@@ -24,53 +26,106 @@
 // https://github.com/matt-eric/web-audio-fft-visualization-with-react-hooks
 
 import React from 'react';
+import { FaMicrophone, FaPauseCircle } from 'react-icons/fa';
+import { attributes as HomeContentAttributes } from '../../../../../content/home.md';
 import AudioVisualizer from './AudioVisualizer';
 
 export default function AudioDataContainer() {
-  const frequencyBandArray = [...Array(25).keys()];
-  let audioFile: HTMLAudioElement;
-  let audioData: AnalyserNode;
+  const audioFile = React.useRef<HTMLAudioElement>(undefined);
+  const audioData = React.useRef<AnalyserNode>(undefined);
+  const [isPlaying, setIsPlaying] = React.useState(false);
 
   function initializeAudioAnalyser() {
-    audioFile = new Audio();
+    audioFile.current = new Audio();
 
     const audioContext = new AudioContext();
-    const source = audioContext.createMediaElementSource(audioFile);
-    audioData = audioContext.createAnalyser();
+    const source = audioContext.createMediaElementSource(audioFile.current);
+    audioData.current = audioContext.createAnalyser();
 
-    audioFile.crossOrigin = 'anonymous';
-    audioFile.src =
+    audioFile.current.crossOrigin = 'anonymous';
+    audioFile.current.src =
       'https://res.cloudinary.com/prestocloud/video/upload/v1635110958/dave-peach-web-netlify-cms/commercial-sample_v49stm.mp3';
-    audioData.fftSize = 64;
+    audioData.current.fftSize = 64;
 
     source.connect(audioContext.destination);
-    source.connect(audioData);
+    source.connect(audioData.current);
 
-    audioFile.play();
+    audioFile.current.play();
+    setIsPlaying(true);
   }
 
   function pause() {
-    audioFile.pause();
-  }
-
-  function isPlaying() {
-    return audioFile?.duration > 0 && !audioFile.paused;
+    audioFile.current.pause();
+    setIsPlaying(false);
   }
 
   function getFrequencyData(styleAdjuster) {
-    const bufferLength = audioData.frequencyBinCount;
+    const bufferLength = audioData.current.frequencyBinCount;
     const amplitudeArray = new Uint8Array(bufferLength);
-    audioData.getByteFrequencyData(amplitudeArray);
+    audioData.current.getByteFrequencyData(amplitudeArray);
     styleAdjuster(amplitudeArray);
   }
 
+  function toggleAudio() {
+    if (isPlaying) {
+      pause();
+      setIsPlaying(false);
+    } else {
+      initializeAudioAnalyser();
+      setIsPlaying(true);
+    }
+  }
+
   return (
-    <AudioVisualizer
-      initializeAudioAnalyser={initializeAudioAnalyser}
-      frequencyBandArray={frequencyBandArray}
-      getFrequencyData={getFrequencyData}
-      isPlaying={isPlaying}
-      pause={pause}
-    />
+    <>
+      <div>
+        <div>
+          {isPlaying && <AudioVisualizer getFrequencyData={getFrequencyData} />}
+          <div className='h-full'>
+            <div
+              className='text-base md:text-xl m-6 align-center'
+              // level={1}
+              // size='large'
+              // margin='large'
+              // textAlign='center'
+            >
+              {HomeContentAttributes.hero_main_text}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className='flex-row justify-between items-center align-center h-12 bg-white'>
+        <div style={{ paddingLeft: '20px' }}>
+          <div className='md:text-lg'>
+            {HomeContentAttributes.hero_sub_text}
+          </div>
+        </div>
+        <div
+          className='tagline-container'
+          style={{ paddingRight: '20px' }}
+          onClick={toggleAudio}
+        >
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              gap: '10px',
+            }}
+          >
+            <div style={{ textAlign: 'right' }}>
+              <div className='md:text-lg'>
+                {HomeContentAttributes.audio_sample_text}
+              </div>
+            </div>
+            {isPlaying ? (
+              <FaPauseCircle color='white' />
+            ) : (
+              <FaMicrophone color='white' />
+            )}
+          </div>
+        </div>
+      </div>
+    </>
   );
 }

@@ -1,5 +1,6 @@
+'use client';
+
 import React from 'react';
-import { Anchor, Box, Heading } from 'grommet';
 import { PortfolioItemInterface } from '../../PortfolioItems/PortfolioItemInterface';
 import PortfolioItems from '../../PortfolioItems/PortfolioItems';
 
@@ -13,21 +14,16 @@ interface Props {
 
 export default function Section(props: Props) {
   return (
-    <Box id={props.name} pad={{ vertical: 'medium' }} key={props.name}>
-      <Box
-        direction='row'
-        justify='between'
-        align='center'
-        margin={{ top: 'none', horizontal: 'small' }}
-      >
-        <Anchor href={`#${props.name}`} color='white'>
-          <Heading level={2}>{props.name}</Heading>
-        </Anchor>
-      </Box>
+    <div id={props.name} className='px-4' key={props.name}>
+      <div className='flex-row justify-between align-center mh-2'>
+        <a href={`#${props.name}`} color='white'>
+          <div className='text-lg'>{props.name}</div>
+        </a>
+      </div>
       <PortfolioItems
         items={props.items}
         setPlayingPortfolioItem={props.setPlayingPortfolioItem}
       ></PortfolioItems>
-    </Box>
+    </div>
   );
 }

@@ -1,7 +1,7 @@
 import { buildImageUrl } from 'cloudinary-build-url';
 
 export function buildBlurDataUrl(cloudinaryImageId: string) {
-  return buildImageUrl(cloudinaryImageId, {
+  const imageUrl = buildImageUrl(cloudinaryImageId, {
     cloud: { cloudName: 'prestocloud' },
     transformations: {
       quality: 1,
@@ -12,4 +12,6 @@ export function buildBlurDataUrl(cloudinaryImageId: string) {
       },
     },
   });
+  console.debug('imageUrl', imageUrl);
+  return imageUrl;
 }

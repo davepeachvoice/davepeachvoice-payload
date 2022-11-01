@@ -1,13 +1,13 @@
-import React from 'react';
-import { Box } from 'grommet';
+'use client';
+
 import AudioDataContainer from './AudioDataContainer';
 
 const HomeAudio = () => {
   return (
     <>
-      <Box>
+      <div>
         <AudioDataContainer></AudioDataContainer>
-      </Box>
+      </div>
     </>
   );
 };

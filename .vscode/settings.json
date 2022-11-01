@@ -55,5 +55,6 @@
     ".eslintignore": true,
     ".eslintrc.js": true,
     ".gitignore": true
-  }
+  },
+  "typescript.enablePromptUseWorkspaceTsdk": true
 }

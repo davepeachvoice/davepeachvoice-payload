@@ -1,6 +1,4 @@
-import { Box } from 'grommet';
 import Image from 'next/image';
-import * as React from 'react';
 
 interface Props {
   imageBlurDataUrl: string;
@@ -8,7 +6,7 @@ interface Props {
 
 export default function HomeHero(props: Props) {
   return (
-    <Box>
+    <div>
       <div
         style={{
           height: '50vh',
@@ -17,15 +15,14 @@ export default function HomeHero(props: Props) {
       >
         <Image
           className='next-image'
-          layout='fill'
-          objectFit='contain'
+          fill
+          style={{ objectFit: 'contain', objectPosition: 'center top' }}
           src='/dave-peach-web-netlify-cms/march_madness'
-          objectPosition='center top'
           alt='Dave Peach announcing at March Madness in 2021'
           placeholder='blur'
           blurDataURL={props.imageBlurDataUrl}
         />
       </div>
-    </Box>
+    </div>
   );
 }

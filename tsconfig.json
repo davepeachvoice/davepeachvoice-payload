@@ -25,30 +25,21 @@
       "src/@types"
     ],
     "paths": {
-      "@components/*": [
-        "src/components/*"
-      ],
-      "@layouts/*": [
-        "src/layouts/*"
-      ],
-      "@interfaces/*": [
-        "src/interfaces/*"
-      ],
-      "@hocs/*": [
-        "src/hocs/*"
-      ],
-      "@content/*": [
-        "content/*"
-      ],
       "@utils/*": [
         "src/utils/*"
       ],
       "public/*": [
         "src/public/*"
-      ]
+      ],
+      "content/*": ["content/*"]
     },
     "downlevelIteration": true,
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "exclude": [
     "node_modules"
@@ -57,6 +48,7 @@
     "next-env.d.ts",
     "src/**/*.ts",
     "src/**/*.tsx",
-    "src/**/*.js"
+    "src/**/*.js",
+    ".next/types/**/*.ts"
   ]
 }

@@ -1,61 +1,13 @@
-import VideoModal from '@components/Media/VideoModal';
-import Portfolio from '@components/Portfolio';
-import { PortfolioItemInterface } from '@components/PortfolioItems/PortfolioItemInterface';
-import type { InferGetStaticPropsType } from 'next';
-import dynamic from 'next/dynamic';
-import React, { useState } from 'react';
-import Layout from '../components/Layout';
+import PortfolioPage from '../../components/pages/Portfolio/PortfolioPage';
+import { PortfolioItemInterface } from '../../components/PortfolioItems/PortfolioItemInterface';
 import {
   importPortfolioCategories,
   importPortfolioItems,
   PortfolioCategory,
-} from '../import-portfolio-data';
-import { comparePriorities } from '../lib/compare-priorities';
-import * as UnlockMediaElement from '../lib/unlock-media-element';
-const AudioWaveform = dynamic(() => import('@components/Media/AudioWaveform'), {
-  ssr: false,
-});
+} from '../../import-portfolio-data';
+import { comparePriorities } from '../../lib/compare-priorities';
 
-export default function PortfolioPage(
-  props: InferGetStaticPropsType<typeof getStaticProps>
-) {
-  const [playingPortfolioItem, setPlayingPortfolioItem] =
-    useState<PortfolioItemInterface>(null);
-  const [mediaElement, setMediaElement] = useState<HTMLAudioElement>(null);
-
-  function handleFirstUserInteraction() {
-    // did we already handle the first user interaction?
-    if (mediaElement) {
-      return;
-    }
-
-    setMediaElement(UnlockMediaElement.constructUnlockedMediaElement());
-  }
-
-  return (
-    <div
-      onTouchStart={handleFirstUserInteraction}
-      onClick={handleFirstUserInteraction}
-    >
-      <Layout title='Portfolio'>
-        <Portfolio
-          portfolioData={props.portfolioData}
-          setPlayingPortfolioItem={setPlayingPortfolioItem}
-        ></Portfolio>
-        <AudioWaveform
-          portfolioItem={playingPortfolioItem}
-          mediaElement={mediaElement}
-        ></AudioWaveform>
-        <VideoModal
-          portfolioItem={playingPortfolioItem}
-          setPortfolioItem={setPlayingPortfolioItem}
-        ></VideoModal>
-      </Layout>
-    </div>
-  );
-}
-
-export async function getStaticProps() {
+export default async function Page() {
   const portfolioItemsMarkdownData = await importPortfolioItems();
 
   const portfolioItems = portfolioItemsMarkdownData.map(
@@ -75,11 +27,7 @@ export async function getStaticProps() {
     portfolioCategories
   );
 
-  return {
-    props: {
-      portfolioData,
-    },
-  };
+  return <PortfolioPage portfolioData={portfolioData} />;
 }
 
 function buildPortfolioCategories(

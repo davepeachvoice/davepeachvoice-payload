@@ -1,6 +1,6 @@
-import PortfolioItems from '@components/PortfolioItems/PortfolioItems';
 import React from 'react';
 import { PortfolioItemInterface } from './PortfolioItems/PortfolioItemInterface';
+import PortfolioItems from './PortfolioItems/PortfolioItems';
 
 interface Props {
   setPlayingPortfolioItem: React.Dispatch<

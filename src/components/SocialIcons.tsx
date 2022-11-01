@@ -1,60 +1,36 @@
-import { Anchor, Box } from 'grommet';
-import { Facebook, Linkedin, Twitter } from 'grommet-icons';
-import React from 'react';
+import Link from 'next/link';
+import { FaFacebookSquare, FaLinkedin, FaTwitterSquare } from 'react-icons/fa';
 
 export default function SocialIcons() {
   return (
-    <Box style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
-      <Box justify='center' direction='row'>
-        <Anchor href='https://twitter.com/davepeach101' target='_blank'>
-          <Box
-            pad='small'
-            round='full'
-            align='center'
-            hoverIndicator={{
-              background: { color: '#111130' },
-            }}
-            onClick={() => {}}
-            focusIndicator={false}
-          >
-            <Twitter size='medium' />
-          </Box>
-        </Anchor>
-        <Anchor
-          href='https://www.facebook.com/profile.php?id=100008652019445'
-          target='_blank'
-        >
-          <Box
-            pad='small'
-            round='full'
-            align='center'
-            hoverIndicator={{
-              background: { color: '#111130' },
-            }}
-            onClick={() => {}}
-            focusIndicator={false}
-          >
-            <Facebook size='medium' />
-          </Box>
-        </Anchor>
-        <Anchor
-          href='https://www.linkedin.com/in/dave-peach-b05a347'
-          target='_blank'
-        >
-          <Box
-            pad='small'
-            round='full'
-            align='center'
-            hoverIndicator={{
-              background: { color: '#111130' },
-            }}
-            onClick={() => {}}
-            focusIndicator={false}
-          >
-            <Linkedin size='medium' />
-          </Box>
-        </Anchor>
-      </Box>
-    </Box>
+    <div className='w-full flex justify-center'>
+      <Link
+        href='https://twitter.com/davepeach101'
+        target='_blank'
+        rel='noreferrer'
+        className='p-2 rounded-full items-center'
+        style={{ backgroundColor: '#111130' }}
+      >
+        <FaTwitterSquare size='1.75em' color='white' />
+      </Link>
+      <Link
+        href='https://www.facebook.com/profile.php?id=100008652019445'
+        target='_blank'
+        rel='noreferrer'
+        className='p-2 rounded-full items-center'
+        style={{ backgroundColor: '#111130' }}
+      >
+        <FaFacebookSquare size='1.75em' color='white' />
+      </Link>
+      <Link
+        href='https://www.linkedin.com/in/dave-peach-b05a347'
+        target='_blank'
+        rel='noreferrer'
+        className='p-2 rounded-full items-center'
+        style={{ backgroundColor: '#111130' }}
+      >
+        <FaLinkedin size='1.75em' color='white' />
+      </Link>
+    </div>
   );
 }
