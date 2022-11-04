@@ -1,3 +1,5 @@
+import { Open_Sans } from '@next/font/google';
+import classNames from 'classnames';
 import { FC } from 'react';
 import NavigationBar from '../components/NavigationBar';
 import SocialIcons from '../components/SocialIcons';
@@ -8,9 +10,12 @@ interface Props {
   children?: React.ReactNode;
 }
 
-const Layout: FC<Props> = ({ title, children }) => {
+// this site's default font family
+const openSans = Open_Sans({ subsets: ['latin'] });
+
+const Layout: FC<Props> = ({ children }) => {
   return (
-    <div className='w-full bg-neutral-900'>
+    <div className={classNames(openSans.className, 'w-full bg-neutral-900')}>
       <NavigationBar></NavigationBar>
       <article className='flex flex-1 flex-col'>{children}</article>
       <footer className='flex justify-center items-center pb-6 mt-10 w-full'>

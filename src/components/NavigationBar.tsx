@@ -6,16 +6,14 @@ const orbitron = Orbitron({ subsets: ['latin'] });
 
 const NavigationBar = () => {
   return (
-    <div
-      className='bg-black p-4 h-12 flex justify-between'
-      style={{ padding: '12px 24px' }}
-    >
+    <div className='bg-black py-6 px-6 flex justify-between items-center'>
       <Link
         href='/'
         className={classNames(
           'text-base md:text-2xl text-orange-500',
           orbitron.className
         )}
+        style={{ lineHeight: 1 }}
       >
         Dave Peach:
         <br />
@@ -47,11 +45,11 @@ const NavigationBar = () => {
           // ]}
           ></div>
         </div>
-        <div className='flex justify-end flex-row gap-4'>
-          <Link className='text-orange-500' href='/portfolio'>
+        <div className='flex justify-end flex-row gap-6'>
+          <Link className='text-orange-400 text-lg' href='/portfolio'>
             Portfolio
           </Link>
-          <Link className='text-orange-500' href='/services'>
+          <Link className='text-orange-400 text-lg' href='/services'>
             Services
           </Link>
         </div>
