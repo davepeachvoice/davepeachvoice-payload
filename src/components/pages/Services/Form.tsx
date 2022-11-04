@@ -65,10 +65,10 @@ export function ContactForm(props: Props) {
             name='type'
             placeholder='Select a Service'
             value={value.type}
-            // onChange={({ option }) => {
-            //   setSelectedService(option);
-            //   setFullFormVisible(true);
-            // }}
+            onChange={(e) => {
+              setSelectedService(e.currentTarget.value);
+              setFullFormVisible(true);
+            }}
             // clear={{ label: 'Clear selection' }}
           >
             {props.services.map((service) => (

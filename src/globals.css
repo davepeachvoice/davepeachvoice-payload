@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.next-image {
-  /* The necessity for this seems like a bug with next/image */
-  background-repeat: no-repeat
-}
-
 .tagline-container {
   height: 100%;
   background-color: var(--status-ok);

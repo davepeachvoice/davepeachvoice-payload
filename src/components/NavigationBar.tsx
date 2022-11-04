@@ -47,7 +47,7 @@ const NavigationBar = () => {
           // ]}
           ></div>
         </div>
-        <div className='justify-end flex-row gap-4'>
+        <div className='flex justify-end flex-row gap-4'>
           <Link className='text-orange-500' href='/portfolio'>
             Portfolio
           </Link>

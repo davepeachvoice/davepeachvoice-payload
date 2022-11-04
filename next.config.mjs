@@ -1,10 +1,5 @@
 /** @type {import("next").NextConfig} */
 const config = {
-  images: {
-    loader: 'cloudinary',
-    path: 'https://res.cloudinary.com/prestocloud/image/upload/',
-    formats: ['image/avif', 'image/webp']
-  },
   experimental: {
     appDir: true
   },

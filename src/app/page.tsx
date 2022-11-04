@@ -1,5 +1,5 @@
 import { importPortfolioItems } from '../../src/import-portfolio-data';
-import { buildBlurDataUrl } from '../common/cloudinary-build-blur-data-url';
+import { buildBlurDataUrl } from '../common/cloudinary';
 import HomeHero from '../components/HomeHero';
 import Players from '../components/Media/Players';
 import { comparePriorities } from '../lib/compare-priorities';

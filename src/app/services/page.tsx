@@ -1,9 +1,8 @@
-import Image from 'next/image';
 import {
   attributes as ServicesAttributes,
   react as ServicesContent,
 } from '../../../content/services.md';
-import { buildBlurDataUrl } from '../../common/cloudinary-build-blur-data-url';
+import CloudinaryImage from '../../components/cloudinary-image';
 import { ContactForm } from '../../components/pages/Services/Form';
 import { importServices } from '../../components/services/service-data';
 import { comparePriorities } from '../../lib/compare-priorities';
@@ -16,10 +15,6 @@ export default async function Services() {
   );
 
   services.sort(comparePriorities);
-
-  const mainImageBlurDataUrl = buildBlurDataUrl(
-    '/dave-peach-web-netlify-cms/march_madness.png'
-  );
 
   return (
     <main className='items-center p-4'>
@@ -49,11 +44,10 @@ export default async function Services() {
       </div>
       <div className='container flex-row justify-evenly p-4 gap-2'>
         <div className='w-full relative min-h-[50vh]'>
-          <Image
-            className='next-image'
+          <CloudinaryImage
+            className='object-contain'
             height={500}
             width={900}
-            style={{ objectFit: 'contain', objectPosition: 'center top' }}
             src='/dave-peach-web-netlify-cms/march_madness'
             alt='Dave Peach announcing at March Madness in 2021'
             // placeholder='blur'
