@@ -1,5 +1,4 @@
 import { importPortfolioItems } from '../../src/import-portfolio-data';
-import { buildBlurDataUrl } from '../common/cloudinary';
 import HomeHero from '../components/HomeHero';
 import Players from '../components/Media/Players';
 import { comparePriorities } from '../lib/compare-priorities';
@@ -13,13 +12,9 @@ export default async function Index() {
 
   portfolioItems.sort(comparePriorities);
 
-  const heroImageBlurDataUrl = buildBlurDataUrl(
-    '/dave-peach-web-netlify-cms/march_madness.png'
-  );
-
   return (
     <>
-      <HomeHero imageBlurDataUrl={heroImageBlurDataUrl}></HomeHero>
+      <HomeHero />
       <Players portfolioItems={portfolioItems} />
     </>
   );
