@@ -40,21 +40,21 @@
     "dist": true
   },
   "files.exclude": {
-    "**/.git": true,
-    "**/.DS_Store": true,
-    "node_modules": true,
-    "tsconfig.json": true,
-    "resolve-tsconfig-path-to-webpack-alias.js": true,
-    "next-env.d.ts": true,
-    "next.config.js": true,
-    ".next": true,
-    "netlify.toml": true,
-    ".prettierignore": true,
-    ".prettierrc.yaml": true,
-    ".babelrc": true,
-    ".eslintignore": true,
-    ".eslintrc.js": true,
-    ".gitignore": true
+    // "**/.git": true,
+    // "**/.DS_Store": true,
+    // "node_modules": true,
+    // "tsconfig.json": true,
+    // "resolve-tsconfig-path-to-webpack-alias.js": true,
+    // "next-env.d.ts": true,
+    // "next.config.js": true,
+    // ".next": true,
+    // "netlify.toml": true,
+    // ".prettierignore": true,
+    // ".prettierrc.yaml": true,
+    // ".babelrc": true,
+    // ".eslintignore": true,
+    // ".eslintrc.js": true,
+    // ".gitignore": true
   },
   "typescript.enablePromptUseWorkspaceTsdk": true
 }
