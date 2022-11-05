@@ -27,7 +27,7 @@ specifiers:
   eslint-plugin-react-hooks: ^4.6.0
   express: ^4.18.2
   frontmatter-markdown-loader: ^3.7.0
-  next: ^13.0.1
+  next: ^13.0.2
   postcss: ^8.4.18
   prettier: ^2.7.1
   raw-loader: ^4.0.2
@@ -38,7 +38,6 @@ specifiers:
   tailwindcss: ^3.2.1
   typescript: ^4.8.4
   wavesurfer-react: ^2.2.2
-  wavesurfer.js: ^6.3.0
 
 dependencies:
   '@babel/core': 7.20.2
@@ -56,7 +55,6 @@ dependencies:
   react-player: 2.11.0_react@18.2.0
   server-only: 0.0.1
   wavesurfer-react: 2.2.2_wavesurfer.js@6.4.0
-  wavesurfer.js: 6.4.0
 
 devDependencies:
   '@cld-apis/types': 0.1.6

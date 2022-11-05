@@ -1,17 +1,17 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import React, { FC, Suspense } from 'react';
+// import dynamic from 'next/dynamic';
+import React, { FC } from 'react';
 import { PortfolioCategory } from '../../../import-portfolio-data';
 import * as UnlockMediaElement from '../../../lib/unlock-media-element';
 import VideoModal from '../../Media/VideoModal';
 import Portfolio from '../../Portfolio';
 import { PortfolioItemInterface } from '../../PortfolioItems/PortfolioItemInterface';
 
-const AudioWaveform = dynamic(() => import('../../Media/AudioWaveform'), {
-  suspense: true,
-  ssr: false,
-});
+// const AudioWaveform = dynamic(() => import('../../Media/AudioWaveform'), {
+//   suspense: true,
+//   ssr: false,
+// });
 
 export interface Props {
   portfolioData: [string, Pick<PortfolioCategory, 'priority' | 'items'>][];
@@ -41,12 +41,12 @@ const PortfolioPage: FC<Props> = (props) => {
         portfolioData={props.portfolioData}
         setPlayingPortfolioItem={setPlayingPortfolioItem}
       ></Portfolio>
-      <Suspense>
+      {/* <Suspense>
         <AudioWaveform
           portfolioItem={playingPortfolioItem}
           mediaElement={mediaElement}
         ></AudioWaveform>
-      </Suspense>
+      </Suspense> */}
       <VideoModal
         portfolioItem={playingPortfolioItem}
         setPortfolioItem={setPlayingPortfolioItem}

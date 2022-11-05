@@ -1,16 +1,31 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import dynamic from 'next/dynamic';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { FaArrowDown, FaPauseCircle, FaPlayCircle } from 'react-icons/fa';
-import { WaveForm, WaveSurfer } from 'wavesurfer-react';
 import { PortfolioItemInterface } from '../PortfolioItems/PortfolioItemInterface';
+
+const WaveForm = dynamic(
+  () => import('wavesurfer-react').then((mod) => mod.WaveForm),
+  {
+    suspense: true,
+    ssr: false,
+  }
+);
+const WaveSurfer = dynamic(
+  () => import('wavesurfer-react').then((mod) => mod.WaveSurfer),
+  {
+    suspense: true,
+    ssr: false,
+  }
+);
 
 interface Props {
   portfolioItem: PortfolioItemInterface;
   mediaElement: HTMLAudioElement;
 }
 
-export default function Waveform(props: Props) {
+export default function AudioWaveform(props: Props) {
   const HEIGHT = 75;
 
   const [currentAudioSource, setCurrentAudioSource] = useState<string>(null);
@@ -114,26 +129,29 @@ export default function Waveform(props: Props) {
         </div>
       </div>
       <div style={{ backgroundColor: 'black', width: '100%' }}>
-        <WaveSurfer
-          key={currentAudioSource}
-          onMount={(waveSurfer: WaveSurfer) =>
-            handleWSMount(waveSurfer, currentAudioSource)
-          }
-        >
-          <WaveForm
-            id='waveform'
-            barWidth={1}
-            hideScrollbar={true}
-            responsive={true}
-            height={50}
-            barHeight={4}
-            barGap={1}
-            normalize={true}
-            minPxPerSec={100}
-            backend='MediaElement'
-            waveColor='white'
-          ></WaveForm>
-        </WaveSurfer>
+        <Suspense>
+          <WaveSurfer
+            key={currentAudioSource}
+            onMount={(waveSurfer: WaveSurfer) =>
+              handleWSMount(waveSurfer, currentAudioSource)
+            }
+            plugins={[]}
+          >
+            <WaveForm
+              id='waveform'
+              barWidth={1}
+              hideScrollbar={true}
+              responsive={true}
+              height={50}
+              barHeight={4}
+              barGap={1}
+              normalize={true}
+              minPxPerSec={100}
+              backend='MediaElement'
+              waveColor='white'
+            ></WaveForm>
+          </WaveSurfer>
+        </Suspense>
       </div>
       <button
         onClick={() => {

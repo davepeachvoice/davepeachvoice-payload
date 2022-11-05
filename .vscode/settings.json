@@ -47,7 +47,7 @@
     // "resolve-tsconfig-path-to-webpack-alias.js": true,
     // "next-env.d.ts": true,
     // "next.config.js": true,
-    // ".next": true,
+    "site/.next": true,
     // "netlify.toml": true,
     // ".prettierignore": true,
     // ".prettierrc.yaml": true,
