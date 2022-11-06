@@ -28,7 +28,7 @@
   "editor.detectIndentation": false,
   "editor.formatOnSave": false,
   "editor.codeActionsOnSave": [
-    "source.organizeImports",
+    // "source.organizeImports",
     "source.fixAll"
   ],
   "files.associations": {
