@@ -11,7 +11,10 @@ export default async function handler(
   const payload = getPayloadClient();
   const request = req as unknown as PayloadRequest<any>;
   request.payload = payload;
-  const handler = graphQLHandler(request, res as unknown as Response);
+
+  const handler = graphQLHandler(request, '/api/payload/graphQL');
 
   await handler(request, res as unknown as Response);
+
+  console.debug('finished running handler');
 }
