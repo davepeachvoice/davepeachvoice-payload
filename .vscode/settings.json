@@ -14,6 +14,9 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   "typescript.suggest.completeFunctionCalls": true,
   "eslint.format.enable": true,
   "eslint.lintTask.enable": true,
@@ -26,7 +29,7 @@
   "eslint.onIgnoredFiles": "off",
   "editor.tabSize": 2,
   "editor.detectIndentation": false,
-  "editor.formatOnSave": false,
+  "editor.formatOnSave": true,
   "editor.codeActionsOnSave": [
     // "source.organizeImports",
     "source.fixAll"
